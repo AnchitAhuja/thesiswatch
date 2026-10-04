@@ -1,5 +1,8 @@
 import { groups, portfolio, weeklyAssessments } from './portfolio.js';
 import './style.css';
+import { ConvexHttpClient } from 'convex/browser';
+import { api } from '../convex/_generated/api.js';
+import { trackingMarkup, bindTracking } from './tracking.mjs';
 
 const escape = (text) => text.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const id = (group) => group.toLowerCase().replaceAll(' ', '-');
@@ -30,4 +33,12 @@ document.querySelector('#app').innerHTML = `
       }).join('')}</div>
     </section>`).join('')}</div>
   <footer>Weekly assessments supplied by the founder. Source links open in a new tab.</footer>
+  ${trackingMarkup}
 `;
+
+const convexUrl = import.meta.env.VITE_CONVEX_URL;
+const convex = convexUrl ? new ConvexHttpClient(convexUrl) : null;
+bindTracking(document.querySelector('#app'), async (email) => {
+  if (!convex) throw new Error('Convex URL is not configured');
+  await convex.mutation(api.tracking.save, { email });
+});
