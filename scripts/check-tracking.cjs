@@ -1,4 +1,4 @@
-const assert = require('node:assert/strict');
+﻿const assert = require('node:assert/strict');
 const { JSDOM, VirtualConsole } = require('jsdom');
 const { execFileSync } = require('node:child_process');
 const { ConvexHttpClient } = require('convex/browser');
@@ -20,8 +20,9 @@ async function loadPage() {
   const response = await fetch(new URL(script.src, localUrl));
   assert.equal(response.status, 200);
   dom.window.eval(await response.text());
+  await new Promise(resolve => setImmediate(resolve));
   assert.equal(dom.window.document.querySelectorAll('article').length, 11);
-  assert.ok(dom.window.document.body.textContent.includes('Status set manually, 4 Oct'));
+  assert.ok(dom.window.document.body.textContent.includes('Edition dated Oct 4, 2026'));
   return dom;
 }
 
@@ -101,3 +102,4 @@ function waitForSaved(dom) {
   console.log('Checked the served page with a DOM test; visual browser check unavailable (no connected browser).');
   dom.window.close(); duplicatePage.window.close(); failurePage.window.close();
 })().catch(error => { console.error(error); process.exit(1); });
+

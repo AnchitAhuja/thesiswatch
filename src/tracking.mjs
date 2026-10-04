@@ -1,13 +1,13 @@
-import { validateEmail } from '../shared/email.mjs';
+﻿import { validateEmail } from '../shared/email.mjs';
 
 export const trackingMarkup = `
   <section class="tracking" aria-labelledby="tracking-heading">
-    <h2 id="tracking-heading">Keep tracking this</h2>
+    <h2 id="tracking-heading">Subscribe to this thesis</h2>
     <form id="tracking-form" novalidate>
       <label for="tracking-email">Email address</label>
       <div class="tracking-fields">
-        <input id="tracking-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="tracking-error" />
-        <button type="submit">Keep tracking this</button>
+        <input id="tracking-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="Enter email" required aria-describedby="tracking-error" />
+        <button type="submit">Subscribe to this thesis</button>
       </div>
       <p id="tracking-error" class="tracking-error" role="alert"></p>
     </form>
@@ -42,7 +42,7 @@ export function bindTracking(root, saveEmail) {
     saving = true;
     button.disabled = true;
     input.disabled = true;
-    button.textContent = 'Saving…';
+    button.textContent = 'Savingâ€¦';
     form.setAttribute('aria-busy', 'true');
     try {
       await saveEmail(validation.email);
@@ -54,8 +54,9 @@ export function bindTracking(root, saveEmail) {
       saving = false;
       button.disabled = false;
       input.disabled = false;
-      button.textContent = 'Keep tracking this';
+      button.textContent = 'Subscribe to this thesis';
       form.removeAttribute('aria-busy');
     }
   });
 }
+
