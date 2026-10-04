@@ -1,4 +1,4 @@
-﻿:root { color-scheme: light; font-family: Inter, sans-serif; color: #202824; background: #F7F6F2; font-synthesis: none; --muted: #202824; --rule: #EFF2EF; }
+:root { color-scheme: light; font-family: Inter, sans-serif; color: #202824; background: #F7F6F2; font-synthesis: none; --muted: #202824; --rule: #EFF2EF; }
 * { box-sizing: border-box; }
 body { margin: 0; }
 main { max-width: 1240px; margin: auto; padding: 56px 40px 30px; }
@@ -68,3 +68,65 @@ button:disabled { opacity: .6; cursor: wait; }
  .tracking button { max-width: none; }
 }
 @media (max-width: 480px) { article, .skeleton-row { grid-template-columns: 1fr; gap: 20px; } .assessment { grid-column: auto; } .edition { gap: 8px; } .intro .lead { font-size: 20px; } nav { gap: 14px 12px; } }
+
+/* The landing opens into the same four-stage reading structure. */
+.product-header { display: flex; align-items: center; min-height: 44px; margin-bottom: 56px; }
+.product-name { font-size: 14px; line-height: 22px; font-weight: 600; color: #202824; text-decoration: none; }
+.product-name:hover { text-decoration: underline; }
+.intro { max-width: 1000px; }
+.intro h1 { max-width: 19ch; text-wrap: balance; }
+.intro .lead { max-width: 54ch; }
+.thesis-page { margin-top: 34px; grid-template-columns: 280px minmax(0, 1fr); gap: 56px; }
+.page-content > nav { padding-top: 0; padding-bottom: 24px; border-bottom: 1px solid #41534A; }
+.page-content section { margin-top: 34px; }
+.page-content section > h2 { margin-bottom: 16px; }
+.positions { border-radius: 0; padding: 0 24px; }
+article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 28px; }
+.identity { grid-row: span 2; }
+.assessment { grid-column: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+.assessment p { grid-column: 1 / -1; }
+.assessment a, .assessment .status { margin-top: 0; }
+.status { justify-self: end; }
+.tracking { border-radius: 0; padding: 24px; margin-top: 0; }
+.tracking h2 { font-size: 27px; line-height: 1.2; }
+.tracking-fields { gap: 8px; flex-wrap: nowrap; }
+.tracking input { flex: 1; width: 0; }
+.tracking button { max-width: 105px; width: auto; font-size: 12px; }
+.contact { border: 1px solid #41534A; border-radius: 6px; }
+.landing-page { min-height: calc(100svh - 86px); }
+.landing-intro { margin-bottom: 56px; }
+.landing-intro h1 { max-width: 19ch; }
+.landing-intro .lead { font-size: 23px; line-height: 1.65; margin-top: 14px; }
+.thesis-choices { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 28px; align-items: end; }
+.ai-thesis-card { display: flex; flex-direction: column; min-height: 360px; padding: 28px; background: #FFFFFF; color: #202824; text-decoration: none; border-radius: 12px; border: 1px solid #41534A; }
+.ai-thesis-card h2 { font-size: 27px; font-weight: 600; }
+.ai-thesis-card:hover h2 { text-decoration: underline; text-underline-offset: 6px; }
+.card-chain { margin: 56px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card-chain span { font-size: 14px; line-height: 22px; padding: 16px 12px 0 0; border-top: 1px solid #41534A; position: relative; }
+.card-chain span::before { content: ''; width: 7px; height: 7px; background: #202824; border-radius: 50%; position: absolute; top: -4px; left: 0; }
+.card-action { align-self: flex-start; margin-top: auto; padding: 12px 20px; background: #254E43; color: #FFFFFF; font-size: 12px; font-weight: 600; border-radius: 6px; }
+.coming-soon-card { margin: 0; padding: 28px; min-height: 220px; border: 1px dashed #41534A; border-radius: 12px; }
+.coming-soon { display: inline-block; font-size: 12px; line-height: 18px; padding: 5px 9px; background: #EFF2EF; color: #41534A; border-radius: 4px; margin-bottom: 28px; }
+.coming-soon-card h2 { font-size: 27px; font-weight: 400; max-width: 12ch; }
+@media (max-width: 1000px) { .thesis-page { gap: 28px; } }
+@media (max-width: 760px) {
+ .product-header { margin-bottom: 34px; }
+ .thesis-choices { grid-template-columns: 1fr; }
+ .ai-thesis-card { min-height: 300px; }
+ .coming-soon-card { min-height: auto; }
+ .coming-soon-card h2 { max-width: none; }
+ .landing-intro { margin-bottom: 34px; }
+ .tracking { padding: 20px; padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+ .tracking h2 { font-size: 18px; }
+ .tracking-fields { flex-wrap: nowrap; }
+ .tracking input { flex: 1; min-width: 0; width: 0; }
+ .tracking button { width: auto; }
+ .landing-intro .lead { font-size: 20px; }
+}
+@media (max-width: 480px) {
+ article, .skeleton-row { grid-template-columns: 1fr; gap: 20px; }
+ .identity { grid-row: auto; }
+ .assessment { grid-column: auto; grid-template-columns: minmax(0, 1fr); }
+ .status { justify-self: end; }
+ .card-chain { grid-template-columns: 1fr 1fr; gap: 28px 0; margin: 34px 0; }
+}

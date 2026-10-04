@@ -4,7 +4,7 @@ const { execFileSync } = require('node:child_process');
 const { ConvexHttpClient } = require('convex/browser');
 const fs = require('node:fs');
 
-const localUrl = process.env.TEST_LOCAL_URL || 'http://127.0.0.1:5174/';
+const localUrl = process.env.TEST_LOCAL_URL || 'http://127.0.0.1:5174/?thesis=ai';
 const testEmail = 'thesis-tracking-test-20261004@example.com';
 const convexUrl = fs.readFileSync('.env.local', 'utf8').match(/^VITE_CONVEX_URL=(.+)$/m)[1].trim();
 const queryRows = () => JSON.parse(execFileSync(process.execPath, ['node_modules/convex/bin/main.js', 'run', '--inline-query',
