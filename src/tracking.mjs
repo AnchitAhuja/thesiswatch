@@ -1,4 +1,4 @@
-﻿import { validateEmail } from '../shared/email.mjs';
+import { validateEmail } from '../shared/email.mjs';
 
 export const trackingMarkup = `
   <section class="tracking" aria-labelledby="tracking-heading">
@@ -59,4 +59,3 @@ export function bindTracking(root, saveEmail) {
     }
   });
 }
-
