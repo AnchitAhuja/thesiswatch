@@ -1,0 +1,44 @@
+:root { color-scheme: light; font-family: 'Segoe UI', sans-serif; color: #203648; background: #f3f6f9; font-synthesis: none; --muted: #506579; --rule: #c6d2de; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 1240px; margin: auto; padding: 56px 40px 30px; }
+h1, h2, h3, h4, p { margin: 0; }
+h1 { font-family: Georgia, serif; font-size: clamp(44px, 6vw, 68px); font-weight: 400; letter-spacing: -.025em; line-height: 1.08; }
+.intro > p { max-width: 68ch; line-height: 1.65; color: var(--muted); }
+.intro .lead { font-size: 23px; color: #203648; margin: 14px 0 12px; }
+.edition { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px; }
+.edition h2 { font-size: 18px; font-weight: 600; }
+.edition p { font-size: 14px; color: var(--muted); }
+nav { display: flex; flex-wrap: wrap; gap: 12px 30px; padding: 24px 0 18px; }
+a { color: #204e83; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+a:hover { color: #102b4c; text-decoration-thickness: 2px; }
+a:focus-visible { outline: 3px solid #345b9b; outline-offset: 5px; border-radius: 2px; }
+nav a { font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; }
+.status { display: inline-block; font-size: 11px; font-weight: 700; line-height: 1.4; padding: 5px 9px; border-radius: 4px; letter-spacing: .02em; }
+.strengthening { color: #155841; background: #d5efe3; }
+.intact { color: #204e83; background: #dde8f5; }
+.watch { color: #78500d; background: #f8eac6; }
+.weakening { color: #933242; background: #f5dce0; }
+section { scroll-margin-top: 20px; margin-top: 34px; }
+section > h2 { font-size: 27px; font-weight: 600; margin-bottom: 16px; }
+.positions { background: #fff; border-radius: 12px; padding: 0 24px; }
+article { display: grid; grid-template-columns: minmax(125px, .5fr) minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px; padding: 28px 0; }
+article + article { border-top: 1px solid var(--rule); }
+h3 { font-size: 24px; letter-spacing: -.02em; }
+.identity p { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 5px; }
+.type { display: block; font-size: 12px; color: var(--muted); margin-top: 8px; }
+h4 { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 7px; }
+.thesis p, .assessment p { font-size: 15px; line-height: 1.65; max-width: 70ch; }
+.thesis h4:nth-of-type(2) { margin-top: 17px; }
+ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 5px 14px; }
+li { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.assessment h4 { margin-top: 15px; }
+.assessment a { display: inline-block; margin-top: 15px; font-size: 13px; line-height: 1.7; }
+.assessment a span { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+footer { font-size: 13px; line-height: 1.6; color: var(--muted); padding-top: 32px; }
+::selection { background: #c6ddf7; color: #102b4c; }
+.skip { position: absolute; top: -100px; padding: 12px; background: white; }
+.skip:focus { top: 8px; left: 8px; }
+@media (max-width: 760px) { main { padding: 32px 20px 24px; } article { grid-template-columns: 110px minmax(0, 1fr); gap: 20px; } .assessment { grid-column: 2; } .positions { padding: 0 20px; } }
+@media (max-width: 480px) { article { grid-template-columns: 1fr; gap: 20px; } .assessment { grid-column: auto; } .identity { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; } .identity p, .type { margin-top: 0; } .edition { gap: 8px; } .intro .lead { font-size: 20px; } nav { gap: 14px 20px; } }
