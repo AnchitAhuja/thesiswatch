@@ -1,0 +1,204 @@
+[
+  {
+    "page": "landing",
+    "width": 390,
+    "overflow": false,
+    "signup": null,
+    "input": null,
+    "button": null,
+    "ticker": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "normal",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "status": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "16.8px",
+      "color": "rgb(36, 87, 64)",
+      "background": "rgb(234, 243, 237)"
+    },
+    "reason": null,
+    "date": null,
+    "source": null,
+    "fontLoaded": true
+  },
+  {
+    "page": "thesis",
+    "width": 390,
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "width": 390,
+      "left": 0,
+      "position": "fixed"
+    },
+    "input": {
+      "top": 811,
+      "bottom": 880,
+      "width": 237,
+      "left": 20,
+      "position": "static"
+    },
+    "button": {
+      "top": 811,
+      "bottom": 880,
+      "width": 105,
+      "left": 265,
+      "position": "static"
+    },
+    "ticker": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "normal",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "status": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "16.8px",
+      "color": "rgb(36, 87, 64)",
+      "background": "rgb(234, 243, 237)"
+    },
+    "reason": {
+      "font": "Inter, sans-serif",
+      "size": "14px",
+      "weight": "400",
+      "line": "22px",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "date": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "400",
+      "line": "18px",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "source": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "400",
+      "line": "18px",
+      "color": "rgb(37, 78, 67)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "fontLoaded": true,
+    "signupAtEnd": {
+      "x": 0,
+      "y": 756.40625,
+      "width": 390,
+      "height": 143.59375
+    }
+  },
+  {
+    "page": "landing",
+    "width": 1280,
+    "overflow": false,
+    "signup": null,
+    "input": null,
+    "button": null,
+    "ticker": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "normal",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "status": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "16.8px",
+      "color": "rgb(36, 87, 64)",
+      "background": "rgb(234, 243, 237)"
+    },
+    "reason": null,
+    "date": null,
+    "source": null,
+    "fontLoaded": true
+  },
+  {
+    "page": "thesis",
+    "width": 1280,
+    "overflow": false,
+    "signup": {
+      "top": 548.1875,
+      "bottom": 776.96875,
+      "width": 280,
+      "left": 60,
+      "position": "sticky"
+    },
+    "input": {
+      "top": 683.96875,
+      "bottom": 752.96875,
+      "width": 119,
+      "left": 84,
+      "position": "static"
+    },
+    "button": {
+      "top": 683.96875,
+      "bottom": 752.96875,
+      "width": 105,
+      "left": 211,
+      "position": "static"
+    },
+    "ticker": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "normal",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "status": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "600",
+      "line": "16.8px",
+      "color": "rgb(36, 87, 64)",
+      "background": "rgb(234, 243, 237)"
+    },
+    "reason": {
+      "font": "Inter, sans-serif",
+      "size": "14px",
+      "weight": "400",
+      "line": "22px",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "date": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "400",
+      "line": "18px",
+      "color": "rgb(32, 40, 36)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "source": {
+      "font": "Inter, sans-serif",
+      "size": "12px",
+      "weight": "400",
+      "line": "18px",
+      "color": "rgb(37, 78, 67)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "fontLoaded": true,
+    "signupAtEnd": {
+      "x": 60,
+      "y": 28,
+      "width": 280,
+      "height": 228.78125
+    }
+  }
+]

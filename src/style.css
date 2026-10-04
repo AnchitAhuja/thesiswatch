@@ -140,3 +140,23 @@ article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 
 .landing-page .preview-ticker { font-size: 12px; font-weight: 600; }
 .landing-page .preview-row .status { margin-top: 0; }
 .landing-page .preview-more { font-size: 12px; line-height: 18px; margin-bottom: 28px; }
+
+/* Keep the laptop signup visible from the first screen through the last row. */
+@media (min-width: 761px) {
+ #app:has(.thesis-page) { display: grid; grid-template-columns: 280px minmax(0, 1fr); column-gap: 56px; align-items: start; }
+ #app:has(.thesis-page) > .product-header, #app:has(.thesis-page) > .intro { grid-column: 2; }
+ #app:has(.thesis-page) > .product-header { grid-row: 1; }
+ #app:has(.thesis-page) > .intro { grid-row: 2; }
+ #app:has(.thesis-page) .thesis-page { display: contents; }
+ #app:has(.thesis-page) .page-content { grid-column: 2; grid-row: 3; margin-top: 34px; }
+ #app:has(.thesis-page) .tracking { grid-column: 1; grid-row: 1 / 4; align-self: start; }
+}
+@media (min-width: 761px) and (max-width: 1000px) { #app:has(.thesis-page) { column-gap: 28px; } }
+/* Loading placeholders follow the same identity, reason and assessment layout. */
+.skeleton-row > div:first-child { grid-row: span 2; }
+.skeleton-row > div:nth-child(2) { height: 44px; }
+.skeleton-row > div:nth-child(3) { grid-column: 2; }
+@media (max-width: 480px) {
+ .skeleton-row > div:first-child { grid-row: auto; height: 44px; }
+ .skeleton-row > div:nth-child(3) { grid-column: auto; }
+}

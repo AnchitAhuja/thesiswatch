@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { readFile } from 'node:fs/promises';
 const portfolioCode = await readFile(new URL('../src/portfolio.js', import.meta.url), 'utf8');
@@ -34,3 +34,40 @@ await new Promise(resolve => setImmediate(resolve));
 assert.equal(failed.window.document.querySelectorAll('article').length, 11);
 console.log('PASS: loading has 11 row shimmers; failed loading displays Refresh, which successfully reloads the edition.');
 
+
+// A loading or failed reload must not continue showing the previous edition date.
+const retryPage = root();
+let retryCalls = 0;
+let finishLoad;
+const pendingLoad = bindEdition(retryPage.window.document, () => new Promise(resolve => { finishLoad = resolve; }));
+assert.equal(retryPage.window.document.querySelector('#edition-date').hidden, true);
+assert.equal(retryPage.window.document.querySelectorAll('.skeleton-row').length, 11);
+finishLoad(currentEdition);
+await pendingLoad;
+assert.equal(retryPage.window.document.querySelector('#edition-date').textContent, 'Edition dated Oct 4, 2026');
+const failedReload = bindEdition(retryPage.window.document, async () => { if (!retryCalls++) throw new Error('Connection lost'); return currentEdition; });
+await failedReload;
+assert.equal(retryPage.window.document.querySelector('#edition-date').textContent, '');
+assert.equal(retryPage.window.document.querySelector('#edition-date').hidden, true);
+assert.equal(retryPage.window.document.querySelector('#edition-note').textContent, '');
+retryPage.window.document.querySelector('button').click();
+await new Promise(resolve => setImmediate(resolve));
+assert.equal(retryPage.window.document.querySelectorAll('article').length, 11);
+console.log('PASS: loading and failed reloads clear stale dates; Refresh restores the correct date and edition.');
+
+// A recovered edition remains the latest edition within the same controller.
+const cachedRecovery = root();
+let recoveryCalls = 0;
+await bindEdition(cachedRecovery.window.document, async () => {
+  if (!recoveryCalls++) throw new Error('Connection lost');
+  return recoveryCalls === 2 ? currentEdition : null;
+});
+const recoveryButton = cachedRecovery.window.document.querySelector('button');
+recoveryButton.click();
+await new Promise(resolve => setImmediate(resolve));
+assert.equal(cachedRecovery.window.document.querySelectorAll('.status').length, 11);
+recoveryButton.click();
+await new Promise(resolve => setImmediate(resolve));
+assert.equal(cachedRecovery.window.document.querySelectorAll('.status').length, 11);
+assert.equal(cachedRecovery.window.document.querySelector('#edition-note').textContent, 'The next edition lands Saturday 10 AM IST.');
+console.log('PASS: a later empty response keeps the edition recovered by the same controller, without requiring storage.');

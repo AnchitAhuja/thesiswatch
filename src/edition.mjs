@@ -1,4 +1,4 @@
-﻿import { groups, portfolio, weeklyAssessments } from './portfolio.js';
+import { groups, portfolio, weeklyAssessments } from './portfolio.js';
 
 const escape = (text) => String(text).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const id = (group) => group.toLowerCase().replaceAll(' ', '-');
@@ -33,6 +33,9 @@ export async function bindEdition(root, loadEdition = async () => currentEdition
   try { returning = storage?.getItem('thesis-visited') === 'yes'; cached = JSON.parse(storage?.getItem('thesis-latest') || 'null'); } catch {}
   async function refresh() {
     rows.innerHTML = loadingMarkup();
+    date.hidden = true;
+    date.textContent = '';
+    note.textContent = '';
     try {
       const latest = await loadEdition();
       const edition = latest || (returning ? cached : null);
@@ -40,6 +43,8 @@ export async function bindEdition(root, loadEdition = async () => currentEdition
       date.textContent = edition ? `Edition dated ${edition.date}` : '';
       date.hidden = !edition;
       note.textContent = returning && edition ? 'The next edition lands Saturday 10 AM IST.' : '';
+      cached = edition;
+      returning = true;
       try { storage?.setItem('thesis-visited', 'yes'); if (edition) storage?.setItem('thesis-latest', JSON.stringify(edition)); } catch {}
     } catch {
       rows.innerHTML = '<div class="rows-error" role="alert"><p>Rows failed to load.</p><button type="button" id="refresh-rows">Refresh</button></div>';

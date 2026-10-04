@@ -1,0 +1,242 @@
+[
+  {
+    "width": 390,
+    "state": "done",
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 390,
+    "state": "empty-first",
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 0
+  },
+  {
+    "width": 390,
+    "state": "empty-returning",
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 390,
+    "state": "loading",
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 0,
+    "statuses": 0
+  },
+  {
+    "width": 390,
+    "state": "error",
+    "overflow": false,
+    "signup": {
+      "top": 756.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 0,
+    "statuses": 0
+  },
+  {
+    "width": 390,
+    "state": "signup-validation",
+    "overflow": false,
+    "signup": {
+      "top": 698.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 390,
+    "state": "signup-error",
+    "overflow": false,
+    "signup": {
+      "top": 698.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 390,
+    "state": "signup-success",
+    "overflow": false,
+    "signup": {
+      "top": 802.40625,
+      "bottom": 900,
+      "left": 0,
+      "width": 390,
+      "position": "fixed"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 1280,
+    "state": "done",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 284.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 1280,
+    "state": "empty-first",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 284.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 0
+  },
+  {
+    "width": 1280,
+    "state": "empty-returning",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 284.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 1280,
+    "state": "loading",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 284.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 0,
+    "statuses": 0
+  },
+  {
+    "width": 1280,
+    "state": "error",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 284.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 0,
+    "statuses": 0
+  },
+  {
+    "width": 1280,
+    "state": "signup-validation",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 342.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 1280,
+    "state": "signup-error",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 364.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  },
+  {
+    "width": 1280,
+    "state": "signup-success",
+    "overflow": false,
+    "signup": {
+      "top": 56,
+      "bottom": 211.78125,
+      "left": 60,
+      "width": 280,
+      "position": "sticky"
+    },
+    "fontLoaded": true,
+    "articles": 11,
+    "statuses": 11
+  }
+]
