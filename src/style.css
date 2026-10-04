@@ -130,3 +130,13 @@ article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 
  .status { justify-self: end; }
  .card-chain { grid-template-columns: 1fr 1fr; gap: 28px 0; margin: 34px 0; }
 }
+
+/* Preview styles are confined to the landing page. */
+.landing-page .landing-intro h1 { max-width: 24ch; text-wrap: balance; }
+.landing-page .landing-intro .lead { max-width: 54ch; }
+.landing-page .card-chain { margin: 28px 0; }
+.landing-page .position-preview { margin-bottom: 12px; }
+.landing-page .preview-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #EFF2EF; }
+.landing-page .preview-ticker { font-size: 12px; font-weight: 600; }
+.landing-page .preview-row .status { margin-top: 0; }
+.landing-page .preview-more { font-size: 12px; line-height: 18px; margin-bottom: 28px; }
