@@ -5,7 +5,7 @@
 Run this in Claude with web search available. This prompt researches and drafts an edition; it does not save an edition or send email.
 
 Before running:
-1. Fill the three date fields in `<reporting_period>` with explicit dates, times and the IST offset (+05:30). The end must not be in the future when you run it.
+1. The dates below are filled for the Saturday, October 10, 2026 edition. Run this research at or after 9:00 AM IST that Saturday, then review and save the approved edition before the scheduled 10:00 AM email. For later editions, update these dates. The research cutoff must not be in the future when you run it.
 2. Replace `<previous_edition>` with the latest approved edition every week. The starting reference below is the existing Oct 4, 2026 edition, copied unchanged from Lookout. Its claims have not been independently checked as part of creating this prompt.
 3. Paste everything from `<instructions>` through the final task into Claude.
 
@@ -186,9 +186,9 @@ Before returning the result, check that all 11 positions appear exactly once in 
 </instructions>
 
 <reporting_period>
-Edition date: [EDITION_DATE_IST]
-Research window start, inclusive: [START_DATETIME_IST_WITH_+05:30_OFFSET]
-Research window end, exclusive: [END_DATETIME_IST_WITH_+05:30_OFFSET]
+Edition date: Oct 10, 2026
+Research window start, inclusive: 2026-10-04T00:00:00+05:30
+Research window end, exclusive: 2026-10-10T09:00:00+05:30
 Timezone: Asia/Kolkata (IST, UTC+05:30)
 Publication schedule: Saturday 10:00 AM IST
 Use the explicit research cutoff above, not your assumed current date.
