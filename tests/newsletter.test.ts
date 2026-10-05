@@ -101,6 +101,10 @@ describe("saved edition email delivery", () => {
     const delivery = await t.run(ctx => ctx.db.query("mailDeliveries").unique());
     expect((await t.query(components.resend.lib.get, { emailId: delivery!.emailId }))!.status).toBe("cancelled");
     expect(await t.mutation(internal.mail.enqueue, args)).toBe(null);
+    const original = await t.run(ctx => ctx.db.get(editionId));
+    const nextId = await t.mutation(internal.editions.save, { key: "after-unsubscribe", date: "test next date", publishedAt: original!.publishedAt + 1, positions: original!.positions });
+    expect(await t.mutation(internal.mail.enqueue, { ...args, editionId: nextId })).toBe(null);
+    expect(await t.run(ctx => ctx.db.query("mailDeliveries").collect())).toHaveLength(1);
   });
 
   it("pins a weekly run to the newest saved edition and schedules subscriber batches", async () => {
@@ -114,6 +118,10 @@ describe("saved edition email delivery", () => {
     expect(scheduled.filter(job => job.name === "mailActions:prepare")).toHaveLength(50);
     expect(scheduled.find(job => job.name === "mail:fanout")!.args[0].editionId).toBe(latestId);
     expect(scheduled.filter(job => job.name === "mailActions:prepare").every(job => job.args[0].editionId === latestId)).toBe(true);
+    const continuation = scheduled.find(job => job.name === "mail:fanout")!;
+    await t.mutation(internal.mail.fanout, continuation.args[0]);
+    const all = await t.run(ctx => ctx.db.system.query("_scheduled_functions").collect());
+    expect(all.filter(job => job.name === "mailActions:prepare")).toHaveLength(51);
   });
 
   it("uses Saturday 04:30 UTC, which is 10:00 AM IST", () => {
