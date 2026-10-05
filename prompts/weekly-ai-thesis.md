@@ -187,8 +187,8 @@ Before returning the result, check that all 11 positions appear exactly once in 
 
 <reporting_period>
 Edition date: Oct 10, 2026
-Research window start, inclusive: 2026-10-04T00:00:00+05:30
-Research window end, exclusive: 2026-10-10T09:00:00+05:30
+Research window start, exclusive (after): 2026-10-03T09:00:00+05:30
+Research window end, inclusive (through): 2026-10-10T09:00:00+05:30
 Timezone: Asia/Kolkata (IST, UTC+05:30)
 Publication schedule: Saturday 10:00 AM IST
 Use the explicit research cutoff above, not your assumed current date.
