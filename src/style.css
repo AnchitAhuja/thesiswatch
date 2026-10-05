@@ -143,13 +143,13 @@ article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 
 
 /* Keep the laptop signup visible from the first screen through the last row. */
 @media (min-width: 761px) {
- #app:has(.thesis-page) { display: grid; grid-template-columns: 280px minmax(0, 1fr); column-gap: 56px; align-items: start; }
- #app:has(.thesis-page) > .product-header, #app:has(.thesis-page) > .intro { grid-column: 2; }
+ #app:has(.thesis-page) { display: grid; grid-template-columns: minmax(0, 1fr) 280px; column-gap: 56px; align-items: start; }
+ #app:has(.thesis-page) > .product-header, #app:has(.thesis-page) > .intro { grid-column: 1; }
  #app:has(.thesis-page) > .product-header { grid-row: 1; }
  #app:has(.thesis-page) > .intro { grid-row: 2; }
  #app:has(.thesis-page) .thesis-page { display: contents; }
- #app:has(.thesis-page) .page-content { grid-column: 2; grid-row: 3; margin-top: 34px; }
- #app:has(.thesis-page) .tracking { grid-column: 1; grid-row: 1 / 4; align-self: start; }
+ #app:has(.thesis-page) .page-content { grid-column: 1; grid-row: 3; margin-top: 34px; }
+ #app:has(.thesis-page) .tracking { grid-column: 2; grid-row: 1 / 4; align-self: start; }
 }
 @media (min-width: 761px) and (max-width: 1000px) { #app:has(.thesis-page) { column-gap: 28px; } }
 /* Loading placeholders follow the same identity, reason and assessment layout. */
