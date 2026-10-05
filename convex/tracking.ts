@@ -1,6 +1,7 @@
 import { mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { validateEmail } from "../shared/email.mjs";
+import { internal } from "./_generated/api";
 
 export const save = mutation({
   args: { email: v.string() },
@@ -13,12 +14,17 @@ export const save = mutation({
     // also produce one row. Keep the original signup date on repeat submissions.
     const existing = await ctx.db.query("trackingOptIns")
       .withIndex("by_email", q => q.eq("email", email)).unique();
-    if (!existing) {
-      await ctx.db.insert("trackingOptIns", {
+    let subscriberId = existing?._id;
+    if (!subscriberId) {
+      subscriberId = await ctx.db.insert("trackingOptIns", {
         email,
         savedAt: new Date(Date.now()).toISOString(),
       });
     }
+    if (existing?.unsubscribedAt !== undefined) {
+      await ctx.db.patch(existing._id, { unsubscribedAt: undefined, unsubscribeToken: undefined });
+    }
+    await ctx.scheduler.runAfter(0, internal.mailActions.prepare, { subscriberId });
     return null;
   },
 });
