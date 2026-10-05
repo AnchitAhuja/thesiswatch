@@ -90,8 +90,8 @@ subscriptions do not supply backend API credentials. Model calls and web
 search use the configured provider's paid usage.
 
 The model is Claude Sonnet 4.5, with native web search and web fetch. Each
-run is limited to 30 searches, 40 fetches, four model steps, 12,000 output
-tokens per step and eight minutes. Provider calls are not automatically
+run is limited to four model steps and eight minutes, with each step capped
+at 30 searches, 40 fetches and 12,000 output tokens. Provider calls are not automatically
 repeated after failure. Failed or incomplete research is recorded privately
 for review. These are execution limits, not a promise that every source is
 accessible or every draft is correct.
@@ -111,7 +111,16 @@ Check access and read the latest private draft with:
 
 ```sh
 npx convex run researchActions:configuration --prod
+npx convex run researchActions:checkConnection --prod
 npx convex run research:latestDraft --prod
+```
+
+The connection check makes a small paid Claude request to check search and
+fetch without producing or publishing a thesis edition. Enable the production
+schedule after both tool checks pass:
+
+```sh
+npx convex env set RESEARCH_SCHEDULE_ENABLED true --prod
 ```
 
 Drafts live in `researchRuns`, separate from approved `editions`. Review

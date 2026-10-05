@@ -1,5 +1,5 @@
 "use node";
-import { Agent } from "@convex-dev/agent";
+import { Agent, createThread } from "@convex-dev/agent";
 import { convexGateway } from "@convex-dev/ai-sdk-provider";
 import { anthropic } from "@ai-sdk/anthropic";
 import { getServiceToken } from "convex/server";
@@ -36,6 +36,37 @@ const output = {
   text: v.string(), searched: v.boolean(), sourceUrls: v.array(v.string()),
   model: v.string(), inputTokens: v.number(), outputTokens: v.number(),
 };
+function researcher(access: { gatewayAvailable: boolean }, maxSearches: number, maxFetches: number, maxContentTokens: number) {
+  return new Agent(components.agent, {
+    name: "Lookout weekly AI thesis researcher",
+    languageModel: access.gatewayAvailable ? convexGateway.messages(GATEWAY_MODEL) : anthropic(MODEL),
+    instructions: "Follow the supplied task. Use the search and fetch tools for research. Return private results; never publish an edition or send email.",
+    tools: {
+      web_search: anthropic.tools.webSearch_20250305({ maxUses: maxSearches }),
+      web_fetch: anthropic.tools.webFetch_20250910({ maxUses: maxFetches, citations: { enabled: true }, maxContentTokens }),
+    },
+  });
+}
+
+export const checkConnection = internalAction({
+  args: {}, returns: v.object({ searchWorking: v.boolean(), fetchWorking: v.boolean(), model: v.string() }),
+  handler: async (ctx): Promise<{ searchWorking: boolean; fetchWorking: boolean; model: string }> => {
+    const access = await providerAccess();
+    if (!access.gatewayAvailable && !access.anthropicKeyConfigured) throw new Error("Claude access is not configured.");
+    const threadId = await createThread(ctx, components.agent, { title: "Lookout Claude connection check" });
+    const result = await researcher(access, 1, 1, 2000).generateText(ctx, { threadId }, {
+      prompt: "This is a connection check, not investment research. Use web_search once to find Anthropic's official Claude web search documentation. Then use web_fetch once to open https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool . Reply in one short sentence confirming which tools worked. Do not produce a thesis edition.",
+      maxOutputTokens: 1024, maxRetries: 0, stopWhen: stepCountIs(2), abortSignal: AbortSignal.timeout(60000),
+    });
+    return {
+      searchWorking: result.steps.some(step => step.toolResults.some(tool => tool.toolName === "web_search" && Array.isArray(tool.output))),
+      fetchWorking: result.steps.some(step => step.toolResults.some(tool => tool.toolName === "web_fetch"
+        && typeof tool.output === "object" && tool.output !== null && "type" in tool.output && tool.output.type === "web_fetch_result")),
+      model: access.gatewayAvailable ? GATEWAY_MODEL : MODEL,
+    };
+  },
+});
+
 export const generate = internalAction({
   args: { runId: v.id("researchRuns") }, returns: v.object(output),
   handler: async (ctx, { runId }): Promise<{
@@ -46,16 +77,7 @@ export const generate = internalAction({
       throw new Error("Claude is not connected: configure ANTHROPIC_API_KEY in production Convex environment variables.");
     }
     const { threadId, prompt } = await ctx.runMutation(internal.research.prepareThread, { runId });
-    const researcher = new Agent(components.agent, {
-      name: "Lookout weekly AI thesis researcher",
-      languageModel: access.gatewayAvailable ? convexGateway.messages(GATEWAY_MODEL) : anthropic(MODEL),
-      instructions: "Follow the supplied Lookout research prompt. Research using the provided search and fetch tools. Return a private draft, never a published edition.",
-      tools: {
-        web_search: anthropic.tools.webSearch_20250305({ maxUses: 30 }),
-        web_fetch: anthropic.tools.webFetch_20250910({ maxUses: 40, citations: { enabled: true }, maxContentTokens: 12000 }),
-      },
-    });
-    const result = await researcher.generateText(ctx, { threadId }, {
+    const result = await researcher(access, 30, 40, 12000).generateText(ctx, { threadId }, {
       prompt, maxOutputTokens: 12000, maxRetries: 0, stopWhen: stepCountIs(4),
       abortSignal: AbortSignal.timeout(8 * 60 * 1000),
     });

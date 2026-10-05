@@ -116,4 +116,14 @@ describe("Saturday Claude research", () => {
     expect(definitions["send latest AI edition"].schedule.minuteUTC).toBe(30);
     expect(definitions["send latest AI edition"].schedule.hourUTC).toBe(4);
   });
+  it("checks search and fetch separately without creating an edition or scheduled research run", async () => {
+    const t = setup();
+    vi.stubEnv("ANTHROPIC_API_KEY", "unit-test-placeholder");
+    vi.spyOn(Agent.prototype, "generateText").mockResolvedValue({
+      steps: [{ toolResults: [{ toolName: "web_search", output: [] }, { toolName: "web_fetch", output: { type: "web_fetch_result" } }] }],
+    } as never);
+    expect(await t.action(internal.researchActions.checkConnection, {})).toEqual({ searchWorking: true, fetchWorking: true, model: "claude-sonnet-4-5" });
+    expect(await t.run(ctx => ctx.db.query("researchRuns").collect())).toHaveLength(0);
+    expect(await t.run(ctx => ctx.db.query("editions").collect())).toHaveLength(0);
+  });
 });
