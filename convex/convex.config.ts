@@ -1,11 +1,15 @@
 import { defineApp } from "convex/server";
 import staticHosting from "@convex-dev/static-hosting/convex.config";
 import resend from "@convex-dev/resend/convex.config";
+import agent from "@convex-dev/agent/convex.config";
+import workflow from "@convex-dev/workflow/convex.config";
 
 // Your own HTTP endpoints (convex/http.ts) are served under /api so the
 // static site can own the root.
 const app = defineApp({ httpPrefix: "/api" });
 app.use(staticHosting, { httpPrefix: "/" });
 app.use(resend);
+app.use(agent);
+app.use(workflow);
 
 export default app;

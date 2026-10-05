@@ -15,4 +15,15 @@ export default defineSchema({
     subscriberId: v.id("trackingOptIns"), editionId: v.id("editions"),
     emailId: v.string(), queuedAt: v.number(),
   }).index("by_subscriber_edition", ["subscriberId", "editionId"]),
+  researchRuns: defineTable({
+    key: v.string(), editionDate: v.string(), windowStart: v.number(), windowEnd: v.number(),
+    baselineEditionId: v.id("editions"), prompt: v.string(),
+    status: v.union(v.literal("queued"), v.literal("running"), v.literal("draft"), v.literal("failed")),
+    workflowId: v.optional(v.string()), threadId: v.optional(v.string()),
+    startedAt: v.number(), finishedAt: v.optional(v.number()), error: v.optional(v.string()),
+    text: v.optional(v.string()), editorReview: v.optional(v.string()), readerEdition: v.optional(v.string()),
+    reviewState: v.optional(v.union(v.literal("READY FOR EDITOR REVIEW"), v.literal("NEEDS REVIEW"))),
+    sourceUrls: v.optional(v.array(v.string())), searched: v.optional(v.boolean()),
+    model: v.optional(v.string()), inputTokens: v.optional(v.number()), outputTokens: v.optional(v.number()),
+  }).index("by_key", ["key"]).index("by_window_end", ["windowEnd"]),
 });

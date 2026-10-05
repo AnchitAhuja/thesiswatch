@@ -18,6 +18,7 @@ Convex creates `.env.local` for your project. This file is ignored by Git and mu
 npm test
 node scripts/check-edition.mjs
 npm run test:newsletter
+npm run test:research
 npm run build
 npx tsc --noEmit -p convex/tsconfig.json
 ```
@@ -67,3 +68,60 @@ with a fresh link, without resending an edition already queued for that subscrib
 `mail:testDelivery` and `mailActions:testReceipt` are internal-only checks for
 `delivered+test@resend.dev`. The latter returns Resend's unchanged retrieval response,
 not the API key or request headers.
+
+## Scheduled Claude research
+
+`research weekly AI thesis` runs Saturdays at 03:30 UTC (9:00 AM IST). The
+first permitted run is October 10, 2026 at 9:00 AM IST. Each window covers
+after the previous Saturday's 9:00 AM through this Saturday's 9:00 AM, with
+the end included and start excluded. The dates advance automatically.
+
+The schedule is enabled only where `RESEARCH_SCHEDULE_ENABLED=true` is set
+in Convex environment variables. Keep it disabled in development to avoid
+running a second paid research job. Each edition date gets one durable
+workflow and agent thread. The latest approved edition and exact prompt
+are saved with the run before research starts.
+
+Claude uses the official Convex Agent and Workflow components. It prefers
+the Convex AI Gateway's native Anthropic Messages interface when available;
+otherwise it uses `ANTHROPIC_API_KEY` from the target Convex environment.
+Keep credentials out of source files, the browser and chat. Claude app
+subscriptions do not supply backend API credentials. Model calls and web
+search use the configured provider's paid usage.
+
+The model is Claude Sonnet 4.5, with native web search and web fetch. Each
+run is limited to 30 searches, 40 fetches, four model steps, 12,000 output
+tokens per step and eight minutes. Provider calls are not automatically
+repeated after failure. Failed or incomplete research is recorded privately
+for review. These are execution limits, not a promise that every source is
+accessible or every draft is correct.
+
+The instructions are generated from `prompts/weekly-ai-thesis.md`:
+
+```sh
+npm run sync:research-prompt
+npx convex dev --once
+```
+
+`npm run build` also syncs the instructions before production deployment.
+The human example's fixed reporting dates and previous edition are excluded
+from the generated instructions; scheduled runs use live approved data.
+
+Check access and read the latest private draft with:
+
+```sh
+npx convex run researchActions:configuration --prod
+npx convex run research:latestDraft --prod
+```
+
+Drafts live in `researchRuns`, separate from approved `editions`. Review
+`editorReview` and `readerEdition` in the result. A `READY FOR EDITOR REVIEW`
+draft still needs human review. After checking it, save the approved
+position assessments with the existing internal `editions:save` mutation
+before the 10:00 AM email job. Without a newly approved edition, the mail
+job retains its existing behavior and does not publish or email the draft.
+Repeated weekly email runs still cannot resend an edition already queued.
+The existing sender's `testMode: true` restriction remains in force.
+
+This schedule does not change either page, the tracked positions, signup,
+unsubscribe behavior or the existing 10:00 AM send schedule.

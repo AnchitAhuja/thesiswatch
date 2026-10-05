@@ -14,6 +14,9 @@ import type * as editions from "../editions.js";
 import type * as http from "../http.js";
 import type * as mail from "../mail.js";
 import type * as mailActions from "../mailActions.js";
+import type * as research from "../research.js";
+import type * as researchActions from "../researchActions.js";
+import type * as researchPrompt from "../researchPrompt.js";
 import type * as tracking from "../tracking.js";
 
 import type {
@@ -29,6 +32,9 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   mail: typeof mail;
   mailActions: typeof mailActions;
+  research: typeof research;
+  researchActions: typeof researchActions;
+  researchPrompt: typeof researchPrompt;
   tracking: typeof tracking;
 }>;
 
@@ -61,4 +67,6 @@ export declare const internal: FilterApi<
 export declare const components: {
   staticHosting: import("@convex-dev/static-hosting/_generated/component.js").ComponentApi<"staticHosting">;
   resend: import("@convex-dev/resend/_generated/component.js").ComponentApi<"resend">;
+  agent: import("@convex-dev/agent/_generated/component.js").ComponentApi<"agent">;
+  workflow: import("@convex-dev/workflow/_generated/component.js").ComponentApi<"workflow">;
 };

@@ -2,7 +2,9 @@
 
 ## How to use
 
-Run this in Claude with web search available. This prompt researches and drafts an edition; it does not save an edition or send email.
+This prompt can be run manually in Claude with web search available. The Convex research job also uses these same instructions to save a private draft every Saturday at 9:00 AM IST, starting October 10, 2026, once Claude access is configured. It does not publish an edition or send email.
+
+For scheduled runs, the backend fills the rolling seven-day dates and uses the latest approved edition automatically. The fixed dates and Oct 4 reference below are for a manual October 10 run.
 
 Before running:
 1. The dates below are filled for the Saturday, October 10, 2026 edition. Run this research at or after 9:00 AM IST that Saturday, then review and save the approved edition before the scheduled 10:00 AM email. For later editions, update these dates. The research cutoff must not be in the future when you run it.
