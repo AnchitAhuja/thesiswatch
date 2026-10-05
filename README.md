@@ -1,4 +1,4 @@
-﻿# ThesisWatch
+# Lookout
 
 A Vite app with a Convex backend and Convex static hosting.
 

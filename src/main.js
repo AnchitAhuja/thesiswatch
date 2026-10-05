@@ -13,12 +13,12 @@ const skip = document.querySelector('.skip');
 if (!isThesis) {
   const ordered = groups.flatMap(group => portfolio.filter(position => position.group === group).sort((a, b) => a.ticker.localeCompare(b.ticker)));
   const preview = [...new Set(ordered.map(position => weeklyAssessments[position.ticker].status))].slice(0, 3).map(status => ordered.find(position => weeklyAssessments[position.ticker].status === status));
-  document.title = 'ThesisWatch';
+  document.title = 'Lookout';
   skip.href = '#theses';
   skip.textContent = 'Skip to theses';
   app.innerHTML = `
     <div class="landing-page">
-      <header class="product-header"><span class="product-name">ThesisWatch</span></header>
+      <header class="product-header"><span class="product-name">Lookout</span></header>
       <div class="landing-intro"><h1>Stay on top of your investment thesis without drowning in 50 tabs</h1><p class="lead">Every Saturday, get an email on the AI thesis, stock by stock. 5 minutes is all it takes.</p></div>
       <div class="thesis-choices" id="theses">
         <a class="ai-thesis-card" href="/?thesis=ai" aria-labelledby="ai-card-title">
@@ -40,9 +40,9 @@ if (!isThesis) {
       </div>
     </div>`;
 } else {
-  document.title = 'AI thesis · [PRODUCT NAME]';
+  document.title = 'AI thesis · Lookout';
   app.innerHTML = `
-    <header class="product-header"><a class="product-name" href="/">[PRODUCT NAME]</a></header>
+    <header class="product-header"><a class="product-name" href="/">Lookout</a></header>
     <header class="intro">
       <h1>Stay on top of your investment thesis without drowning in 50 tabs</h1>
       <p class="lead">Every Saturday, get an email on the AI thesis, stock by stock. 5 minutes is all it takes.</p>
