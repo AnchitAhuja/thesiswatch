@@ -1,0 +1,5 @@
+import {chromium} from '../../passport-tools/node_modules/playwright-core/index.mjs';
+import {readFile} from 'node:fs/promises';
+const b=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const p=await b.newPage();
+await p.goto((await readFile('tmp/milestone-one/private-url.txt','utf8')).trim());await p.getByRole('button',{name:'Edit my words'}).click();await p.locator('#reflection').waitFor();if(await p.locator('#investments').count()!==1)throw Error('Missing holdings input');await p.getByRole('button',{name:'Save these words'}).waitFor();console.log('PASS: saved private thesis opens the real edit/reflection screen with its existing fields and save action.');
+await p.goto('http://127.0.0.1:5178/');await p.locator('#landing-belief').fill('Indian consumption grows');await p.locator('.landing-composer').first().getByRole('button',{name:'Build'}).click();await p.getByRole('heading',{name:'Why does that interest you, or why do you believe it?'}).waitFor();console.log('PASS: hero Build still starts the existing capture flow.');await b.close();

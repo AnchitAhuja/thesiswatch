@@ -1,0 +1,2 @@
+import { chromium } from '../../passport-tools/node_modules/playwright-core/index.mjs';
+const b=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const p=await b.newPage({viewport:{width:390,height:844}});await p.goto('http://127.0.0.1:5178/?create=thesis');await p.getByRole('heading',{name:'What do you believe?'}).waitFor();await p.screenshot({path:'tmp/milestone-one/capture-redesign-390.png',fullPage:true});await b.close();console.log('390px capture screenshot saved.');

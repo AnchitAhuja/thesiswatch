@@ -1,0 +1,10 @@
+﻿import { chromium } from './node_modules/playwright-core/index.mjs';
+const browser = await chromium.connectOverCDP('http://127.0.0.1:9223');
+const page = browser.contexts()[0].pages().find(p => p.url().includes('5173'));
+page.on('response', r => { if (r.status() >= 400) console.log('HTTP', r.status(), r.url()); });
+page.on('pageerror', e => console.log('PAGEERROR', e.message));
+await page.reload();
+await page.waitForFunction(() => document.querySelector('canvas')?.dataset.artwork === 'ready');
+console.log('Artwork ready after reload');
+await page.evaluate(async () => { const r = await fetch('/favicon.ico'); console.log('Favicon HTTP', r.status); });
+await browser.close();

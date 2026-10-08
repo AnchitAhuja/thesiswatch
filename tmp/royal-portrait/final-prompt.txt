@@ -1,0 +1,19 @@
+﻿Medium: historic oil painting on fine canvas.
+Palette: antique gold #c68a32, warm umber #77543b, deep burgundy #542b34, muted bronze #927044, soft ivory #eee4cf.
+Light: large warm upper-left key, soft controlled shadow, warm reflected light beneath the jaw, faint hair and shoulder rim.
+Materials: fine layered oil brushwork, subtle canvas grain, delicate craquelure, restrained impasto, charcoal velvet, gold embroidery.
+Mood: dignified, composed, refined.
+Never: photographic skin or pasted face, altered identity, beauty filtering, fantasy gloss, pure-black or pale-cream background, bright yellow, harsh orange, crowns, hats, military costume, extra jewelry, scenery, text, logos, watermark, frame.
+
+Use case: identity-preserve / style-transfer.
+Input image: the attached original photograph is the edit target and authoritative identity reference.
+Transform this specific person into a museum-quality royal portrait painted throughout in a late-Baroque / Victorian oil-painting style. Preserve his exact recognizable facial structure: face shape, eyes and spacing, eyebrows, nose, lips, jawline, cheeks, skin tone, hairline, salt-and-pepper beard and distinctive features. Do not beautify, westernize, age, slim or reconstruct his face. The result must clearly look like the same individual.
+
+Repaint the entire face itself. Every facial region, ears, hair, neck and outfit must have the same refined visible oil treatment: fine layered brushwork, softly blended painted skin tones, painted pores, restrained impasto highlights and hand-painted edges. No untouched photographic skin, pasted photographic face, airbrushing or plastic smoothing.
+
+Composition: vertical 4:5 high-detail chest-up portrait, centered, no frame or border. Torso turned approximately 25–35 degrees away, head gently back toward upper-left light for an elegant three-quarter view. Eyes slightly past camera, composed confident expression with a restrained natural smile. Entire head fully visible, breathing room above and beside hair. Face positioned in upper third, suitable for the existing decorative shield crop. Clean silhouette, chest and neck fully covered.
+Dress: historically inspired formal masculine royal outfit, tailored black or very deep charcoal velvet frock coat, high covered ivory collar, dark cravat, restrained antique-gold embroidery along lapels and edges, optional narrow burgundy ceremonial sash. Dignified and refined, no military decorations, crown, hat or extra accessories. Warm cloth highlights keep dark outfit clearly distinguishable from background.
+Background: quiet evenly painterly studio ground, medium antique gold-brown midway between dark brown and pale cream-gold; warm umber, burnt sienna, muted ochre, restrained bronze. Gentle warm halo behind head, softly darkened corners. No scenery, furniture, architecture, bright yellow, pale beige or pure black.
+Lighting: classical chiaroscuro, large warm upper-left key, delicate golden forehead/cheekbone/nose highlights, soft controlled opposite shadows, reflected jaw warmth and faint hair/shoulder rim. Preserve clear eyes and face, moderate contrast, no muddy shadows or harsh orange cast.
+Finish: authentic fine-art canvas texture, delicate craquelure, visible refined brushwork throughout, resembling a carefully restored historic oil portrait rather than a filtered photograph or glossy fantasy.
+No text, logos, watermark, decorative frame, anime or 3D rendering.

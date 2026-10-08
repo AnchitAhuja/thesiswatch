@@ -1,0 +1,77 @@
+[
+  {
+    "calls": 1,
+    "context": {
+      "belief": "Retail consumption in India will go up",
+      "timeHorizon": null,
+      "whatWouldProveItWrong": null,
+      "why": null
+    },
+    "error": null,
+    "missingFields": [
+      "why",
+      "whatWouldProveItWrong",
+      "timeHorizon"
+    ],
+    "needsConfirmation": false,
+    "reply": "What makes you expect retail consumption in India to rise?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 1
+  },
+  {
+    "calls": 2,
+    "context": {
+      "belief": "Retail consumption in India will go up",
+      "timeHorizon": null,
+      "whatWouldProveItWrong": null,
+      "why": null
+    },
+    "error": null,
+    "missingFields": [
+      "why",
+      "whatWouldProveItWrong",
+      "timeHorizon"
+    ],
+    "needsConfirmation": false,
+    "reply": "India's middle class is expanding with rising incomes, creating more spending power. E-commerce and payment platforms are reaching new customers in smaller cities. Younger demographics favor shopping and lifestyle goods. Which of these drivers fits your thinking?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 2
+  },
+  {
+    "calls": 3,
+    "context": {
+      "belief": "Retail consumption in India will go up",
+      "timeHorizon": null,
+      "whatWouldProveItWrong": null,
+      "why": null
+    },
+    "error": null,
+    "missingFields": [
+      "why",
+      "whatWouldProveItWrong",
+      "timeHorizon"
+    ],
+    "needsConfirmation": false,
+    "reply": "Would you focus on food and everyday essentials, or on discretionary items like electronics, fashion, and dining out?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 3
+  },
+  {
+    "calls": 4,
+    "context": null,
+    "error": "Lookout couldn't think right now, try again",
+    "missingFields": [],
+    "needsConfirmation": false,
+    "reply": null,
+    "result": null,
+    "retry": true,
+    "thesis": null,
+    "turns": 3
+  }
+]

@@ -1,0 +1,7 @@
+import {chromium} from '../../passport-tools/node_modules/playwright-core/index.mjs';import {readFile} from 'node:fs/promises';
+const b=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.route('**/api/action',r=>r.abort());
+await p.goto('http://127.0.0.1:5178/');await p.locator('#landing-belief').waitFor();await p.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(img=>img.decode().catch(()=>{})))});await p.screenshot({path:'tmp/milestone-one/final-01-landing.png'});
+await p.setViewportSize({width:1280,height:1400});await p.goto((await readFile('tmp/milestone-one/final-walk-private-url.txt','utf8')).trim());await p.getByText('Saved privately.',{exact:true}).waitFor();await p.screenshot({path:'tmp/milestone-one/final-09-saved.png'});await p.screenshot({path:'tmp/milestone-one/final-10-reloaded.png'});
+await p.getByRole('button',{name:'Edit',exact:true}).click();await p.getByLabel('Assumption 1',{exact:true}).waitFor();await p.screenshot({path:'tmp/milestone-one/final-07-edit-assumption.png'});await p.getByLabel('Email',{exact:true}).fill('lookout-walkthrough@example.com');await p.screenshot({path:'tmp/milestone-one/final-08-email-save.png'});
+console.log('Recaptured ready landing and complete edit/saved screens at 1280px wide; no model calls or saves.');await b.close();

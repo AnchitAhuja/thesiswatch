@@ -1,0 +1,9 @@
+{
+  "name": "builder-passport",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1", "build": "tsc --noEmit && vite build", "preview": "vite preview --host 127.0.0.1" },
+  "dependencies": { "react": "19.2.0", "react-dom": "19.2.0", "three": "0.185.1", "mp4-muxer": "5.2.2" },
+  "devDependencies": { "vite": "6.4.3", "@vitejs/plugin-react": "4.7.0", "@types/react": "19.2.2", "@types/react-dom": "19.2.2", "typescript": "5.9.3", "@types/three": "0.185.0" }
+}

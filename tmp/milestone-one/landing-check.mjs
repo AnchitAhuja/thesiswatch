@@ -1,0 +1,24 @@
+import {chromium} from '../../passport-tools/node_modules/playwright-core/index.mjs';
+const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+const page=await browser.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:5178/');
+await page.getByRole('heading',{name:'What do you believe?'}).waitFor();
+await page.screenshot({path:'tmp/milestone-one/landing-dark-1280.png',fullPage:true});
+await page.setViewportSize({width:390,height:844});
+await page.screenshot({path:'tmp/milestone-one/landing-dark-390.png',fullPage:true});
+if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw new Error('Phone overflow');
+if(await page.locator('.landing-starters button').count()!==6)throw new Error('Missing chips');
+for(const link of await page.getByRole('link',{name:'Build my idea',exact:true}).all()){ await link.click();if(!await page.getByLabel('Your investment belief').evaluate(el=>el===document.activeElement))throw new Error('CTA not linked'); }
+await page.getByRole('button',{name:"I can't put it into words, ask me",exact:true}).click();
+await page.getByRole('heading',{name:"What's one company, industry or change you're interested in?"}).waitFor();
+await page.goto('http://127.0.0.1:5178/');
+await page.getByRole('button',{name:"AI's bottleneck is power, not chips",exact:true}).click();
+await page.getByRole('button',{name:'Send',exact:true}).click();
+await page.getByRole('heading',{name:'Why does that interest you, or why do you believe it?'}).waitFor();
+if(await page.evaluate(()=>document.body.classList.contains('lookout-dark')))throw new Error('Dark styles leaked into reflection flow');
+await page.getByLabel('Your answer').fill('More AI data centres need reliable power and grid equipment.');await page.getByRole('button',{name:'Send',exact:true}).click();
+await page.getByLabel('Your answer').fill('If data centre power demand slows or grid supply catches up.');await page.getByRole('button',{name:'Send',exact:true}).click();
+await page.getByRole('heading',{name:"Here's what I think you're betting on."}).waitFor({timeout:90000});
+await page.getByLabel('Investments connected to it').waitFor();
+await page.goto('http://127.0.0.1:5178/?thesis=ai');await page.getByText('Edition dated Oct 4, 2026',{exact:true}).waitFor();if(await page.locator('article').count()!==11)throw new Error('Shared thesis changed');
+if(errors.length)throw new Error(JSON.stringify(errors));console.log('PASS: 390px and 1280px screenshots, six chips, both Build my idea links focus capture, ask-me route, Send carries belief through real Claude reflection, original 11-position page unchanged; no browser errors.');await browser.close();

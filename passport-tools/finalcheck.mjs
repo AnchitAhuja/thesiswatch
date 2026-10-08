@@ -1,0 +1,17 @@
+﻿import { chromium } from './node_modules/playwright-core/index.mjs';
+import { writeFile } from 'node:fs/promises';
+const browser = await chromium.connectOverCDP('http://127.0.0.1:9223');
+const page = browser.contexts()[0].pages().find(p => p.url().includes('5173'));
+const errors = [];
+page.on('pageerror', e => errors.push(e.message));
+page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
+await page.reload();
+await page.waitForFunction(() => document.querySelector('canvas')?.dataset.artwork === 'ready');
+await page.getByRole('button', { name: 'Export 10s clip' }).waitFor();
+await page.screenshot({ path: new URL('./results/final-desktop.png', import.meta.url).pathname.replace(/^\/(\w:)/, '$1') });
+console.log(JSON.stringify({ title: await page.title(), artwork: await page.locator('canvas').getAttribute('data-artwork'), exportEnabled: await page.getByRole('button', { name: 'Export 10s clip' }).isEnabled(), errors }));
+await writeFile(new URL('./results/final-browser.json', import.meta.url), JSON.stringify({ errors, artwork: 'ready' }, null, 2));
+await page.bringToFront();
+await browser.close();
+if (errors.length) process.exitCode = 1;

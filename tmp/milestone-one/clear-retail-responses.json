@@ -1,0 +1,112 @@
+[
+  {
+    "calls": 1,
+    "context": {
+      "belief": "India's retail consumption will grow amid rising disposable income",
+      "timeHorizon": null,
+      "whatWouldProveItWrong": null,
+      "why": null
+    },
+    "error": null,
+    "missingFields": [
+      "why",
+      "whatWouldProveItWrong",
+      "timeHorizon"
+    ],
+    "needsConfirmation": false,
+    "reply": "Got it—you expect India's retail consumption to grow as disposable income rises. What's driving that income increase: economic expansion creating more jobs, wage growth in certain sectors, or something else?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 1
+  },
+  {
+    "calls": 2,
+    "context": {
+      "belief": "India's retail consumption will grow amid rising disposable income",
+      "timeHorizon": "Five years",
+      "whatWouldProveItWrong": null,
+      "why": "Wages rising faster than living costs will leave households more money for discretionary spending"
+    },
+    "error": null,
+    "missingFields": [
+      "whatWouldProveItWrong"
+    ],
+    "needsConfirmation": false,
+    "reply": "So households keep more after covering basics, and they spend that extra money on retail goods. What evidence would make you rethink this—if wage growth slows, if inflation outpaces wages, or if households save rather than spend?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 2
+  },
+  {
+    "calls": 3,
+    "context": {
+      "belief": "India's retail consumption will grow amid rising disposable income",
+      "timeHorizon": "Five years",
+      "whatWouldProveItWrong": "Household spending stays flat for two years despite rising real incomes, or retail sales volumes fall persistently",
+      "why": "Wages rising faster than living costs will leave households more money for discretionary spending"
+    },
+    "error": null,
+    "missingFields": [],
+    "needsConfirmation": false,
+    "reply": "You expect retail consumption to grow because real wages leave more for discretionary spending. You'd rethink if spending stays flat despite income gains or retail volumes fall for two years. Your horizon is five years. Does that capture your thesis?",
+    "result": null,
+    "retry": false,
+    "thesis": null,
+    "turns": 3
+  },
+  {
+    "calls": 4,
+    "context": {
+      "belief": "India's retail consumption will grow amid rising disposable income",
+      "timeHorizon": "Five years",
+      "whatWouldProveItWrong": "Household spending stays flat for two years despite rising real incomes, or retail sales volumes fall persistently",
+      "why": "Wages rising faster than living costs will leave households more money for discretionary spending"
+    },
+    "error": null,
+    "missingFields": [],
+    "needsConfirmation": false,
+    "reply": "Your thesis: India's retail consumption will grow as rising real wages boost discretionary spending over five years. Watch household spending data, retail sales volumes, and wage versus inflation trends to test your reasoning.",
+    "result": {
+      "belief": "India's retail consumption will grow as rising real wages increase discretionary spending",
+      "inferredAssumptions": [
+        "Real wages will outpace inflation, leaving households more disposable income",
+        "Households will allocate additional income to retail goods rather than savings",
+        "Retail sales volumes will track discretionary spending growth over five years"
+      ],
+      "reflection": "India's retail consumption will grow as rising real wages increase discretionary spending",
+      "risks": [],
+      "statedReasons": [
+        "Wages rising faster than living costs will leave households more money for discretionary spending"
+      ],
+      "strengtheningEvidence": [
+        "Household spending data showing sustained growth in discretionary categories",
+        "Retail sales volume trends across major product segments",
+        "Wage growth rates versus consumer price inflation over consecutive quarters",
+        "Consumer confidence indices reflecting willingness to spend",
+        "Savings rate changes indicating shifts between spending and saving behavior"
+      ],
+      "unverifiedClaims": [],
+      "weakeningEvidence": []
+    },
+    "retry": false,
+    "thesis": {
+      "assumptions": [
+        "Real wages will outpace inflation, leaving households more disposable income",
+        "Households will allocate additional income to retail goods rather than savings",
+        "Retail sales volumes will track discretionary spending growth over five years"
+      ],
+      "sector": "Consumer Retail",
+      "thesis": "India's retail consumption will grow as rising real wages increase discretionary spending",
+      "watchSignals": [
+        "Household spending data showing sustained growth in discretionary categories",
+        "Retail sales volume trends across major product segments",
+        "Wage growth rates versus consumer price inflation over consecutive quarters",
+        "Consumer confidence indices reflecting willingness to spend",
+        "Savings rate changes indicating shifts between spending and saving behavior"
+      ]
+    },
+    "turns": 4
+  }
+]

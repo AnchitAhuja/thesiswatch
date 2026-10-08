@@ -1,0 +1,22 @@
+{
+  "state": {
+    "artwork": "ready",
+    "videoEncoder": "function",
+    "canvasSize": [
+      1440,
+      1000
+    ]
+  },
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "identical": false,
+  "shaA": "91665db5171067d6d3e9e21d083c527ff87a804330d8d6ee90ce1b4a50e37450",
+  "shaB": "9b66eb36cbadc8f2d57b34386f00f9f823a0c9fef324d56f97f386dbd5353dff",
+  "mobile": {
+    "x": 34.79999923706055,
+    "y": 725.5,
+    "width": 320.8000068664551,
+    "height": 42
+  }
+}
