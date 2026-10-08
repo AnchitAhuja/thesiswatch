@@ -1,0 +1,41 @@
+import { bindCustomThesis, thesisStarters } from './thesis.mjs';
+const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+
+export function bindLanding(root) {
+  document.body.classList.add('lookout-dark');
+  root.innerHTML = `<div class="dark-landing">
+    <header class="dark-header"><a class="dark-brand" href="/">LOOKOUT<span>VANTAGE / A CLEARER VIEW</span></a><a class="build-idea" href="#capture-box">Build my idea</a></header>
+    <div class="dark-hero">
+      <div class="dark-hero-left"><p class="long-view">For the long view</p><h1>Invest.<br>Then move on<br>with your life.</h1>
+        <p class="dark-intro">Markets have plenty to say. Your reasons matter more. Share why you invest; Lookout brings relevant evidence back to those reasons.</p>
+        <div class="landing-capture" id="capture-box"><h2>What do you believe?</h2><p>Describe an investment idea in plain language. I'll ask a couple of questions, then help you put your thesis into words.</p>
+          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><textarea id="landing-belief" rows="2" maxlength="3000" required placeholder="AI's real bottleneck is power and grid equipment&#8230;"></textarea><button type="submit">Send</button></form>
+          <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
+          <button class="landing-ask" type="button">I can't put it into words, ask me</button>
+        </div>
+      </div>
+      <aside class="journal-example" aria-labelledby="journal-title"><div class="journal-meta"><span id="journal-title">The Conviction Journal</span><span>Demo / MSFT</span></div>
+        <blockquote>“AI will make Microsoft's cloud business more valuable over time.”</blockquote>
+        <dl><div><dt>Belief</dt><dd>Cloud demand grows</dd></div><div><dt>Evidence</dt><dd>Azure revenue +29% YoY</dd></div></dl>
+        <h2>A signal, not a conclusion.</h2><p>FY24 Q4 cloud growth supports demand. One quarter alone cannot establish the long-term returns from AI investment.</p>
+        <a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q4/press-release-webcast" target="_blank" rel="noopener noreferrer">Read Microsoft's release · July 30, 2024</a><p class="journal-caption">Historical evidence. Illustrative interpretation.</p>
+      </aside>
+    </div>
+    <div class="dark-principles"><div><p>Write it down</p><h2>Make conviction explicit.</h2><span>A belief is easier to revisit when you know what it rests on.</span></div><div><p>Follow the thread</p><h2>Evidence over headlines.</h2><span>See the source, the context and the connection to your reasoning.</span></div><div><p>Keep perspective</p><h2>Leave room to change your mind.</h2><span>Look for the evidence that challenges your story, too.</span></div></div>
+    <footer class="dark-footer"><p>Your life is bigger<br>than your portfolio.</p><a class="build-idea" href="#capture-box">Build my idea</a></footer>
+    <a class="shared-thesis-link" href="/?thesis=ai">Explore the AI thesis</a>
+  </div>`;
+  const input = root.querySelector('#landing-belief');
+  root.querySelectorAll('.landing-starters button').forEach(button => button.onclick = () => { input.value = button.textContent; input.focus(); });
+  root.querySelectorAll('.build-idea').forEach(link => link.addEventListener('click', event => { event.preventDefault(); input.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); input.focus({ preventScroll: true }); }));
+  const start = entry => {
+    document.body.classList.remove('lookout-dark');
+    history.pushState(null, '', '/?create=thesis');
+    document.title = 'Your thesis · Lookout';
+    const skip = document.querySelector('.skip');
+    skip.href = '#app'; skip.textContent = 'Skip to your thesis';
+    void bindCustomThesis(root, entry);
+  };
+  root.querySelector('form').addEventListener('submit', event => { event.preventDefault(); if (input.value.trim()) start({ original: input.value, guided: false }); });
+  root.querySelector('.landing-ask').onclick = () => start({ original: '', guided: true });
+}

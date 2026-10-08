@@ -1,7 +1,8 @@
 import { ConvexHttpClient } from 'convex/browser';
 import { api } from '../convex/_generated/api.js';
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-export async function bindCustomThesis(root) {
+export const thesisStarters = ["AI's bottleneck is power, not chips", 'GLP-1s reshape food and healthcare', 'A weaker dollar: I want real assets', 'Nuclear answers baseload demand', 'US reshoring is an industrial boom', 'Aging drives a healthcare bull market'];
+export async function bindCustomThesis(root, entry = null) {
   const client = new ConvexHttpClient(import.meta.env.VITE_CONVEX_URL);
   let token = window.location.hash.startsWith('#private=') ? window.location.hash.slice(9) : null;
   let record = null;
@@ -17,7 +18,7 @@ export async function bindCustomThesis(root) {
     ['Claims not yet verified', result.unverifiedClaims], ['Risks and uncertainties', result.risks],
     ['Evidence that could strengthen it', result.strengtheningEvidence], ['Evidence that could weaken it', result.weakeningEvidence],
   ].map(([title, entries]) => `<div><h3>${title}</h3>${entries.length ? `<ul>${entries.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p>None identified in your statement.</p>'}</div>`).join('')}</details>`;
-  const starters = ["AI's bottleneck is power, not chips", 'GLP-1s reshape food and healthcare', 'A weaker dollar: I want real assets', 'Nuclear answers baseload demand', 'US reshoring is an industrial boom', 'Aging drives a healthcare bull market'];
+  const starters = thesisStarters;
   function capture() {
     shell(`<h1>What do you believe?</h1><p class="capture-lead">Describe an investment idea in plain language. I'll ask a couple of questions, then help you put your thesis into words.</p>
       <form id="belief-form" class="chat-composer"><label class="visually-hidden" for="belief">Your belief and why</label><textarea id="belief" rows="2" maxlength="3000" required placeholder="AI's real bottleneck is power and grid equipment&#8230;"></textarea><button type="submit">Send</button></form>
@@ -74,7 +75,7 @@ export async function bindCustomThesis(root) {
       catch { root.querySelector('#copy-note').textContent = 'Copy the address from your browser to keep your link.'; }
     });
   }
-  if (!token) return capture();
+  if (!token) return entry ? questions(entry.original || '', [], Boolean(entry.guided)) : capture();
   shell('<p role="status">Opening your private thesis…</p>');
   try { record = await client.query(api.theses.read, { token });
     if (!record?.interpretation) throw new Error('Missing thesis');
