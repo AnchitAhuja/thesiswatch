@@ -1,3 +1,4 @@
+import { captureComposerMarkup } from './ui-fragments.mjs';
 import { bindCustomThesis, thesisStarters } from './thesis.mjs';
 import { howItWorksMarkup, animateHowItWorks } from './how-it-works.mjs';
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
@@ -13,7 +14,7 @@ export function bindLanding(root) {
       <div class="dark-hero-left"><h1>Invest.<span>Then move on with your life.</span></h1>
         <p class="dark-intro">Add your investment ideas. Lookout tracks the evidence behind each belief and flags what changes, so you know when to revisit your reasoning.</p>
         <div class="landing-capture" id="capture-box">
-          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Build</button></form>
+          ${captureComposerMarkup()}
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
           <a class="ai-thesis-choice" href="/?thesis=ai"><h2>AI thesis</h2><p>Follow the AI value chain through energy, chips, platforms and adopters, with sourced evidence for each of eleven tracked positions.</p></a>

@@ -1,3 +1,4 @@
+import { reflectionMarkup } from './ui-fragments.mjs';
 import { ConvexHttpClient } from 'convex/browser';
 import { api } from '../convex/_generated/api.js';
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
@@ -49,9 +50,7 @@ export async function bindCustomThesis(root, entry = null) {
   function reflection(edit = false) {
     const result = record.interpretation;
     const text = record.confirmedReflection || result.reflection;
-    shell(`<h1>Here's what I think you're betting on.</h1><div class="reflection-paper">${edit ? `<label for="reflection">Put it in your words</label><textarea id="reflection" maxlength="2000">${esc(text)}</textarea>` : `<p class="reflection-text">${esc(text)}</p>`}
-      ${record.investments.length ? `<p class="linked-investments">Connected investments: ${record.investments.map(esc).join(', ')}</p>` : ''}</div>
-      <label for="investments">Investments connected to it <span>(optional)</span></label><input id="investments" maxlength="504" value="${esc(record.investments.join(', '))}" placeholder="Nvidia, Microsoft, or an ETF"><p class="field-note">Add up to five, separated by commas. You can leave this blank.</p><p class="capture-question">Does that sound right?</p><div class="capture-actions"><button id="confirm">${edit ? 'Save these words' : 'Yes, save my thesis'}</button>${edit ? '' : '<button class="secondary-action" id="edit">Edit the interpretation</button>'}</div><p role="alert" hidden></p>
+    shell(`${reflectionMarkup({ text, investments: record.investments, edit })}
       ${details(result)}<details class="original-statement"><summary>Your original words</summary><p>${esc(record.original)}</p></details>`);
     root.querySelector('#edit')?.addEventListener('click', () => { record.investments = root.querySelector('#investments').value.split(',').map(x => x.trim()).filter(Boolean); reflection(true); });
     root.querySelector('#confirm').addEventListener('click', async () => {
