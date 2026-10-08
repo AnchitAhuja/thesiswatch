@@ -12,7 +12,7 @@ export function bindLanding(root) {
       <div class="dark-hero-left"><h1>Invest.<span>Then move on with your life.</span></h1>
         <p class="dark-intro">Put your belief into words, connect your investments, and save your reasoning.</p>
         <div class="landing-capture" id="capture-box">
-          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Send</button></form>
+          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Build</button></form>
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
         </div>

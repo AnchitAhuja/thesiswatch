@@ -291,3 +291,31 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
  .lookout-photo .dark-hero { padding-top: 290px; }
  .photo-hero::after { background: linear-gradient(180deg, #131C17 0, #131C17 75px, rgba(10,18,12,.13) 85px, rgba(10,18,12,.08) 220px, rgba(10,18,12,.22) 310px, rgba(19,28,23,.9) 405px, #131C17 450px); }
 }
+/* Keep the complete hero inside the first viewport, with faces above the copy. */
+.lookout-photo .photo-hero { height: 100svh; min-height: 680px; display: flex; flex-direction: column; }
+.lookout-photo .dark-header { width: 100%; flex: 0 0 auto; }
+.lookout-photo .dark-brand span { font-size: 11px; line-height: 18px; letter-spacing: .075em; color: #F0F0E7; }
+.lookout-photo .photo-hero::after { background: linear-gradient(180deg, rgba(10,18,12,.4) 0%, rgba(10,18,12,.15) 24%, rgba(10,18,12,.65) 44%, rgba(10,18,12,.93) 76%, #131C17 100%), linear-gradient(90deg, rgba(10,18,12,.35), transparent 75%); }
+.lookout-photo .dark-hero { width: 100%; max-width: 1180px; margin: auto auto 0; padding: 0 40px 28px; text-align: left; }
+.lookout-photo .dark-hero-left { max-width: 560px; }
+.lookout-photo .dark-hero h1 { font-size: 50px; line-height: 1.03; max-width: 19ch; }
+.lookout-photo .dark-intro { font-size: 16px; line-height: 24px; margin: 14px 0 0; max-width: 48ch; }
+.lookout-photo .landing-capture { max-width: 490px; margin: 18px 0 0; }
+.lookout-photo .landing-composer { padding: 4px; border-radius: 10px; }
+.lookout-photo .landing-composer input { font-size: 14px; line-height: 22px; padding: 8px 10px; }
+.lookout-photo .landing-composer button { min-height: 40px; padding: 9px 18px; font-size: 14px; line-height: 22px; }
+.lookout-photo .landing-starters { justify-content: flex-start; margin-top: 12px; gap: 6px; }
+.lookout-photo .landing-starters button { font-size: 11px; line-height: 16px; padding: 7px 9px; }
+.lookout-photo .landing-ask { padding-top: 12px; font-size: 12px; line-height: 20px; }
+@media(max-width:760px) {
+ .lookout-photo .photo-hero { min-height: 800px; }
+ .lookout-photo .family-photo { top: 80px; height: 300px; }
+ .lookout-photo .dark-hero { padding: 0 20px 24px; }
+ .lookout-photo .dark-hero h1 { font-size: 32px; max-width: 19ch; }
+ .lookout-photo .dark-intro { font-size: 14px; line-height: 21px; margin-top: 12px; max-width: 42ch; }
+ .lookout-photo .landing-capture { max-width: 330px; margin-top: 16px; }
+ .lookout-photo .landing-starters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+ .lookout-photo .landing-starters button { padding: 7px 9px; font-size: 11px; line-height: 16px; }
+ .lookout-photo .photo-hero::after { background: linear-gradient(180deg, #131C17 0, #131C17 75px, rgba(10,18,12,.1) 85px, rgba(10,18,12,.08) 210px, rgba(10,18,12,.35) 290px, rgba(19,28,23,.92) 370px, #131C17 415px); }
+}
+.lookout-photo .dark-hero h1 span { text-wrap: balance; }
