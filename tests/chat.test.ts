@@ -49,15 +49,28 @@ it("validates short single-question replies, final-card shape and prohibited wor
   expect(() => parseChatResponse(JSON.stringify({ ...draft, thesis: { ...draft.thesis, assumptions: ["one"] } }), true)).toThrow();
   expect(() => parseChatResponse(JSON.stringify({ ...question, reply: "Buy this company?" }), false)).toThrow();
 });
-it("keeps missing context provisional and refuses saving until the person supplies it", async () => {
+it("saves an edited assumption without inventing missing context", async () => {
   const { t, token, id } = await setup();
   const data = parseChatResponse(JSON.stringify({ ...draft, context: { ...context, why: null, timeHorizon: null } }), true);
   expect(data.missingFields).toEqual(["why", "timeHorizon"]); expect(data.needsConfirmation).toBe(true);
   await t.mutation(internal.thesisConversation.claim, { token, requestId: "1" });
   await t.mutation(internal.thesisConversation.finish, { id, requestId: "1", reply: data.reply, thesis: data.thesis, context: data.context, missingFields: data.missingFields, needsConfirmation: true, result: legacyInterpretation(data) });
-  await expect(t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis })).rejects.toThrow("Confirm");
+  const assumptions = ["Edited first assumption", ...data.thesis.assumptions.slice(1)];
+  await t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, assumptions });
+  const provisional = await t.query(api.theses.read, { token });
+  expect(provisional?.state).toBe("saved"); expect(provisional?.context?.why).toBeNull();
+  expect(provisional?.missingFields).toEqual(["why", "timeHorizon"]); expect(provisional?.needsConfirmation).toBe(true);
+  expect(provisional?.thesis?.assumptions).toEqual(assumptions); expect(provisional?.interpretation?.inferredAssumptions).toEqual(assumptions);
+  await expect(t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, assumptions: ["one"] })).rejects.toThrow("three assumptions");
   await t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, context });
   const saved = await t.query(api.theses.read, { token });
   expect(saved?.state).toBe("saved"); expect(saved?.needsConfirmation).toBe(false); expect(saved?.thesis?.assumptions).toHaveLength(3);
 });
 
+
+it("accepts neutral retail business descriptions while blocking securities trade wording", () => {
+ const response = { ...draft, reply: "Avenue Supermarts operates supermarket chains selling groceries and household goods." };
+ expect(parseChatResponse(JSON.stringify(response), true).reply).toContain("providing groceries");
+ expect(() => parseChatResponse(JSON.stringify({ ...response, reply: "Consider selling shares." }), true)).toThrow("Unacceptable wording");
+ expect(() => parseChatResponse(JSON.stringify({ ...response, reply: "Would these fit?" }), true)).toThrow();
+});

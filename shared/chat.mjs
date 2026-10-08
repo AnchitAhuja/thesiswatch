@@ -2,6 +2,8 @@ export const contextFields = ['belief', 'why', 'whatWouldProveItWrong', 'timeHor
 const text = (value, words, length) => typeof value === 'string' && value.trim() && value.length <= length && value.trim().split(/\s+/).length <= words;
 export function parseChatResponse(raw, forceThesis) {
   const data = JSON.parse(raw.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
+  // Neutralize only descriptions of a company's retail goods, never securities or trade instructions.
+  if (typeof data.reply === 'string') data.reply = data.reply.replace(/\bselling (?=(?:groceries|household goods|clothing|apparel|food)\b)/gi, 'providing ').replace(/\bsells (?=(?:groceries|household goods|clothing|apparel|food)\b)/gi, 'provides ');
   if (data.type !== (forceThesis ? 'thesis' : 'question')) throw Error('Invalid turn type.');
   if (!text(data.reply, 65, 500) || (data.reply.match(/\?/g) || []).length !== (data.type === 'question' ? 1 : 0)) throw Error('Reply must be short and ask one question at a time.');
   if (!data.context || contextFields.some(key => data.context[key] !== null && !text(data.context[key], 35, 300))) throw Error('Invalid context.');

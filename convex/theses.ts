@@ -48,8 +48,8 @@ export const read = query({
   },
 });
 export const confirm = mutation({
-  args: { token: v.string(), reflection: v.string(), investments: v.optional(v.array(v.string())), context: v.optional(thesisContext), email: v.string() }, returns: v.null(),
-  handler: async (ctx, { token, reflection, investments, context, email: rawEmail }) => {
+  args: { token: v.string(), reflection: v.string(), investments: v.optional(v.array(v.string())), context: v.optional(thesisContext), email: v.string(), assumptions: v.optional(v.array(v.string())) }, returns: v.null(),
+  handler: async (ctx, { token, reflection, investments, context, email: rawEmail, assumptions }) => {
     const email = rawEmail.trim().toLowerCase();
     if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw Error("Enter a valid email address.");
     if (investments && (investments.length > 5 || investments.some(x => !x.trim() || x.length > 100))) throw new Error("Add up to five investments.");
@@ -57,15 +57,15 @@ export const confirm = mutation({
     const tokenHash = await digest(token);
     const row = await ctx.db.query("customTheses").withIndex("by_token_hash", q => q.eq("tokenHash", tokenHash)).unique();
     if (!row || !row.interpretation) throw new Error("This thesis is not ready to save.");
-    if (row.thesis || context) {
-      const confirmed = context || row.context;
-      if (!confirmed || Object.values(confirmed).some(x => !x?.trim() || x.length > 300)) throw Error("Confirm the belief, reason, what would prove it wrong and time horizon before saving.");
-    }
+    if (assumptions && (assumptions.length !== 3 || assumptions.some(x => !x.trim() || x.length > 300))) throw Error("Enter three assumptions, each under 300 characters.");
+    if (context && Object.values(context).some(x => x !== null && (!x.trim() || x.length > 300))) throw Error("Keep each reasoning detail under 300 characters.");
+    const confirmed = context || row.context;
+    const missingFields = confirmed ? ["belief", "why", "whatWouldProveItWrong", "timeHorizon"].filter(key => confirmed[key as keyof typeof confirmed] === null) : row.missingFields || [];
     if (row.state !== "saved" || row.email !== email) {
       const saved = await ctx.db.query("customTheses").withIndex("by_email_state", q => q.eq("email", email).eq("state", "saved")).take(3);
       if (saved.length >= 3) throw new Error("This email already has three saved theses.");
     }
-    await ctx.db.patch(row._id, { state: "saved", email, confirmedReflection: reflection.trim(), ...(row.thesis ? { thesis: { ...row.thesis, thesis: reflection.trim() } } : {}), ...(context ? { context, missingFields: [], needsConfirmation: false } : {}), ...(investments ? { investments } : {}) });
+    await ctx.db.patch(row._id, { state: "saved", email, confirmedReflection: reflection.trim(), ...(row.thesis ? { thesis: { ...row.thesis, thesis: reflection.trim(), ...(assumptions ? { assumptions: assumptions.map(x => x.trim()) } : {}) } } : {}), ...(confirmed ? { context: confirmed, missingFields, needsConfirmation: missingFields.length > 0 } : {}), ...(assumptions ? { interpretation: { ...row.interpretation, inferredAssumptions: assumptions.map(x => x.trim()) } } : {}), ...(investments ? { investments } : {}) });
     return null;
   },
 });

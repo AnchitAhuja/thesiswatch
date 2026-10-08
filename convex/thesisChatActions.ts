@@ -28,12 +28,12 @@ export const reply = action({
       if (!process.env.ANTHROPIC_API_KEY) throw Error("AI key unavailable.");
       threadId ||= await createThread(ctx, components.agent, { title: "Private Lookout conversation" });
       const agent = new Agent(components.agent, { name: "Lookout conversation", languageModel: meteredClaude(ctx, anthropic("claude-sonnet-4-5")), instructions: chatSystemPrompt, contextOptions: { recentMessages: 0 } });
-      const finalInstructions = final ? 'This is the fourth and last turn: return type thesis and no question. Missing details remain null and must be confirmed. If the latest answer is you tell me, your reply MUST give two or three connected company examples with their business connections.' : `This is turn ${turn} of four, NOT the final turn. You MUST return type question and thesis:null. Ask one short question reacting to the latest answer. If all details are established, ask for confirmation of your understanding. Do not produce a provisional thesis before the fourth turn.`;
+      const finalInstructions = final ? 'This is the fourth and last turn: return type thesis. Your reply MUST contain only statements and ZERO question marks. Do NOT ask which company fits or request confirmation; the conversation is finished. Missing details remain null and must be confirmed. If the latest answer is you tell me, your reply MUST give two or three connected company examples with their business connections.' : `This is turn ${turn} of four, NOT the final turn. You MUST return type question and thesis:null. Ask one short question reacting to the latest answer. If all details are established, ask for confirmation of your understanding. Do not produce a provisional thesis before the fourth turn.`;
       console.log(`LOOKOUT_MODEL_CALL_START ${trace}`);
       const response = await agent.generateObject(ctx, { threadId }, {
         schema: jsonSchema(chatReplySchema(final)),
         schemaName: "LookoutChatReply",
-        prompt: `${chatSystemPrompt}\n${finalInstructions}\n<conversation_state>${JSON.stringify({ lookoutTurn: turn, remainingCalls: 6 - chat.calls, confirmedContext: claim.context })}</conversation_state>\n<whole_conversation>\n${JSON.stringify(chat.messages)}\n</whole_conversation>`,
+        prompt: `${finalInstructions}\n<conversation_state>${JSON.stringify({ lookoutTurn: turn, remainingCalls: 6 - chat.calls, confirmedContext: claim.context })}</conversation_state>\n<whole_conversation>\n${JSON.stringify(chat.messages)}\n</whole_conversation>`,
         maxOutputTokens: final ? 1200 : 650, maxRetries: 0, abortSignal: AbortSignal.timeout(60000),
       });
       rawModelResponse = JSON.stringify(response.object);
@@ -71,7 +71,7 @@ function chatReplySchema(final: boolean): import("ai").JSONSchema7 {
   };
   return {
     type: "object", additionalProperties: false,
-    properties: { type: { type: "string", enum: [final ? "thesis" : "question"] }, reply: shortText(500), context, thesis: final ? thesis : { type: "null" } },
+    properties: { type: { type: "string", enum: [final ? "thesis" : "question"] }, reply: { ...shortText(500), pattern: final ? "^[^?]*$" : "^[^?]*[?]$" }, context, thesis: final ? thesis : { type: "null" } },
     required: ["type", "reply", "context", "thesis"],
   };
 }
