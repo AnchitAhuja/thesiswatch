@@ -7,10 +7,10 @@ export function bindLanding(root) {
   root.innerHTML = `<div class="dark-landing">
     <div class="photo-hero">
     <img class="family-photo" src="/hero-family.webp" alt="A family enjoying time together at home" fetchpriority="high" width="1021" height="614">
-    <header class="dark-header"><a class="dark-brand" href="/">LOOKOUT<span>VANTAGE / A CLEARER VIEW</span></a><a class="build-idea" href="#capture-box">Build my idea</a></header>
+    <header class="dark-header"><a class="dark-brand" href="/">LOOKOUT<span>By Vantage</span></a><a class="build-idea" href="#capture-box">Build my idea</a></header>
     <div class="dark-hero">
       <div class="dark-hero-left"><h1>Invest.<span>Then move on with your life.</span></h1>
-        <p class="dark-intro">Put your belief into words, connect your investments, and save your reasoning.</p>
+        <p class="dark-intro">Add your investment ideas. Lookout tracks the evidence behind each belief and flags what changes, so you know when to revisit your reasoning.</p>
         <div class="landing-capture" id="capture-box">
           <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Build</button></form>
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
