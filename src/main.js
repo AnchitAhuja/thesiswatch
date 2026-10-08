@@ -6,11 +6,16 @@ import { api } from '../convex/_generated/api.js';
 import { trackingMarkup, bindTracking } from './tracking.mjs';
 import { bindEdition } from './edition.mjs';
 import { groups, portfolio, weeklyAssessments } from './portfolio.js';
+import { bindCustomThesis } from './thesis.mjs';
 
 const app = document.querySelector('#app');
 const isThesis = new URLSearchParams(window.location.search).get('thesis') === 'ai';
 const skip = document.querySelector('.skip');
-if (!isThesis) {
+if (new URLSearchParams(window.location.search).get('create') === 'thesis') {
+  document.title = 'Your thesis · Lookout';
+  skip.href = '#app'; skip.textContent = 'Skip to your thesis';
+  void bindCustomThesis(app);
+} else if (!isThesis) {
   const ordered = groups.flatMap(group => portfolio.filter(position => position.group === group).sort((a, b) => a.ticker.localeCompare(b.ticker)));
   const preview = [...new Set(ordered.map(position => weeklyAssessments[position.ticker].status))].slice(0, 3).map(status => ordered.find(position => weeklyAssessments[position.ticker].status === status));
   document.title = 'Lookout';
@@ -34,8 +39,8 @@ if (!isThesis) {
           <span class="card-action">Open the AI thesis</span>
         </a>
         <section class="coming-soon-card" aria-labelledby="create-card-title">
-          <span class="coming-soon">Coming soon</span>
           <h2 id="create-card-title">Create your own thesis</h2>
+          <a class="create-thesis-link" href="/?create=thesis">Start with your belief</a>
         </section>
       </div>
     </div>`;

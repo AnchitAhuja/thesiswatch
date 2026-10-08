@@ -17,6 +17,9 @@ import type * as mailActions from "../mailActions.js";
 import type * as research from "../research.js";
 import type * as researchActions from "../researchActions.js";
 import type * as researchPrompt from "../researchPrompt.js";
+import type * as theses from "../theses.js";
+import type * as thesisActions from "../thesisActions.js";
+import type * as thesisFields from "../thesisFields.js";
 import type * as tracking from "../tracking.js";
 
 import type {
@@ -35,6 +38,9 @@ declare const fullApi: ApiFromModules<{
   research: typeof research;
   researchActions: typeof researchActions;
   researchPrompt: typeof researchPrompt;
+  theses: typeof theses;
+  thesisActions: typeof thesisActions;
+  thesisFields: typeof thesisFields;
   tracking: typeof tracking;
 }>;
 

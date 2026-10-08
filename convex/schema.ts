@@ -1,8 +1,10 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { editionFields } from "./editionFields";
+import { thesisFields } from "./thesisFields";
 
 export default defineSchema({
+  customTheses: defineTable(thesisFields).index("by_token_hash", ["tokenHash"]).index("by_created_at", ["createdAt"]),
   trackingOptIns: defineTable({
     email: v.string(),
     savedAt: v.string(),

@@ -160,3 +160,34 @@ article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 
  .skeleton-row > div:first-child { grid-row: auto; height: 44px; }
  .skeleton-row > div:nth-child(3) { grid-column: auto; }
 }
+/* Thesis capture is a quiet working page, separate from the shared edition. */
+.capture-page { max-width: 760px; margin: 0 auto; }
+.capture-page .product-header { justify-content: space-between; gap: 24px; }
+.capture-page .product-header > a:last-child { font-size: 12px; line-height: 18px; }
+.capture-body h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.15; max-width: 23ch; }
+.capture-lead { font-size: 16px; line-height: 25px; margin: 20px 0 32px; max-width: 54ch; }
+.capture-body form { margin-top: 28px; }
+.capture-body label { display: block; font-size: 14px; font-weight: 600; margin: 24px 0 10px; }
+.capture-body label span { font-weight: 400; }
+.capture-body textarea, .capture-body input { width: 100%; background: #FFFFFF; border: 1px solid #41534A; border-radius: 6px; color: #202824; font: inherit; font-size: 14px; line-height: 22px; padding: 16px; }
+.capture-body textarea { min-height: 190px; resize: vertical; }
+.capture-body textarea:focus-visible { outline: 3px solid #202824; outline-offset: 3px; }
+.field-note, .linked-investments, .monitoring-note { font-size: 12px; line-height: 18px; margin: 10px 0 24px; }
+.capture-body button { font-size: 14px; line-height: 22px; }
+.capture-body [role="alert"] { color: #8B3932; background: #F8EBE8; padding: 12px; margin: 16px 0; font-size: 14px; line-height: 22px; }
+.reflection-paper { background: #FFFFFF; padding: 28px; margin-top: 28px; border-left: 3px solid #41534A; }
+.reflection-text { font-size: 20px; line-height: 31px; }
+.reflection-paper .linked-investments { margin-bottom: 0; padding-top: 16px; border-top: 1px solid #EFF2EF; }
+.capture-question { font-size: 18px; margin: 28px 0 16px; }
+.capture-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.secondary-action { background: transparent; border: 1px solid #41534A; color: #202824; }
+.thesis-details, .original-statement { border-top: 1px solid #41534A; margin-top: 32px; padding-top: 18px; font-size: 14px; line-height: 22px; }
+.capture-body summary { cursor: pointer; font-weight: 600; }
+.thesis-details h3 { margin-top: 24px; font-size: 14px; }
+.thesis-details ul { padding-left: 20px; }
+.original-statement p { white-space: pre-wrap; margin-top: 16px; }
+.private-link-box { margin: 28px 0; }
+.private-link-box h2 { font-size: 18px; }
+.private-link-box p { font-size: 14px; line-height: 22px; margin: 12px 0 16px; }
+.create-thesis-link { display: inline-block; font-size: 14px; line-height: 22px; margin-top: 24px; }
+@media(max-width: 480px) { .capture-page .product-header { margin-bottom: 36px; } .reflection-paper { padding: 20px; } .capture-actions { flex-direction: column; align-items: stretch; } .capture-body form > button { width: 100%; } }

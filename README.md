@@ -134,3 +134,38 @@ The existing sender's `testMode: true` restriction remains in force.
 
 This schedule does not change either page, the tracked positions, signup,
 unsubscribe behavior or the existing 10:00 AM send schedule.
+
+## Custom thesis capture — milestone 1
+
+Open `/?create=thesis` to describe a belief and optionally connect up to five
+investments. Claude interprets it in one request (2,000 output tokens, 60-second
+limit, no tools and no automatic retries). The UI separates the user's stated
+reasons, AI assumptions, unverified claims, risks and possible future evidence.
+The user confirms or edits the reflection before the thesis becomes saved.
+The original statement is preserved verbatim.
+
+`customTheses` is a new table; existing edition and subscription records do not
+need migration. Ten thesis places are enforced atomically before paid calls.
+Interpreted drafts reserve places too; a failed interpretation releases its
+place. Abandoned successful drafts remain reserved in this milestone.
+
+There is no sign-in. A 32-byte random private token is placed in the URL
+fragment, which is not sent in HTTP referrer headers. Only its SHA-256 digest is
+stored in the thesis record. The matching token is required to read or edit;
+there is no public listing. Anyone with the complete link can view and edit,
+so the saved screen tells users to bookmark it and keep it private. There is
+no email recovery or private-link email delivery in milestone 1.
+
+Private custom theses do not enter the existing weekly research or email jobs.
+No custom tracking opt-in, email collection, monitoring, approval screen,
+payments, brokerage integrations or production deployment is included.
+At the future tracking step, ask for email as approved by the founder.
+
+Interpretation needs `ANTHROPIC_API_KEY` in the development Convex environment
+for local testing; never store credentials in source files. The existing
+production research and email settings are unchanged.
+
+Validation: `npx vitest run tests/theses.test.ts tests/research.test.ts tests/newsletter.test.ts`,
+`npx tsc --noEmit -p convex/tsconfig.json`, `npm run build`, and a real Edge browser
+walkthrough at 390px and 1280px. Phone screenshots are local review artifacts
+under the ignored `tmp/milestone-one/` folder.
