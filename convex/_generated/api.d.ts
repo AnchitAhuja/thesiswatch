@@ -8,17 +8,22 @@
  * @module
  */
 
+import type * as aiSpend from "../aiSpend.js";
 import type * as crons from "../crons.js";
 import type * as editionFields from "../editionFields.js";
 import type * as editions from "../editions.js";
 import type * as http from "../http.js";
 import type * as mail from "../mail.js";
 import type * as mailActions from "../mailActions.js";
+import type * as meteredClaude from "../meteredClaude.js";
+import type * as prompts from "../prompts.js";
 import type * as research from "../research.js";
 import type * as researchActions from "../researchActions.js";
 import type * as researchPrompt from "../researchPrompt.js";
 import type * as theses from "../theses.js";
 import type * as thesisActions from "../thesisActions.js";
+import type * as thesisChatActions from "../thesisChatActions.js";
+import type * as thesisConversation from "../thesisConversation.js";
 import type * as thesisFields from "../thesisFields.js";
 import type * as tracking from "../tracking.js";
 
@@ -29,17 +34,22 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  aiSpend: typeof aiSpend;
   crons: typeof crons;
   editionFields: typeof editionFields;
   editions: typeof editions;
   http: typeof http;
   mail: typeof mail;
   mailActions: typeof mailActions;
+  meteredClaude: typeof meteredClaude;
+  prompts: typeof prompts;
   research: typeof research;
   researchActions: typeof researchActions;
   researchPrompt: typeof researchPrompt;
   theses: typeof theses;
   thesisActions: typeof thesisActions;
+  thesisChatActions: typeof thesisChatActions;
+  thesisConversation: typeof thesisConversation;
   thesisFields: typeof thesisFields;
   tracking: typeof tracking;
 }>;

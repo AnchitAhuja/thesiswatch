@@ -4,7 +4,9 @@ import { editionFields } from "./editionFields";
 import { thesisFields } from "./thesisFields";
 
 export default defineSchema({
-  customTheses: defineTable(thesisFields).index("by_token_hash", ["tokenHash"]).index("by_created_at", ["createdAt"]),
+  customTheses: defineTable(thesisFields).index("by_token_hash", ["tokenHash"]).index("by_created_at", ["createdAt"]).index("by_state", ["state"]).index("by_email_state", ["email", "state"]),
+  aiDailySpend: defineTable({ day: v.string(), estimatedInr: v.number(), inputTokens: v.number(), outputTokens: v.number(), calls: v.number() }).index("by_day", ["day"]),
+  aiUsage: defineTable({ key: v.string(), day: v.string(), estimatedInr: v.number(), inputTokens: v.number(), outputTokens: v.number() }).index("by_key", ["key"]),
   trackingOptIns: defineTable({
     email: v.string(),
     savedAt: v.string(),

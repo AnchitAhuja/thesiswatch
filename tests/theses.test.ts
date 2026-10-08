@@ -15,18 +15,18 @@ it("keeps a thesis private, preserves original words, and saves edited confirmat
   const id = await t.mutation(internal.theses.reserve, { tokenHash: await digest(token), original: "  I believe AI grows.  ", investments: ["Nvidia"] });
   await t.mutation(internal.theses.finish, { id, result });
   expect(await t.query(api.theses.read, { token: "b".repeat(64) })).toBeNull();
-  await expect(t.mutation(api.theses.confirm, { token: "b".repeat(64), reflection: "Not mine" })).rejects.toThrow();
-  await expect(t.mutation(api.theses.confirm, { token, reflection: "My edited belief", investments: Array(6).fill("NVDA") })).rejects.toThrow("five");
-  await t.mutation(api.theses.confirm, { token, reflection: "My edited belief", investments: ["CEG", "GRID"] });
+  await expect(t.mutation(api.theses.confirm, { email: "test@example.com", token: "b".repeat(64), reflection: "Not mine" })).rejects.toThrow();
+  await expect(t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: "My edited belief", investments: Array(6).fill("NVDA") })).rejects.toThrow("five");
+  await t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: "My edited belief", investments: ["CEG", "GRID"] });
   const saved = await t.query(api.theses.read, { token });
   expect(saved?.original).toBe("  I believe AI grows.  "); expect(saved?.confirmedReflection).toBe("My edited belief");
   expect(saved?.interpretation?.unverifiedClaims).toEqual(result.unverifiedClaims);
   expect(saved?.state).toBe("saved"); expect(saved).not.toHaveProperty("tokenHash");
   expect(saved?.investments).toEqual(["CEG", "GRID"]);
 });
-it("enforces ten thesis places and five investments before paid interpretation", async () => {
+it("allows drafts while enforcing five investments", async () => {
   const t = convexTest(schema, modules);
   await expect(t.mutation(internal.theses.reserve, { tokenHash: "test", original: "belief", investments: Array(6).fill("NVDA") })).rejects.toThrow("five");
   for (let i = 0; i < 10; i++) await t.mutation(internal.theses.reserve, { tokenHash: String(i), original: "belief", investments: [] });
-  await expect(t.mutation(internal.theses.reserve, { tokenHash: "11", original: "belief", investments: [] })).rejects.toThrow("ten");
+  await t.mutation(internal.theses.reserve, { tokenHash: "11", original: "belief", investments: [] });
 });
