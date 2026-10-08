@@ -16,11 +16,13 @@ it("keeps a thesis private, preserves original words, and saves edited confirmat
   await t.mutation(internal.theses.finish, { id, result });
   expect(await t.query(api.theses.read, { token: "b".repeat(64) })).toBeNull();
   await expect(t.mutation(api.theses.confirm, { token: "b".repeat(64), reflection: "Not mine" })).rejects.toThrow();
-  await t.mutation(api.theses.confirm, { token, reflection: "My edited belief" });
+  await expect(t.mutation(api.theses.confirm, { token, reflection: "My edited belief", investments: Array(6).fill("NVDA") })).rejects.toThrow("five");
+  await t.mutation(api.theses.confirm, { token, reflection: "My edited belief", investments: ["CEG", "GRID"] });
   const saved = await t.query(api.theses.read, { token });
   expect(saved?.original).toBe("  I believe AI grows.  "); expect(saved?.confirmedReflection).toBe("My edited belief");
   expect(saved?.interpretation?.unverifiedClaims).toEqual(result.unverifiedClaims);
   expect(saved?.state).toBe("saved"); expect(saved).not.toHaveProperty("tokenHash");
+  expect(saved?.investments).toEqual(["CEG", "GRID"]);
 });
 it("enforces ten thesis places and five investments before paid interpretation", async () => {
   const t = convexTest(schema, modules);

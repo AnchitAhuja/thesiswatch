@@ -191,3 +191,14 @@ article, .skeleton-row { grid-template-columns: 110px minmax(0, 1fr); gap: 12px 
 .private-link-box p { font-size: 14px; line-height: 22px; margin: 12px 0 16px; }
 .create-thesis-link { display: inline-block; font-size: 14px; line-height: 22px; margin-top: 24px; }
 @media(max-width: 480px) { .capture-page .product-header { margin-bottom: 36px; } .reflection-paper { padding: 20px; } .capture-actions { flex-direction: column; align-items: stretch; } .capture-body form > button { width: 100%; } }
+/* Conversation entry follows the reference; colour and type remain Lookout's. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.capture-body .chat-composer { display: flex; align-items: flex-end; gap: 12px; background: #FFFFFF; border: 1px solid #EFF2EF; border-radius: 24px; padding: 12px; margin: 30px 0 20px; }
+.capture-body .chat-composer textarea { min-height: 64px; max-height: 160px; border: 0; background: transparent; padding: 9px 8px; resize: vertical; flex: 1; min-width: 0; }
+.capture-body .chat-composer button { width: auto; border-radius: 20px; padding: 10px 18px; flex-shrink: 0; }
+.starter-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.capture-body .starter-chip { text-align: left; background: #EFF2EF; color: #202824; border-radius: 12px; padding: 12px 14px; font-weight: 400; font-size: 14px; line-height: 22px; }
+.capture-body .ask-me { background: transparent; color: #202824; font-weight: 400; text-decoration: underline; text-underline-offset: 4px; padding: 18px 0; font-size: 14px; }
+.conversation-context { font-size: 14px; line-height: 22px; padding-left: 16px; border-left: 2px solid #41534A; margin-top: 24px; white-space: pre-wrap; }
+.capture-body h1[tabindex="-1"]:focus { outline: none; }
+@media(max-width:480px) { .capture-body .chat-composer { gap: 6px; } .capture-body .chat-composer textarea { font-size: 14px; } .starter-chips { gap: 8px; } .capture-body .starter-chip { padding: 10px 12px; } }

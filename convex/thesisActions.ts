@@ -9,7 +9,7 @@ import { interpretation } from "./thesisFields";
 import { parseInterpretation, interpretationInstructions } from "../shared/thesis.mjs";
 
 export const interpret = action({
-  args: { original: v.string(), investments: v.array(v.string()) },
+  args: { original: v.string(), investments: v.array(v.string()), clarifications: v.optional(v.array(v.string())) },
   returns: v.object({ token: v.string(), result: interpretation }),
   handler: async (ctx, args): Promise<{ token: string; result: Infer<typeof interpretation> }> => {
     if (!process.env.ANTHROPIC_API_KEY) throw new Error("Thesis interpretation is not connected yet.");

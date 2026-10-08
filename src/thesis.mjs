@@ -17,26 +17,32 @@ export async function bindCustomThesis(root) {
     ['Claims not yet verified', result.unverifiedClaims], ['Risks and uncertainties', result.risks],
     ['Evidence that could strengthen it', result.strengtheningEvidence], ['Evidence that could weaken it', result.weakeningEvidence],
   ].map(([title, entries]) => `<div><h3>${title}</h3>${entries.length ? `<ul>${entries.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p>None identified in your statement.</p>'}</div>`).join('')}</details>`;
+  const starters = ["AI's bottleneck is power, not chips", 'GLP-1s reshape food and healthcare', 'A weaker dollar: I want real assets', 'Nuclear answers baseload demand', 'US reshoring is an industrial boom', 'Aging drives a healthcare bull market'];
   function capture() {
-    shell(`<h1>What's an investment belief you want to keep an eye on?</h1><p class="capture-lead">Tell us what you believe and why, in your own words. You don't need to have it all figured out.</p>
-      <form id="belief-form"><label for="belief">Your belief and why</label><textarea id="belief" maxlength="3000" required placeholder="I think AI infrastructure will continue growing because companies are spending billions on AI…"></textarea>
-      <label for="investments">Investments connected to it <span>(optional)</span></label><input id="investments" maxlength="504" placeholder="Nvidia, Microsoft, or an ETF"><p class="field-note">You can start with one holding. Add up to five, separated by commas.</p>
-      <p role="alert" hidden></p><button type="submit">Help me put it into words</button><p class="field-note">Your words stay yours. You'll review the interpretation before saving.</p></form>`);
+    shell(`<h1>What do you believe?</h1><p class="capture-lead">Describe an investment idea in plain language. I'll ask a couple of questions, then help you put your thesis into words.</p>
+      <form id="belief-form" class="chat-composer"><label class="visually-hidden" for="belief">Your belief and why</label><textarea id="belief" rows="2" maxlength="3000" required placeholder="AI's real bottleneck is power and grid equipment&#8230;"></textarea><button type="submit">Send</button></form>
+      <p role="alert" hidden></p><div class="starter-chips" aria-label="Ideas to start from">${starters.map(x => `<button type="button" class="starter-chip">${esc(x)}</button>`).join('')}</div>
+      <button type="button" class="ask-me">I can't put it into words, ask me</button>`);
+    root.querySelectorAll('.starter-chip').forEach(button => button.onclick = () => { root.querySelector('#belief').value = button.textContent; root.querySelector('#belief').focus(); });
+    root.querySelector('.ask-me').onclick = () => questions('', [], true);
+    root.querySelector('form').addEventListener('submit', event => { event.preventDefault(); const original = root.querySelector('#belief').value; if (!original.trim()) return error('Tell us what you believe first.'); questions(original, [], false); });
+  }
+  function questions(original, answers, guided) {
+    const question = guided && !original ? "What's one company, industry or change you're interested in?" : !answers.length ? 'Why does that interest you, or why do you believe it?' : 'What would make you rethink that belief?';
+    shell(`<h1>${question}</h1>${original ? `<p class="conversation-context">${esc(original)}</p>` : '<p class="capture-lead">Start with something you have noticed. A few words are enough.</p>'}
+      <form class="chat-composer"><label class="visually-hidden" for="answer">Your answer</label><textarea id="answer" rows="2" maxlength="1500" required placeholder="In your own words&#8230;"></textarea><button type="submit">Send</button></form><p role="alert" hidden></p><p class="field-note">${!original ? 'We can work out the belief together.' : 'A short answer is enough. Saying you are not sure yet is fine.'}</p>`);
     root.querySelector('form').addEventListener('submit', async event => {
-      event.preventDefault();
-      const original = root.querySelector('#belief').value;
-      const investments = root.querySelector('#investments').value.split(',').map(x => x.trim()).filter(Boolean);
-      if (!original.trim()) return error('Tell us what you believe first.');
-      if (investments.length > 5 || investments.some(x => x.length > 100)) return error('Add up to five investments, with each name under 100 characters.');
-      const button = root.querySelector('button'); button.disabled = true; button.textContent = 'Putting your belief into words…';
-      root.querySelector('form').setAttribute('aria-busy', 'true');
+      event.preventDefault(); const answer = root.querySelector('#answer').value; if (!answer.trim()) return error('Add a few words to continue.');
+      if (!original) return questions(answer, [], true);
+      const next = [...answers, answer];
+      // The guided route asks two questions in total; a stated belief gets two clarifications.
+      if (next.length < (guided ? 1 : 2)) return questions(original, next, guided);
+      const button = root.querySelector('form button'); button.disabled = true; button.textContent = 'Thinking…';
       try {
-        const response = await client.action(api.thesisActions.interpret, { original, investments });
-        token = response.token; record = { original, investments, interpretation: response.result, state: 'draft' };
-        history.replaceState(null, '', `/?create=thesis#private=${token}`);
-        reflection();
-      } catch (e) { error(e.message.includes('ten thesis') ? 'The first ten thesis places are filled. Please reach out to Anchit.' : "We couldn't interpret your belief. Your words are still here. Please try again.");
-        button.disabled = false; button.textContent = 'Help me put it into words'; root.querySelector('form').removeAttribute('aria-busy'); }
+        const response = await client.action(api.thesisActions.interpret, { original, investments: [], clarifications: next });
+        token = response.token; record = { original, investments: [], clarifications: next, interpretation: response.result, state: 'draft' };
+        history.replaceState(null, '', `/?create=thesis#private=${token}`); reflection();
+      } catch (e) { error(e.message.includes('ten thesis') ? 'The first ten thesis places are filled. Please reach out to Anchit.' : "We couldn't interpret your belief. Your answers are still here. Please try again."); button.disabled = false; button.textContent = 'Send'; }
     });
   }
   function reflection(edit = false) {
@@ -44,14 +50,16 @@ export async function bindCustomThesis(root) {
     const text = record.confirmedReflection || result.reflection;
     shell(`<h1>Here's what I think you're betting on.</h1><div class="reflection-paper">${edit ? `<label for="reflection">Put it in your words</label><textarea id="reflection" maxlength="2000">${esc(text)}</textarea>` : `<p class="reflection-text">${esc(text)}</p>`}
       ${record.investments.length ? `<p class="linked-investments">Connected investments: ${record.investments.map(esc).join(', ')}</p>` : ''}</div>
-      <p class="capture-question">Does that sound right?</p><div class="capture-actions"><button id="confirm">${edit ? 'Save these words' : 'Yes, save my thesis'}</button>${edit ? '' : '<button class="secondary-action" id="edit">Edit the interpretation</button>'}</div><p role="alert" hidden></p>
+      <label for="investments">Investments connected to it <span>(optional)</span></label><input id="investments" maxlength="504" value="${esc(record.investments.join(', '))}" placeholder="Nvidia, Microsoft, or an ETF"><p class="field-note">Add up to five, separated by commas. You can leave this blank.</p><p class="capture-question">Does that sound right?</p><div class="capture-actions"><button id="confirm">${edit ? 'Save these words' : 'Yes, save my thesis'}</button>${edit ? '' : '<button class="secondary-action" id="edit">Edit the interpretation</button>'}</div><p role="alert" hidden></p>
       ${details(result)}<details class="original-statement"><summary>Your original words</summary><p>${esc(record.original)}</p></details>`);
-    root.querySelector('#edit')?.addEventListener('click', () => reflection(true));
+    root.querySelector('#edit')?.addEventListener('click', () => { record.investments = root.querySelector('#investments').value.split(',').map(x => x.trim()).filter(Boolean); reflection(true); });
     root.querySelector('#confirm').addEventListener('click', async () => {
       const text = edit ? root.querySelector('#reflection').value : (record.confirmedReflection || result.reflection);
       if (!text.trim()) return error('Keep a few words describing your belief.');
+      const investments = root.querySelector('#investments').value.split(',').map(x => x.trim()).filter(Boolean);
+      if (investments.length > 5 || investments.some(x => x.length > 100)) return error('Add up to five investments, with each name under 100 characters.');
       const button = root.querySelector('#confirm'); button.disabled = true; button.textContent = 'Saving…';
-      try { await client.mutation(api.theses.confirm, { token, reflection: text }); record.confirmedReflection = text.trim(); record.state = 'saved'; saved(); }
+      try { await client.mutation(api.theses.confirm, { token, reflection: text, investments }); record.investments = investments; record.confirmedReflection = text.trim(); record.state = 'saved'; saved(); }
       catch { error("We couldn't save your thesis. Please try again."); button.disabled = false; button.textContent = 'Save my thesis'; }
     });
   }

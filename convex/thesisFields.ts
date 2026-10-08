@@ -6,6 +6,7 @@ export const interpretation = v.object({
 });
 export const thesisFields = {
   tokenHash: v.string(), original: v.string(), investments: v.array(v.string()),
+  clarifications: v.optional(v.array(v.string())),
   state: v.union(v.literal("interpreting"), v.literal("draft"), v.literal("saved"), v.literal("failed")),
   createdAt: v.number(), interpretation: v.optional(interpretation), confirmedReflection: v.optional(v.string()),
 };

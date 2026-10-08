@@ -169,3 +169,11 @@ Validation: `npx vitest run tests/theses.test.ts tests/research.test.ts tests/ne
 `npx tsc --noEmit -p convex/tsconfig.json`, `npm run build`, and a real Edge browser
 walkthrough at 390px and 1280px. Phone screenshots are local review artifacts
 under the ignored `tmp/milestone-one/` folder.
+
+Capture-screen refinement: reference `references/supertake-capture.png` informs
+one chat-style composer and six starter chips. Chips fill the editable input;
+Send asks two short clarifying questions before interpretation. The "ask me"
+route asks about an interest and its reason. Clarifications are stored separately
+from the original words. Holdings are optional and entered after the reflection,
+validated again server-side and saved with confirmation. Existing records remain
+compatible because clarifications and confirmation holdings are optional.
