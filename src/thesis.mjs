@@ -1,7 +1,7 @@
 import { ConvexHttpClient } from 'convex/browser';
 import { api } from '../convex/_generated/api.js';
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-export const thesisStarters = ["AI's bottleneck is power, not chips", 'GLP-1s reshape food and healthcare', 'A weaker dollar: I want real assets', 'Nuclear answers baseload demand', 'US reshoring is an industrial boom', 'Aging drives a healthcare bull market'];
+export const thesisStarters = ["AI's bottleneck is power, not chips", 'GLP-1s reshape food and healthcare', 'Aging drives a healthcare bull market', "India's retail consumption growth amid rising disposable income"];
 export async function bindCustomThesis(root, entry = null) {
   const client = new ConvexHttpClient(import.meta.env.VITE_CONVEX_URL);
   let token = window.location.hash.startsWith('#private=') ? window.location.hash.slice(9) : null;
