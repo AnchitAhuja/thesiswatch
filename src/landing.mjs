@@ -16,14 +16,13 @@ export function bindLanding(root) {
           <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Build</button></form>
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
+          <a class="ai-thesis-choice" href="/?thesis=ai"><h2>AI thesis</h2><p>Follow the AI value chain through energy, chips, platforms and adopters, with sourced evidence for each of eleven tracked positions.</p></a>
         </div>
       </div>
     </div>
     </div>
     ${howItWorksMarkup}
-    <div class="dark-principles"><div><p>Write it down</p><h2>Make conviction explicit.</h2><span>A belief is easier to revisit when you know what it rests on.</span></div><div><p>Follow the thread</p><h2>Evidence over headlines.</h2><span>See the source, the context and the connection to your reasoning.</span></div><div><p>Keep perspective</p><h2>Leave room to change your mind.</h2><span>Look for the evidence that challenges your story, too.</span></div></div>
     <footer class="dark-footer"><p>Your life is bigger<br>than your portfolio.</p><a class="build-idea" href="#capture-box">Build my idea</a></footer>
-    <a class="shared-thesis-link" href="/?thesis=ai">Explore the AI thesis</a>
   </div>`;
   animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
