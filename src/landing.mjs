@@ -6,10 +6,10 @@ export function bindLanding(root) {
   root.innerHTML = `<div class="dark-landing">
     <header class="dark-header"><a class="dark-brand" href="/">LOOKOUT<span>VANTAGE / A CLEARER VIEW</span></a><a class="build-idea" href="#capture-box">Build my idea</a></header>
     <div class="dark-hero">
-      <div class="dark-hero-left"><p class="long-view">For the long view</p><h1>Invest.<br>Then move on<br>with your life.</h1>
-        <p class="dark-intro">Markets have plenty to say. Your reasons matter more. Share why you invest; Lookout brings relevant evidence back to those reasons.</p>
-        <div class="landing-capture" id="capture-box"><h2>What do you believe?</h2><p>Describe an investment idea in plain language. I'll ask a couple of questions, then help you put your thesis into words.</p>
-          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><textarea id="landing-belief" rows="2" maxlength="3000" required placeholder="AI's real bottleneck is power and grid equipment&#8230;"></textarea><button type="submit">Send</button></form>
+      <div class="dark-hero-left"><h1>Invest.<span>Then move on with your life.</span></h1>
+        <p class="dark-intro">Put your belief into words, connect your investments, and save your reasoning.</p>
+        <div class="landing-capture" id="capture-box">
+          <form class="landing-composer"><label class="visually-hidden" for="landing-belief">Your investment belief</label><input id="landing-belief" type="text" maxlength="3000" required placeholder="What's your investment idea?"><button type="submit">Send</button></form>
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
         </div>

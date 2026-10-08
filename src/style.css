@@ -242,3 +242,16 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
 .shared-thesis-link { color: #A8B7AC; font-size: 12px; line-height: 18px; }
 .lookout-dark :is(a, button, textarea):focus-visible { outline: 2px solid #D7EABB; outline-offset: 4px; }
 @media(max-width:760px) { .lookout-dark main { padding: 22px 20px 32px; } .dark-header { padding-bottom: 22px; } .dark-brand { font-size: 18px; } .build-idea { padding: 12px 17px; } .dark-hero { grid-template-columns: 1fr; gap: 36px; padding: 40px 0; } .dark-hero h1 { font-size: 49px; } .long-view { margin-bottom: 18px; } .dark-intro { max-width: 40ch; } .journal-example { padding: 24px; } .dark-principles { grid-template-columns: 1fr; gap: 28px; } .dark-footer p { font-size: 22px; line-height: 29px; } .dark-footer { align-items: flex-start; } }
+/* Ramp-inspired hierarchy: two beats, a concrete sub-line, one bright Send. */
+.dark-hero { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; }
+.dark-hero h1 { font-size: clamp(56px, 6.1vw, 78px); font-weight: 600; line-height: .99; letter-spacing: -.06em; }
+.dark-hero h1 span { display: block; }
+.dark-intro { font-size: 19px; line-height: 29px; letter-spacing: -.02em; max-width: 41ch; margin-top: 26px; }
+.landing-capture { margin-top: 30px; }
+.landing-composer { align-items: center; border-radius: 12px; padding: 6px; gap: 8px; margin-top: 0; }
+.landing-composer input { min-width: 0; flex: 1; width: 100%; color: #F0F0E7; background: transparent; border: 0; padding: 15px 12px; font: inherit; font-size: 16px; line-height: 24px; }
+.landing-composer input::placeholder { color: #A8B7AC; opacity: 1; }
+.landing-composer button { border-radius: 8px; background: #DFFA35; color: #18251D; min-height: 56px; padding: 14px 24px; font-size: 16px; flex-shrink: 0; }
+.dark-landing .build-idea { background: transparent; color: #CDD8CF; border: 1px solid #405448; }
+.lookout-dark input:focus-visible { outline: 2px solid #D7EABB; outline-offset: 2px; }
+@media(max-width:760px) { .dark-hero { grid-template-columns: 1fr; gap: 36px; } .dark-hero h1 { font-size: clamp(43px, 12.8vw, 62px); letter-spacing: -.055em; line-height: 1.02; } .dark-intro { font-size: 17px; line-height: 26px; } .landing-composer input { padding: 12px 8px; } .landing-composer button { min-height: 50px; padding: 12px 18px; } }
