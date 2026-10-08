@@ -255,3 +255,39 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
 .dark-landing .build-idea { background: transparent; color: #CDD8CF; border: 1px solid #405448; }
 .lookout-dark input:focus-visible { outline: 2px solid #D7EABB; outline-offset: 2px; }
 @media(max-width:760px) { .dark-hero { grid-template-columns: 1fr; gap: 36px; } .dark-hero h1 { font-size: clamp(43px, 12.8vw, 62px); letter-spacing: -.055em; line-height: 1.02; } .dark-intro { font-size: 17px; line-height: 26px; } .landing-composer input { padding: 12px 8px; } .landing-composer button { min-height: 50px; padding: 12px 18px; } }
+/* Casa-inspired full-bleed family photograph, with copy below the faces. */
+.lookout-photo main { max-width: none; padding: 0; }
+.photo-hero { position: relative; isolation: isolate; overflow: hidden; background: #131C17; }
+.family-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; z-index: -2; }
+.photo-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,18,12,.26) 0%, rgba(10,18,12,.28) 22%, rgba(10,18,12,.76) 46%, rgba(10,18,12,.95) 76%, #131C17 100%); }
+.lookout-photo .dark-header { max-width: 1180px; margin: 0 auto; padding: 24px 40px; border-bottom: 0; }
+.lookout-photo .dark-header .build-idea { background: rgba(19,28,23,.55); }
+.lookout-photo .dark-hero { display: block; max-width: 820px; margin: 0 auto; padding: 240px 40px 64px; text-align: center; }
+.lookout-photo .dark-hero h1 { font-size: clamp(48px, 5.6vw, 72px); line-height: 1.03; letter-spacing: -.055em; text-shadow: 0 2px 18px rgba(0,0,0,.2); }
+.lookout-photo .dark-intro { color: #E1E8E1; margin: 24px auto 0; max-width: 49ch; }
+.lookout-photo .landing-capture { max-width: 650px; margin: 28px auto 0; }
+.lookout-photo .landing-composer { background: rgba(24,38,29,.9); text-align: left; border-color: #77867A; }
+.lookout-photo .landing-starters { justify-content: center; }
+.lookout-photo .landing-starters button { background: rgba(24,38,29,.9); border-color: #536457; }
+.lookout-photo .landing-ask { color: #F0F0E7; }
+.lookout-photo .journal-example { max-width: 700px; margin: 40px auto 48px; }
+.lookout-photo .dark-principles, .lookout-photo .dark-footer { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.lookout-photo .shared-thesis-link { display: block; max-width: 1100px; margin: 0 auto 32px; }
+@media(max-width:760px) {
+ .lookout-photo .dark-header { padding: 22px 20px; }
+ .lookout-photo .family-photo { top: 0; height: 350px; object-position: center top; }
+ .photo-hero::after { background: linear-gradient(180deg, rgba(10,18,12,.22) 0, rgba(10,18,12,.08) 120px, rgba(10,18,12,.22) 230px, rgba(19,28,23,.87) 320px, #131C17 370px); }
+ .lookout-photo .dark-hero { padding: 210px 20px 40px; }
+ .lookout-photo .dark-hero h1 { font-size: clamp(42px, 11.8vw, 60px); }
+ .lookout-photo .dark-intro { margin-top: 20px; font-size: 16px; line-height: 25px; }
+ .lookout-photo .landing-starters { justify-content: flex-start; }
+ .lookout-photo .journal-example { margin: 0 20px 40px; }
+ .lookout-photo .dark-principles, .lookout-photo .dark-footer { margin-left: 20px; margin-right: 20px; }
+ .lookout-photo .shared-thesis-link { margin-left: 20px; margin-right: 20px; }
+}
+.lookout-photo .dark-landing { display: flow-root; padding-bottom: 1px; }
+@media(max-width:760px) {
+ .lookout-photo .family-photo { top: 80px; }
+ .lookout-photo .dark-hero { padding-top: 290px; }
+ .photo-hero::after { background: linear-gradient(180deg, #131C17 0, #131C17 75px, rgba(10,18,12,.13) 85px, rgba(10,18,12,.08) 220px, rgba(10,18,12,.22) 310px, rgba(19,28,23,.9) 405px, #131C17 450px); }
+}

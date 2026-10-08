@@ -3,7 +3,10 @@ const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&
 
 export function bindLanding(root) {
   document.body.classList.add('lookout-dark');
+  document.body.classList.add('lookout-photo');
   root.innerHTML = `<div class="dark-landing">
+    <div class="photo-hero">
+    <img class="family-photo" src="/hero-family.webp" alt="A family enjoying time together at home" fetchpriority="high" width="1021" height="614">
     <header class="dark-header"><a class="dark-brand" href="/">LOOKOUT<span>VANTAGE / A CLEARER VIEW</span></a><a class="build-idea" href="#capture-box">Build my idea</a></header>
     <div class="dark-hero">
       <div class="dark-hero-left"><h1>Invest.<span>Then move on with your life.</span></h1>
@@ -14,13 +17,14 @@ export function bindLanding(root) {
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
         </div>
       </div>
+    </div>
+    </div>
       <aside class="journal-example" aria-labelledby="journal-title"><div class="journal-meta"><span id="journal-title">The Conviction Journal</span><span>Demo / MSFT</span></div>
         <blockquote>“AI will make Microsoft's cloud business more valuable over time.”</blockquote>
         <dl><div><dt>Belief</dt><dd>Cloud demand grows</dd></div><div><dt>Evidence</dt><dd>Azure revenue +29% YoY</dd></div></dl>
         <h2>A signal, not a conclusion.</h2><p>FY24 Q4 cloud growth supports demand. One quarter alone cannot establish the long-term returns from AI investment.</p>
         <a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q4/press-release-webcast" target="_blank" rel="noopener noreferrer">Read Microsoft's release · July 30, 2024</a><p class="journal-caption">Historical evidence. Illustrative interpretation.</p>
       </aside>
-    </div>
     <div class="dark-principles"><div><p>Write it down</p><h2>Make conviction explicit.</h2><span>A belief is easier to revisit when you know what it rests on.</span></div><div><p>Follow the thread</p><h2>Evidence over headlines.</h2><span>See the source, the context and the connection to your reasoning.</span></div><div><p>Keep perspective</p><h2>Leave room to change your mind.</h2><span>Look for the evidence that challenges your story, too.</span></div></div>
     <footer class="dark-footer"><p>Your life is bigger<br>than your portfolio.</p><a class="build-idea" href="#capture-box">Build my idea</a></footer>
     <a class="shared-thesis-link" href="/?thesis=ai">Explore the AI thesis</a>
@@ -30,6 +34,7 @@ export function bindLanding(root) {
   root.querySelectorAll('.build-idea').forEach(link => link.addEventListener('click', event => { event.preventDefault(); input.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); input.focus({ preventScroll: true }); }));
   const start = entry => {
     document.body.classList.remove('lookout-dark');
+    document.body.classList.remove('lookout-photo');
     history.pushState(null, '', '/?create=thesis');
     document.title = 'Your thesis · Lookout';
     const skip = document.querySelector('.skip');
