@@ -409,3 +409,50 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
 .how-it-works .saturday-example > p { color: #202824; font-size: 14px; line-height: 22px; }
 .how-it-works .saturday-example a { color: #254E43; font-size: 12px; line-height: 18px; }
 .how-it-works .saturday-example .status.intact { color: #41534A; background: #EFF2EF; font-size: 12px; font-weight: 600; }
+/* Capture stays in one conversation, using the landing palette. */
+body.lookout-chat { background: #142018; color: #E1E8E1; }
+.lookout-chat #app { max-width: none; padding: 0; }
+.thesis-chat { height: 100dvh; min-height: 460px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.chat-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; border-bottom: 1px solid #2C3930; }
+.chat-header > a:last-child { color: #D7EABB; font-size: 14px; }
+.chat-thread { overflow-y: auto; overscroll-behavior: contain; padding: 32px max(24px, calc((100% - 760px)/2)) 24px; scrollbar-color: #41534A #142018; }
+.chat-message { margin-bottom: 28px; font-size: 14px; line-height: 22px; overflow-wrap: anywhere; }
+.chat-you { margin-left: auto; padding: 14px 18px; width: fit-content; max-width: 85%; background: #2C3930; color: #E1E8E1; border-radius: 16px 16px 4px 16px; }
+.chat-lookout { max-width: 100%; }
+.chat-speaker { display: block; margin-bottom: 8px; color: #D7EABB; font-size: 12px; font-weight: 600; line-height: 18px; }
+.chat-input-area { width: min(808px, 100%); margin: 0 auto; padding: 12px 24px 24px; }
+.thread-composer { display: flex; align-items: flex-end; padding: 10px; gap: 12px; background: #202D24; border: 1px solid #41534A; border-radius: 16px; }
+.thread-composer textarea { flex: 1; min-width: 0; resize: none; border: 0; padding: 6px; background: transparent; color: #E1E8E1; font: inherit; font-size: 14px; line-height: 22px; caret-color: #D7EABB; }
+.thread-composer textarea::placeholder { color: #AFC2AE; opacity: 1; }
+.thread-composer button { display: grid; place-items: center; padding: 10px; border-radius: 10px; background: #DDFB3E; color: #142018; }
+.chat-note { color: #AFC2AE; font-size: 12px; line-height: 18px; margin-top: 10px; }
+.chat-skip, .chat-retry { margin-top: 10px; color: #D7EABB; background: transparent; border: 1px solid #41534A; font-size: 12px; }
+.chat-error { padding: 12px; margin-top: 8px; background: #F8EBE8; color: #8B3932; font-size: 14px; line-height: 22px; border-radius: 6px; }
+.thread-thesis-paper { padding: 24px; background: #202D24; border: 1px solid #41534A; border-radius: 12px; color: #E1E8E1; }
+.thread-thesis-paper h1 { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -.02em; margin: 0 0 12px; }
+.thread-thesis-paper h2 { font-size: 14px; line-height: 22px; margin: 24px 0 8px; font-weight: 600; color: #D7EABB; }
+.thread-thesis-line { font-size: 16px; line-height: 25px; }
+.thread-thesis-paper ul, .thread-thesis-paper ol { margin: 0; padding-left: 20px; }
+.thread-thesis-paper li + li { margin-top: 8px; }
+.thread-thesis-paper details { margin-top: 20px; }
+.thread-thesis-paper summary { color: #D7EABB; cursor: pointer; }
+.thread-thesis-paper label { display: block; font-size: 12px; margin: 16px 0 8px; }
+.thread-thesis-paper textarea, .thread-thesis-paper input { width: 100%; padding: 12px; border: 1px solid #41534A; background: #142018; color: #E1E8E1; border-radius: 6px; font: inherit; resize: vertical; }
+.thread-card-actions { display: flex; gap: 10px; margin: 24px 0 14px; }
+.thread-card-actions button { min-width: 90px; font-size: 14px; }
+.thread-card-actions .chat-save { background: #DDFB3E; color: #142018; }
+.thread-card-actions .chat-edit, .chat-copy { border: 1px solid #41534A; background: transparent; color: #D7EABB; }
+.chat-card-note { color: #AFC2AE; font-size: 12px; line-height: 18px; }
+.thread-saved { margin-top: 24px; border-top: 1px solid #41534A; padding-top: 20px; }
+.thread-saved p { margin-bottom: 12px; }
+.thread-saved p[role=status] { color: #D7EABB; font-weight: 600; }
+.lookout-chat :is(a, button, input, textarea):focus-visible { outline: 2px solid #D7EABB; outline-offset: 3px; }
+.lookout-chat ::selection { background: #D7EABB; color: #142018; }
+@media (max-width: 760px) {
+ .chat-header { padding: 20px; }
+ .chat-thread { padding: 24px 20px 16px; }
+ .chat-input-area { padding: 10px 20px max(16px, env(safe-area-inset-bottom)); }
+ .chat-you { max-width: 94%; }
+ .thread-thesis-paper { padding: 18px; }
+ .thread-thesis-line { font-size: 14px; line-height: 22px; }
+}
