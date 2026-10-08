@@ -319,3 +319,30 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
  .lookout-photo .photo-hero::after { background: linear-gradient(180deg, #131C17 0, #131C17 75px, rgba(10,18,12,.1) 85px, rgba(10,18,12,.08) 210px, rgba(10,18,12,.35) 290px, rgba(19,28,23,.92) 370px, #131C17 415px); }
 }
 .lookout-photo .dark-hero h1 span { text-wrap: balance; }
+/* One Indian example, from raw belief to evidence: 4.1 seconds, once. */
+.how-it-works { max-width: 1100px; margin: 0 auto; padding: 44px 0 48px; }
+.how-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.how-header h2 { font-size: 28px; line-height: 36px; font-weight: 400; letter-spacing: -.025em; }
+.example-label { font-size: 12px; line-height: 18px; color: #CDD8CF; border: 1px solid #405448; border-radius: 4px; padding: 3px 8px; }
+.how-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; padding: 0; margin: 0; list-style: none; }
+.how-step h3 { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 22px; margin-bottom: 14px; }
+.step-number { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid #405448; border-radius: 50%; font-size: 12px; flex-shrink: 0; }
+.how-example { padding: 20px; background: #202D24; border: 1px solid #2C3930; border-radius: 12px; min-height: 226px; }
+.how-example p { font-size: 14px; line-height: 22px; color: #E1E8E1; }
+.reflection-example { border-left: 3px solid #D7EABB; }
+.reflection-example p { font-size: 17px; line-height: 26px; }
+.typed-word { display: inline-block; }
+.example-update-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; font-size: 12px; line-height: 18px; }
+.example-update-header .status { margin: 0; }
+.saturday-example a { display: inline-block; font-size: 12px; line-height: 18px; color: #D7EABB; margin-top: 16px; }
+.how-caption { font-size: 12px; line-height: 18px; color: #A8B7AC; margin: 20px 0; }
+.motion-ready:not(.has-played) .typed-belief > span span { opacity: 0; }
+.motion-ready:not(.has-played) .reflection-example, .motion-ready:not(.has-played) .saturday-example { opacity: 0; }
+.motion-ready.has-played .typed-belief > span span { animation: type-character .001s step-end both; animation-delay: calc(var(--character) * .017s); }
+.motion-ready.has-played .reflection-example { animation: reveal-reflection .55s ease-out 2.5s both; }
+.motion-ready.has-played .saturday-example { animation: reveal-update .65s ease-out 3.4s both; }
+@keyframes type-character { from { opacity: 0; } to { opacity: 1; } }
+@keyframes reveal-reflection { from { opacity: 0; } to { opacity: 1; } }
+@keyframes reveal-update { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:760px) { .how-it-works { margin: 0 20px; padding: 32px 0 40px; } .how-steps { grid-template-columns: 1fr; gap: 20px; } .how-example { min-height: 0; padding: 16px; } .how-step h3 { margin-bottom: 10px; } .how-header { margin-bottom: 20px; } }
+@media(prefers-reduced-motion:reduce) { .how-it-works *, .how-it-works .typed-belief > span span { animation: none !important; opacity: 1 !important; transform: none !important; } }

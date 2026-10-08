@@ -1,4 +1,5 @@
 import { bindCustomThesis, thesisStarters } from './thesis.mjs';
+import { howItWorksMarkup, animateHowItWorks } from './how-it-works.mjs';
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 
 export function bindLanding(root) {
@@ -19,16 +20,12 @@ export function bindLanding(root) {
       </div>
     </div>
     </div>
-      <aside class="journal-example" aria-labelledby="journal-title"><div class="journal-meta"><span id="journal-title">The Conviction Journal</span><span>Demo / MSFT</span></div>
-        <blockquote>“AI will make Microsoft's cloud business more valuable over time.”</blockquote>
-        <dl><div><dt>Belief</dt><dd>Cloud demand grows</dd></div><div><dt>Evidence</dt><dd>Azure revenue +29% YoY</dd></div></dl>
-        <h2>A signal, not a conclusion.</h2><p>FY24 Q4 cloud growth supports demand. One quarter alone cannot establish the long-term returns from AI investment.</p>
-        <a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2024-Q4/press-release-webcast" target="_blank" rel="noopener noreferrer">Read Microsoft's release · July 30, 2024</a><p class="journal-caption">Historical evidence. Illustrative interpretation.</p>
-      </aside>
+    ${howItWorksMarkup}
     <div class="dark-principles"><div><p>Write it down</p><h2>Make conviction explicit.</h2><span>A belief is easier to revisit when you know what it rests on.</span></div><div><p>Follow the thread</p><h2>Evidence over headlines.</h2><span>See the source, the context and the connection to your reasoning.</span></div><div><p>Keep perspective</p><h2>Leave room to change your mind.</h2><span>Look for the evidence that challenges your story, too.</span></div></div>
     <footer class="dark-footer"><p>Your life is bigger<br>than your portfolio.</p><a class="build-idea" href="#capture-box">Build my idea</a></footer>
     <a class="shared-thesis-link" href="/?thesis=ai">Explore the AI thesis</a>
   </div>`;
+  animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
   root.querySelectorAll('.landing-starters button').forEach(button => button.onclick = () => { input.value = button.textContent; input.focus(); });
   root.querySelectorAll('.build-idea').forEach(link => link.addEventListener('click', event => { event.preventDefault(); input.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); input.focus({ preventScroll: true }); }));
