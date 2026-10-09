@@ -478,3 +478,61 @@ body.lookout-chat { background: #142018; color: #E1E8E1; }
 .standing-source { font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
 .standing-source a { color:inherit; text-decoration:underline; }
 .chat-standing:focus-visible,.standing-email button:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+/* Prebuilt research memo: landing-page palette, Inter and cards. */
+.prebuilt-page { background:#131c17; color:#f0f0e7; }
+.memo-header { max-width:1180px; margin:auto; padding:28px 40px; display:flex; justify-content:space-between; align-items:center; gap:20px; border-bottom:1px solid #2c3930; }
+.memo-header a,.thesis-memo a { color:#d7eabb; text-decoration:underline; text-underline-offset:4px; }
+.memo-header .memo-brand { color:#f0f0e7; text-decoration:none; font-size:20px; line-height:26px; font-weight:600; }
+.memo-brand span { display:block; color:#f0f0e7; font-size:11px; line-height:18px; font-weight:400; letter-spacing:.075em; }
+body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; margin:auto; }
+.thesis-memo p,.thesis-memo li { font-size:16px; line-height:1.65; }
+.thesis-memo h1 { font-size:clamp(36px,5vw,60px); line-height:1.08; letter-spacing:-.04em; margin:18px 0; }
+.thesis-memo h2 { font-size:clamp(25px,3vw,34px); line-height:1.2; letter-spacing:-.025em; margin:12px 0 22px; }
+.thesis-memo h3 { font-size:20px; line-height:1.4; }
+.thesis-memo .memo-take { font-size:clamp(22px,3vw,30px); line-height:1.4; max-width:700px; }
+.thesis-memo .memo-muted { color:#a8b7ac; }
+.memo-intro { margin-bottom:64px; }
+.thesis-memo .memo-section { margin:0 0 56px; padding-top:30px; border-top:1px solid #2c3930; }
+.thesis-memo li { margin:12px 0; }
+.memo-drivers { padding-left:22px; }
+.memo-citation { display:block; font-size:12px; line-height:1.6; margin-top:8px; overflow-wrap:anywhere; }
+.memo-bucket { margin:30px 0; }
+.memo-bucket > h3 { margin-bottom:4px; }
+.memo-bucket > p { margin-top:0; }
+.memo-companies { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.thesis-memo article.memo-company { display:block; margin:0; padding:24px; border:1px solid #41534a; border-radius:12px; background:#202d24; }
+.memo-company-title h4 { font-size:20px; margin:0 0 6px; }
+.memo-company-title span,.thesis-memo .memo-role { font-size:12px; color:#a8b7ac; }
+.memo-company details { border-top:1px solid #41534a; margin-top:18px; padding-top:14px; }
+.memo-company details p { font-size:14px; }
+.thesis-memo summary { cursor:pointer; color:#d7eabb; line-height:1.5; }
+.memo-assumptions { padding-left:24px; }
+.memo-assumptions li { padding:8px 0 18px; }
+.memo-assumptions h3 { margin:0 0 8px; }
+.thesis-memo .memo-check { background:#202d24; border:1px solid #41534a; border-radius:12px; padding:30px; margin:0 0 56px; }
+.memo-check-button,.memo-standing button { background:#ddfb3e; color:#131c17; font:600 14px/1.5 Inter,sans-serif; border:0; border-radius:8px; padding:14px 18px; cursor:pointer; white-space:normal; }
+.memo-check-button:disabled,.memo-standing button:disabled { opacity:.6; cursor:wait; }
+.memo-check-note { color:#a8b7ac; font-size:14px!important; }
+.memo-standing .standing-result { margin-top:30px; border-top:1px solid #41534a; padding-top:24px; }
+.memo-standing .standing-takeaway { color:#f0f0e7; }
+.memo-standing .chat-card-note { color:#a8b7ac; }
+.memo-standing input { min-width:0; background:#131c17; border:1px solid #536457; color:#f0f0e7; font:inherit; padding:12px; border-radius:8px; }
+.memo-standing .standing-email > div { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.memo-standing .standing-assumptions { padding-left:22px; }
+.memo-standing .standing-source { overflow-wrap:anywhere; }
+.memo-sources li p { color:#a8b7ac; font-size:14px; margin-top:6px; }
+.memo-sources a { overflow-wrap:anywhere; }
+.memo-footer { border-top:1px solid #2c3930; padding-top:24px; }
+.prebuilt-page :focus-visible { outline:2px solid #ddfb3e; outline-offset:4px; }
+@media(max-width:600px) {
+ .memo-header { padding:22px 20px; align-items:flex-start; }
+ .memo-header > a:last-child { font-size:12px; max-width:110px; text-align:right; }
+ body.prebuilt-page main.thesis-memo { padding:40px 20px 28px; }
+ .memo-intro { margin-bottom:40px; }
+ .memo-companies { grid-template-columns:1fr; }
+ .thesis-memo article.memo-company { padding:20px; }
+ .thesis-memo .memo-check { padding:20px; }
+ .memo-check-button { width:100%; }
+ .memo-standing .standing-email > div { flex-direction:column; }
+ .memo-standing input { width:100%; box-sizing:border-box; }
+}

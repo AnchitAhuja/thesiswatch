@@ -1,0 +1,72 @@
+// Research content is separate from the page. No prices, allocations or trades.
+export const aiInfrastructure = {
+  thesis_id: 'ai-infrastructure', title: 'AI Infrastructure',
+  take: 'AI’s next constraint may be power, even as chip supply expands.',
+  belief: 'Power availability will constrain AI infrastructure expansion more than chip supply over five years',
+  summary: 'AI infrastructure needs more than processors: a usable site also needs reliable electricity, grid access and cooling. This thesis asks whether those physical constraints will become harder to resolve than chip availability over five years. Power producers and equipment suppliers could gain work, while chip makers and cloud operators could face deployment delays. The connection is plausible; its timing, relative severity and effect on cash flows still need evidence.',
+  investment_horizon: 'Five years', geography: ['Global, with US company examples'], markets: ['Nasdaq', 'NYSE'],
+  investment_case: 'If power becomes the binding constraint, long-term electricity contracts and orders for grid and cooling equipment could translate into revenue. Chip and cloud demand could remain strong while deployments slow. More work only becomes earnings when projects are delivered at acceptable margins; a business connection alone does not establish a financial outcome.',
+  structural_drivers: [
+    { text: 'AI workloads require both computing capacity and electricity; the IEA studies their joint expansion.', source_ids: ['iea'] },
+    { text: 'Constellation’s Amazon agreement supports new nuclear capacity; GE Vernova reports data-centre orders for electrical infrastructure.', source_ids: ['ceg','gev'] },
+    { text: 'NVIDIA and AMD report substantial data-centre businesses, while Vertiv provides power and cooling systems.', source_ids: ['nvda','amd','vrt'] },
+  ],
+  assumptions: [
+    'Electricity generation and grid connection capacity will fall short of AI data centre demand.',
+    'AI chip supply will expand faster than usable power capacity for data centres.',
+    'Power shortages will delay AI infrastructure projects despite available chips over the next five years.',
+  ],
+  risks: [
+    'More efficient chips, software or smaller models could reduce electricity needed for each unit of AI work.',
+    'New generation, local power systems or faster grid connections could ease the constraint sooner than expected.',
+    'Weak returns from AI spending could lead customers to cancel projects before power becomes the main constraint.',
+    'Equipment suppliers may gain orders without converting them into profitable, timely deliveries.',
+  ],
+  counterarguments: [
+    'Memory, packaging or export restrictions could remain more limiting than power for chip availability.',
+    'Power shortages may be local; operators could relocate capacity rather than slow the overall buildout.',
+    'Cloud operators may improve utilisation enough to expand services without matching growth in physical capacity.',
+  ],
+  stock_buckets: [
+    { id:'power', title:'Power and grid', description:'Electricity generation and the equipment that connects capacity to demand.', company_ids:['CEG','GEV'] },
+    { id:'compute', title:'Chips and computing', description:'The processors that need powered, operational sites before they can do useful work.', company_ids:['AMD','NVDA'] },
+    { id:'delivery', title:'Data centres and cloud', description:'Physical systems and cloud services that turn capacity into usable AI infrastructure.', company_ids:['MSFT','VRT'] },
+  ],
+  candidate_companies: [
+    { id:'CEG', name:'Constellation Energy', exchange:'Nasdaq', ticker:'CEG', role:'Electricity generation', exposure:'indirect', evidence:'Its 20-year Amazon agreement supports expansion of nuclear capacity at Calvert Cliffs.', source_ids:['ceg'], company_risk:'New capacity depends on project execution and regulatory approvals; long-term contracts do not remove delivery risk.', financial_indicators:[], confidence:'high', confidence_reason:'The company disclosure establishes an energy agreement with a cloud operator; it does not establish the five-year comparison.' },
+    { id:'GEV', name:'GE Vernova', exchange:'NYSE', ticker:'GEV', role:'Generation and grid equipment', exposure:'indirect', evidence:'It reported more than $5 billion of year-to-date data-centre orders in Electrification.', source_ids:['gev'], company_risk:'Order conversion, manufacturing capacity and execution costs can limit the earnings benefit.', financial_indicators:[{name:'Electrification data-centre orders',value:'More than $5 billion',period:'Year to date through Q2 2026',source_id:'gev'}], confidence:'high', confidence_reason:'Management explicitly links orders to data centres; these orders do not prove future profitability.' },
+    { id:'AMD', name:'AMD', exchange:'Nasdaq', ticker:'AMD', role:'Server processors and AI accelerators', exposure:'direct', evidence:'Its Q2 2026 release describes expanding EPYC demand and scaling Instinct deployments.', source_ids:['amd'], company_risk:'Competition, export restrictions and customer deployment timing may affect realised demand.', financial_indicators:[{name:'Data Center revenue',value:'$6.7 billion',period:'Q2 2026',source_id:'amd'}], confidence:'high', confidence_reason:'The disclosed Data Center business directly serves compute infrastructure; growth may still depend on powered sites.' },
+    { id:'NVDA', name:'NVIDIA', exchange:'Nasdaq', ticker:'NVDA', role:'Accelerated computing and networking', exposure:'direct', evidence:'Its fiscal Q2 2027 release reports Data Center revenue from its accelerated-computing business.', source_ids:['nvda'], company_risk:'Export controls, customer concentration and deployment constraints could limit growth.', financial_indicators:[{name:'Data Center revenue',value:'$89.0 billion',period:'Fiscal Q2 2027, ended July 26, 2026',source_id:'nvda'}], confidence:'high', confidence_reason:'Data Center is a reported business segment; this connection is separate from any assessment of valuation.' },
+    { id:'MSFT', name:'Microsoft', exchange:'Nasdaq', ticker:'MSFT', role:'Cloud capacity and AI services', exposure:'direct', evidence:'Its FY2026 Q4 release reports growing Azure and other cloud services revenue.', source_ids:['msft'], company_risk:'Capacity spending can run ahead of customer revenue, while power constraints can delay deployment.', financial_indicators:[{name:'Azure and other cloud services revenue growth',value:'43% year over year',period:'FY2026 Q4, ended June 30, 2026',source_id:'msft'}], confidence:'high', confidence_reason:'Azure provides a direct cloud connection; the reported growth also includes workloads beyond AI.' },
+    { id:'VRT', name:'Vertiv', exchange:'NYSE', ticker:'VRT', role:'Power and cooling inside data centres', exposure:'direct', evidence:'Its Q2 2026 release links critical digital infrastructure demand to larger deployments and capacity expansion.', source_ids:['vrt'], company_risk:'Supply-chain congestion and phased customer projects can shift delivery timing and cash flows.', financial_indicators:[{name:'Net sales',value:'$3.274 billion',period:'Q2 2026, ended June 30, 2026',source_id:'vrt'}], confidence:'high', confidence_reason:'Power, cooling and IT infrastructure are the company’s stated business; total sales are not an AI-only measure.' },
+  ],
+  approved_constituents: [],
+  invalidation_conditions: [
+    'Across two consecutive reporting periods, operators identify chip delivery—not electricity or grid access—as the dominant cause of delayed AI capacity.',
+    'New powered capacity consistently exceeds incremental AI demand, and reported power-related deployment delays materially decline.',
+    'Sustained improvements in energy efficiency or utilisation let AI services expand without a corresponding increase in power constraints.',
+  ],
+  monitoring_indicators: [
+    {assumption_index:0,indicator:'Grid-connection lead times, powered capacity commissioned and disclosed electricity demand.'},
+    {assumption_index:1,indicator:'Chip delivery lead times and capacity additions compared with new usable power capacity.'},
+    {assumption_index:2,indicator:'Project delays explicitly attributed to power, contrasted with delays attributed to chip supply.'},
+  ],
+  current_status: null, status_explanation:'Run the 30-day check for a current assessment. Company disclosures establish business connections, not the thesis’s current direction.',
+  recent_evidence: [],
+  source_references: [
+    {id:'iea',publisher:'International Energy Agency',title:'Energy and AI',date:'2025-04-10',reporting_period:'2025 report, projections to 2030 and beyond',url:'https://www.iea.org/reports/energy-and-ai',confidence:'high',current:false},
+    {id:'ceg',publisher:'Constellation Energy',title:'Constellation and Amazon: Calvert Cliffs power agreement',date:'2026-09-30',reporting_period:'Agreement announced September 2026; capacity planned for 2030–2032',url:'https://www.constellationenergy.com/news/2026/09/constellation-and-amazon-announce-20-year-power-purchase-agreement-at-calvert-cliffs.html',confidence:'high',current:true},
+    {id:'gev',publisher:'GE Vernova',title:'Second quarter 2026 financial results',date:'2026-07-22',reporting_period:'Q2 2026, ended June 30, 2026',url:'https://www.gevernova.com/sites/default/files/gev_webcast_pressrelease_07222026.pdf',confidence:'high',current:false},
+    {id:'amd',publisher:'AMD',title:'Second quarter 2026 financial results',date:'2026-08-04',reporting_period:'Q2 2026, ended June 27, 2026',url:'https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results',confidence:'high',current:false},
+    {id:'nvda',publisher:'NVIDIA',title:'Second quarter fiscal 2027 financial results',date:'2026-08-26',reporting_period:'Fiscal Q2 2027, ended July 26, 2026',url:'https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027',confidence:'high',current:false},
+    {id:'msft',publisher:'Microsoft',title:'FY2026 Q4 financial results',date:'2026-07-29',reporting_period:'FY2026 Q4, ended June 30, 2026',url:'https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast',confidence:'high',current:false},
+    {id:'vrt',publisher:'Vertiv',title:'Second quarter 2026 financial results',date:'2026-07-29',reporting_period:'Q2 2026, ended June 30, 2026',url:'https://investors.vertiv.com/news/news-details/2026/Vertiv-Reports-Strong-Second-Quarter-2026-with-Diluted-EPS-Growth-of-53-Adjusted-Diluted-EPS-Growth-of-60-Raises-Full-Year-2026-Guidance-Across-All-Key-Metrics/default.aspx',confidence:'high',current:false},
+  ],
+  last_verified_at:'2026-10-09',
+  data_quality_flags:[
+    'Company connections are sourced; the five-year comparison remains a hypothesis.',
+    'These are research candidates. No approved constituent list has been selected.',
+    'Background sources can be older than 30 days. The status check uses its own 30-day window.',
+    'Constellation’s selected agreement release supplies no quarterly financial indicator.',
+  ],
+};

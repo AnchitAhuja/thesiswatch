@@ -75,3 +75,12 @@
 ## First thing tomorrow
 
 Review the saved provisional thesis and decide whether why, whatWouldProveItWrong, and timeHorizon must be supplied before monitoring begins. Then verify one fresh end-to-end chat and save flow with the final fixes, including repeated uncertainty and precise confirmation wording, before starting stock matching. Stay on dev and agree the live-call budget before testing.
+
+## AI Infrastructure prebuilt slice - 2026-10-09
+
+- Dev route: https://fearless-ferret-257.convex.site/?thesis=ai-infrastructure. Landing AI choice links here; legacy ?thesis=ai remains available.
+- Stage 1, 2 and 4 record is separate from presentation, with a Convex return validator. Six research candidates in three buckets, no approved constituents, allocations, charts or trading instructions.
+- New private prebuilt check delegates the existing standing action and Saturday signup. Chat, save, legacy newsletter and existing email implementations are unchanged.
+- 38 tests passed; backend type checking, build and dev upload passed. Cached action proof produced three assessments with no new model calls or spend. Source inventory: AI_INFRASTRUCTURE_SOURCES.md.
+- User authorized Playwright. Actual dev browser proof at 1280px and 390px: landing link, company context, populated 30-day check and native email validation passed; no browser errors or horizontal overflow. Reused the existing private dev fixture/cache, with no new model calls. No signup was submitted or email sent. Comparison and full-page captures are in .impeccable/review/. Finish reviewer disposition: ship after labels and title tracking fixes.
+- Production untouched. No GitHub push.

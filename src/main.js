@@ -7,6 +7,7 @@ import { trackingMarkup, bindTracking } from './tracking.mjs';
 import { bindEdition } from './edition.mjs';
 import { bindLanding } from './landing.mjs';
 import { bindCustomThesis } from './thesis.mjs';
+import { bindPrebuiltThesis } from './prebuilt-thesis.mjs';
 
 const app = document.querySelector('#app');
 const isThesis = new URLSearchParams(window.location.search).get('thesis') === 'ai';
@@ -16,6 +17,10 @@ if (new URLSearchParams(window.location.search).get('create') === 'thesis') {
   document.title = 'Your thesis · Lookout';
   skip.href = '#app'; skip.textContent = 'Skip to your thesis';
   void bindCustomThesis(app);
+} else if (new URLSearchParams(window.location.search).get('thesis') === 'ai-infrastructure') {
+  document.title = 'AI Infrastructure · Lookout';
+  skip.href = '#app'; skip.textContent = 'Skip to the thesis';
+  void bindPrebuiltThesis(app);
 } else if (!isThesis) {
   document.title = 'Lookout';
   skip.href = '#capture-box';

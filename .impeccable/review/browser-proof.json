@@ -1,0 +1,44 @@
+[
+  {
+    "width": 1280,
+    "overflowBefore": false,
+    "overflowAfter": false,
+    "errors": [],
+    "styles": {
+      "font": "Inter, sans-serif",
+      "background": "rgb(19, 28, 23)",
+      "title": "AI Infrastructure"
+    },
+    "emailValidation": true,
+    "assessments": 3,
+    "sourceUrls": [
+      "https://247wallst.com/investing/2026/09/29/the-coming-ai-blackout-10-trillion-data-center-surge-threatens-to-break-the-grid/",
+      "https://www.power-eng.com/renewables/america-data-center-construction-delays/",
+      "https://247wallst.com/investing/2026/09/29/the-coming-ai-blackout-10-trillion-data-center-surge-threatens-to-break-the-grid/",
+      "https://finance.yahoo.com/technology/ai/articles/coming-ai-blackout-10-trillion-151952055.html",
+      "https://www.power-eng.com/renewables/america-data-center-construction-delays/",
+      "https://techxplore.com/news/2026-09-ai-centers-grid-limits-hours.html"
+    ]
+  },
+  {
+    "width": 390,
+    "overflowBefore": false,
+    "overflowAfter": false,
+    "errors": [],
+    "styles": {
+      "font": "Inter, sans-serif",
+      "background": "rgb(19, 28, 23)",
+      "title": "AI Infrastructure"
+    },
+    "emailValidation": true,
+    "assessments": 3,
+    "sourceUrls": [
+      "https://247wallst.com/investing/2026/09/29/the-coming-ai-blackout-10-trillion-data-center-surge-threatens-to-break-the-grid/",
+      "https://www.power-eng.com/renewables/america-data-center-construction-delays/",
+      "https://247wallst.com/investing/2026/09/29/the-coming-ai-blackout-10-trillion-data-center-surge-threatens-to-break-the-grid/",
+      "https://finance.yahoo.com/technology/ai/articles/coming-ai-blackout-10-trillion-151952055.html",
+      "https://www.power-eng.com/renewables/america-data-center-construction-delays/",
+      "https://techxplore.com/news/2026-09-ai-centers-grid-limits-hours.html"
+    ]
+  }
+]

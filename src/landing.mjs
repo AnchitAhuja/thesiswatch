@@ -17,7 +17,7 @@ export function bindLanding(root) {
           ${captureComposerMarkup()}
           <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
-          <a class="ai-thesis-choice" href="/?thesis=ai"><h2>AI thesis</h2><p>Follow the AI value chain through energy, chips, platforms and adopters, with sourced evidence for each of eleven tracked positions.</p></a>
+          <a class="ai-thesis-choice" href="/?thesis=ai-infrastructure"><h2>AI Infrastructure</h2><p>Explore the power constraint: connected companies, assumptions, risks and a check against the last 30 days.</p></a>
         </div>
       </div>
     </div>
