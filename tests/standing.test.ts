@@ -1,0 +1,52 @@
+import { it,expect,vi } from 'vitest';
+import resendTest from '@convex-dev/resend/test';
+import workpoolTest from '@convex-dev/workpool/test';
+import rateLimiterTest from '@convex-dev/rate-limiter/test';
+import { publication,withinWindow,validateStanding,NO_EVIDENCE } from '../shared/standing.mjs';
+import { convexTest } from 'convex-test';
+import schema from '../convex/schema';
+import { internal,api,components } from '../convex/_generated/api';
+import { digest } from '../convex/theses';
+const modules=import.meta.glob('../convex/**/*.ts');
+it('requires an unambiguous publication date, excludes old and future sources',()=>{
+ expect(publication('<script>{"datePublished":"2026-10-08T00:00:00Z"}</script>')).toBe('2026-10-08');
+ expect(publication('{"dateModified":"2026-10-08"}')).toBeNull();
+ expect(publication('{"datePublished":"2026-10-08"}{"datePublished":"2025-01-01"}')).toBeNull();
+ expect(withinWindow('2026-09-08','2026-09-09','2026-10-09')).toBe(false);
+ expect(withinWindow('2026-10-10','2026-09-09','2026-10-09')).toBe(false);
+ expect(withinWindow('2026-09-09','2026-09-09','2026-10-09')).toBe(true);
+});
+it('saves a Saturday signup, queues a test-only email once and respects private unsubscribe',async()=>{
+ vi.stubEnv('RESEND_API_KEY','unit-test-placeholder');vi.stubEnv('CONVEX_SITE_URL','https://example.convex.site');
+ const t=convexTest(schema,modules);resendTest.register(t);workpoolTest.register(t,'resend/emailWorkpool');workpoolTest.register(t,'resend/callbackWorkpool');rateLimiterTest.register(t,'resend/rateLimiter');
+ const token='e'.repeat(64),id=await t.mutation(internal.theses.reserve,{tokenHash:await digest(token),original:'Power',investments:[]});
+ await t.run(ctx=>ctx.db.patch(id,{standingResult:{takeaway:'No clear evidence.',assumptions:[{assumption:'Power capacity',status:'WATCH',signalStrength:'soft',reason:NO_EVIDENCE,sources:[]}],checkedAt:Date.now(),windowStart:'2026-09-09',windowEnd:'2026-10-09',modelCalls:2,searches:1}}));
+ await t.mutation(api.standing.subscribe,{token,email:' Person@Example.com '});
+ const args={id,edition:'2026-10-10'};expect(await t.query(internal.standingMail.needsDelivery,args)).toBe(true);
+ await Promise.all([t.mutation(internal.standingMail.enqueue,args),t.mutation(internal.standingMail.enqueue,args)]);
+ const ledger=await t.run(ctx=>ctx.db.query('standingDeliveries').withIndex('by_thesis_edition',q=>q.eq('thesisId',id)).take(2));expect(ledger).toHaveLength(1);
+ const email=await t.query(components.resend.lib.get,{emailId:ledger[0].emailId});expect(email!.to).toEqual(['delivered+test@resend.dev']);expect(email!.text).toContain(NO_EVIDENCE);
+ expect(await t.query(internal.standingMail.needsDelivery,args)).toBe(false);
+ const row=await t.run(ctx=>ctx.db.get(id));expect(row!.standingEmail).toBe('person@example.com');
+ await t.mutation(internal.standingMail.unsubscribe,{token:row!.standingUnsubscribeToken!,confirm:false});expect(await t.query(internal.standingMail.needsDelivery,{id,edition:'next'})).toBe(true);
+ await t.mutation(internal.standingMail.unsubscribe,{token:row!.standingUnsubscribeToken!,confirm:true});expect(await t.query(internal.standingMail.needsDelivery,{id,edition:'next'})).toBe(false);vi.unstubAllEnvs();
+});
+it('keeps strength separate from direction, rejects invented URLs and uses explicit missing evidence',()=>{
+ const assumptions=['a','b','c'];const row={status:'WEAKENING',signalStrength:'hard',reason:'Capacity improved.',sourceUrls:['https://example.com/news']};
+ const source={url:row.sourceUrls[0],title:'News',publisher:'example.com',date:'2026-10-08',dateVerification:'metadata'};
+ const data={takeaway:'Evidence is mixed.',assumptions:[row,{...row,sourceUrls:[]},row]};
+ const result=validateStanding(data,assumptions,[source]);expect(result.assumptions[0].signalStrength).toBe('hard');expect(result.assumptions[0].status).toBe('WEAKENING');expect(result.assumptions[1].reason).toBe(NO_EVIDENCE);expect(result.assumptions[1].status).toBe('WATCH');
+ expect(()=>validateStanding(data,assumptions,[])).toThrow('Source was not verified');
+ expect(()=>validateStanding({...data,takeaway:'Buy shares.'},assumptions,[source])).toThrow();
+});
+it('locks concurrent checks, caches for 24 hours and invalidates when assumptions change',async()=>{
+ const t=convexTest(schema,modules),token='f'.repeat(64);
+ const id=await t.mutation(internal.theses.reserve,{tokenHash:await digest(token),original:'Power thesis',investments:[]});
+ await t.mutation(internal.theses.finish,{id,result:{belief:'Power',reflection:'Power',statedReasons:[],inferredAssumptions:['a','b','c'],unverifiedClaims:[],risks:[],strengtheningEvidence:[],weakeningEvidence:[]}});
+ const first=await t.mutation(internal.standing.claim,{token});await expect(t.mutation(internal.standing.claim,{token})).rejects.toThrow('already running');
+ const result={takeaway:'Unclear.',assumptions:[],checkedAt:Date.now(),windowStart:'2026-09-09',windowEnd:'2026-10-09',modelCalls:2,searches:10};
+ await t.mutation(internal.standing.finish,{id,key:first.key,result});expect((await t.mutation(internal.standing.claim,{token})).result).toEqual(result);
+ await t.run(ctx=>ctx.db.patch(id,{standingResult:{...result,checkedAt:Date.now()-86400001}}));expect((await t.mutation(internal.standing.claim,{token})).result).toBeNull();
+ await t.mutation(internal.standing.finish,{id,key:first.key,result});await t.run(async ctx=>{const row=await ctx.db.get(id);await ctx.db.patch(id,{interpretation:{...row!.interpretation!,inferredAssumptions:['changed','b','c']}});});const changed=await t.mutation(internal.standing.claim,{token});expect(changed.result).toBeNull();
+ await t.mutation(internal.standing.finish,{id,key:changed.key});expect((await t.mutation(internal.standing.claim,{token})).result).toBeNull();
+});

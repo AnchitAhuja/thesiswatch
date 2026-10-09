@@ -44,3 +44,10 @@ it("records token costs once and retains usage for invalid output", async () => 
  expect(today.estimatedInr).toBeCloseTo(.45); expect(today.calls).toBe(1); expect(today.inputTokens).toBe(1000);
  vi.unstubAllEnvs();
 });
+it('includes Claude web search charges in the daily spend cap',async()=>{
+ const t=convexTest(schema,modules);vi.stubEnv('LOOKOUT_USD_INR_RATE','100');
+ const response={content:[],finishReason:{unified:'stop',raw:'end_turn'},usage:{inputTokens:{total:0,noCache:0,cacheRead:0,cacheWrite:0},outputTokens:{total:0}},response:{id:'search-cost'},warnings:[],providerMetadata:{anthropic:{usage:{server_tool_use:{web_search_requests:10}}}}};
+ const model={specificationVersion:'v4',provider:'test',modelId:'test',supportedUrls:{},doGenerate:vi.fn().mockResolvedValue(response),doStream:vi.fn()};
+ await meteredClaude({runMutation:(ref:any,args:any)=>t.mutation(ref,args)} as any,model as any).doGenerate({prompt:[]} as any);
+ expect((await t.query(internal.aiSpend.today,{})).estimatedInr).toBeCloseTo(10);vi.unstubAllEnvs();
+});

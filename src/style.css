@@ -456,3 +456,25 @@ body.lookout-chat { background: #142018; color: #E1E8E1; }
  .thread-thesis-paper { padding: 18px; }
  .thread-thesis-line { font-size: 14px; line-height: 22px; }
 }
+/* Evidence shares the private thesis card's type and palette. */
+.chat-standing { width:100%; margin:20px 0 12px; padding:14px 18px; border:1px solid #ddfb3e; border-radius:6px; background:#ddfb3e; color:#142018; font:inherit; font-weight:600; cursor:pointer; }
+.thread-thesis:has(.chat-standing) .thread-card-actions .chat-save { border:1px solid #41534a; background:transparent; color:#d7eabb; }
+.chat-standing:disabled { opacity:.65; cursor:wait; }
+.standing-result { margin:24px 0; padding-top:20px; border-top:1px solid #596052; }
+.standing-takeaway { font-size:20px; line-height:1.5; }
+.standing-email { margin:24px 0; }
+.standing-email > div { display:flex; gap:8px; flex-wrap:wrap; }
+.standing-email input { flex:1; min-width:160px; }
+.standing-email button { padding:12px; font:inherit; cursor:pointer; }
+.standing-assumptions { padding-left:24px; }
+.standing-assumptions > li { margin:28px 0; }
+.standing-assumptions h3 { font-size:16px; line-height:1.5; }
+.standing-labels { display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-size:12px; }
+.standing-status { padding:4px 8px; border-radius:4px; font-weight:600; }
+.standing-strengthening { color:#245740; background:#eaf3ed; }
+.standing-intact { color:#41534a; background:#eff2ef; }
+.standing-watch { color:#805719; background:#fbf1dd; }
+.standing-weakening { color:#8b3932; background:#f8ebe8; }
+.standing-source { font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+.standing-source a { color:inherit; text-decoration:underline; }
+.chat-standing:focus-visible,.standing-email button:focus-visible { outline:2px solid currentColor; outline-offset:4px; }

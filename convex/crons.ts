@@ -17,3 +17,4 @@ crons.weekly(
   {},
 );
 export default crons;
+crons.weekly('custom thesis Saturday evidence',{dayOfWeek:'saturday',hourUTC:4,minuteUTC:30},internal.standingMail.weekly,{});

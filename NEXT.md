@@ -2,6 +2,21 @@
 
 ## What works now
 
+### October 9: 30-day assumption check
+
+- Added primary card action "See where this thesis stands: last 30 days". Existing chat and stocks are unchanged.
+- Convex uses one Claude search call (maximum ten searches) and one structured assessment call; zero automatic retries. Token and web-search charges enter the existing daily INR cap.
+- Only URLs actually present in search tool results are eligible. Publisher HTML must have an unambiguous publication date in the window; undated, old, future, inaccessible or redirecting pages are discarded. Reasons use verified page text. No sources means WATCH / soft / "no clear evidence in the last 30 days". Source publisher is its hostname.
+- Result cached on the private thesis for 24 hours; changed thesis/assumptions invalidate it; concurrent requests are locked. A failed refresh clears stale cached evidence.
+- Result shows takeaway, then "Get this every Saturday" email box, then all three assessments with separate direction and signal strength, and dated source links.
+- Custom Saturday delivery is implemented with the Convex workflow and Resend components, private unsubscribe and once-per-thesis-per-edition ledger. Schedule requires LOOKOUT_CUSTOM_SCHEDULE_ENABLED=true; real-recipient delivery requires LOOKOUT_CUSTOM_EMAIL_LIVE=true. Defaults remain schedule off and test-recipient delivery. Neither flag was enabled. This retrospective flow does not invent missing provisional reasoning.
+- Dev proof used a deliberately seeded draft (not a new chat run): "Power availability will constrain AI infrastructure expansion more than chip supply over five years", with three plainly stated test assumptions. Two model calls, eight searches, INR 43.9706 tracked. Window 2026-09-09 through 2026-10-09. Sources dated 2026-09-16 and 2026-10-06; both publisher publication metadata verified. Cached replay made zero new model calls and added zero spend.
+- Local proof: tmp/standing/result.json and private.json (ignored by git). Run scripts/prove-standing.mjs --cached to reuse the existing private test record. Running without --cached creates another dev-only test draft and spends up to two model calls / ten searches.
+- 33 tests passed, backend type checking passed, backend and frontend uploaded only to fearless-ferret-257 dev. Production untouched.
+- Browser inventory is empty; no screenshot or click-through proof is available. Finish reviewer requires desktop/mobile captures before visual approval. Next: connect a browser and walk the populated result plus Saturday signup before enabling scheduled/live delivery.
+
+### Earlier chat milestone
+
 - Landing-page Build starts one dark chat thread using Inter and the landing palette.
 - Lookout replies come from Claude through a Convex action with the whole conversation. The SDK requests structured JSON.
 - The thread stops at four successful Lookout turns and produces a thesis sentence, three assumptions, watch signals, and a sector.

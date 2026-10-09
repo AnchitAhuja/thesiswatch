@@ -1,4 +1,5 @@
 import { v } from "convex/values";
+import { standingResult } from './standingFields';
 export const thesisContext = v.object({ belief: v.union(v.string(), v.null()), why: v.union(v.string(), v.null()), whatWouldProveItWrong: v.union(v.string(), v.null()), timeHorizon: v.union(v.string(), v.null()) });
 export const structuredThesis = v.object({ thesis: v.string(), assumptions: v.array(v.string()), watchSignals: v.array(v.string()), sector: v.string() });
 export const chatMessage = v.object({ role: v.union(v.literal("user"), v.literal("assistant")), content: v.string() });
@@ -12,6 +13,7 @@ export const interpretation = v.object({
   risks: v.array(v.string()), strengtheningEvidence: v.array(v.string()), weakeningEvidence: v.array(v.string()),
 });
 export const thesisFields = {
+  standingResult: v.optional(standingResult), standingKey: v.optional(v.string()), standingBusySince: v.optional(v.number()), standingEmail: v.optional(v.string()), standingSubscribedAt: v.optional(v.number()), standingActive:v.optional(v.boolean()), standingUnsubscribeToken:v.optional(v.string()),
   email: v.optional(v.string()),
   tokenHash: v.string(), original: v.string(), investments: v.array(v.string()),
   clarifications: v.optional(v.array(v.string())),

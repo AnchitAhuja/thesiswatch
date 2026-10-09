@@ -17,7 +17,9 @@ export function meteredClaude(ctx: ActionCtx, model: Parameters<typeof wrapLangu
    const inputTokens = i.total ?? ((i.noCache ?? 0) + (i.cacheRead ?? 0) + (i.cacheWrite ?? 0));
    const outputTokens = o.total ?? 0;
    const usd = ((i.noCache ?? Math.max(0, inputTokens - (i.cacheRead ?? 0) - (i.cacheWrite ?? 0))) * 3 + (i.cacheRead ?? 0) * .30 + (i.cacheWrite ?? 0) * 6 + outputTokens * 15) / 1000000;
-   await ctx.runMutation(internal.aiSpend.record, { key: response.response?.id ?? crypto.randomUUID(), day, inputTokens, outputTokens, estimatedInr: usd * rate });
+   const usage = response.providerMetadata?.anthropic?.usage as { server_tool_use?: { web_search_requests?: number } } | undefined;
+   const searchUsd = (usage?.server_tool_use?.web_search_requests ?? 0) * .01;
+   await ctx.runMutation(internal.aiSpend.record, { key: response.response?.id ?? crypto.randomUUID(), day, inputTokens, outputTokens, estimatedInr: (usd + searchUsd) * rate });
    return response;
   }
  } });

@@ -1,0 +1,3 @@
+import { v } from 'convex/values';
+export const standingSource = v.object({ title: v.string(), publisher: v.string(), date: v.string(), url: v.string(), dateVerification: v.string() });
+export const standingResult = v.object({ takeaway: v.string(), assumptions: v.array(v.object({ assumption: v.string(), status: v.union(v.literal('STRENGTHENING'),v.literal('INTACT'),v.literal('WATCH'),v.literal('WEAKENING')), signalStrength: v.union(v.literal('soft'),v.literal('hard')), reason: v.string(), sources: v.array(standingSource) })), checkedAt: v.number(), windowStart: v.string(), windowEnd: v.string(), modelCalls: v.number(), searches: v.number() });

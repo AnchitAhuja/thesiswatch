@@ -23,3 +23,11 @@ http.route({ path: "/unsubscribe", method: "POST", handler: httpAction(async (ct
   return page("<h1>You're unsubscribed.</h1><p>You won't receive future AI thesis editions.</p>");
 }) });
 export default http;
+http.route({path:'/standing-unsubscribe',method:'GET',handler:httpAction(async(ctx,request)=>{
+ const token=new URL(request.url).searchParams.get('token');if(!token || !await ctx.runMutation(internal.standingMail.unsubscribe,{token,confirm:false})) return page('<p>This unsubscribe link is invalid.</p>',404);
+ return page('<h1>Unsubscribe from this thesis?</h1><form method="post"><button type="submit">Unsubscribe</button></form>');
+})});
+http.route({path:'/standing-unsubscribe',method:'POST',handler:httpAction(async(ctx,request)=>{
+ const token=new URL(request.url).searchParams.get('token');if(!token || !await ctx.runMutation(internal.standingMail.unsubscribe,{token,confirm:true})) return page('<p>This unsubscribe link is invalid.</p>',404);
+ return page('<h1>You’re unsubscribed.</h1><p>You won’t receive future updates for this thesis.</p>');
+})});
