@@ -1,0 +1,1439 @@
+{
+  "deployment": "fearless-ferret-257",
+  "productionTouched": false,
+  "input": "Bajaj Auto, held 3+ years for penetration and strong fundamentals in 2 Wheeler segment and strong EV promise. Eternal, bought after the post-IPO dip for Blinkit and Zomato order growth and the platform fee rising.",
+  "finalRun": {
+    "claudeRequests": 3,
+    "webSearches": 0,
+    "costInr": "8.87909999999999897",
+    "usage": [
+      {
+        "inputTokens": 473,
+        "outputTokens": 65,
+        "estimatedInr": 0.23939999999999997
+      },
+      {
+        "inputTokens": 25965,
+        "outputTokens": 288,
+        "estimatedInr": 8.221499999999999
+      },
+      {
+        "inputTokens": 789,
+        "outputTokens": 121,
+        "estimatedInr": 0.4182
+      }
+    ]
+  },
+  "initialNewsRun": {
+    "claudeRequests": 5,
+    "webSearches": 17,
+    "costInr": "104.93749999999999397"
+  },
+  "tests": 42,
+  "emailSignupVerified": true,
+  "results": [
+    {
+      "match": {
+        "aliases": [],
+        "id": "IN:BAJAJ-AUTO",
+        "market": "India",
+        "name": "Bajaj Auto Ltd.",
+        "ticker": "BAJAJ-AUTO"
+      },
+      "reasons": [
+        "penetration and strong fundamentals in 2 Wheeler segment",
+        "strong EV promise"
+      ],
+      "result": {
+        "assumptions": [
+          {
+            "assumption": "penetration and strong fundamentals in 2 Wheeler segment",
+            "reason": "September 2026 sales up 5% year-on-year to 538,443 units, but domestic two-wheeler sales fell 12% while exports rose 32%; volume missed Street estimate of 570,000-585,000 units.",
+            "signalStrength": "hard",
+            "sources": [
+              {
+                "date": "2026-10-01",
+                "dateVerification": "Publisher page datePublished / publication metadata",
+                "publisher": "business-standard.com",
+                "title": "Bajaj Auto, M&M, Hero Moto skid up to 6%; here's why auto stocks are down",
+                "url": "https://www.business-standard.com/markets/news/bajaj-auto-m-m-hero-moto-skid-up-to-6-here-s-why-auto-stocks-are-down-126100100251_1.html"
+              },
+              {
+                "date": "2026-10-01",
+                "dateVerification": "Publisher page datePublished / publication metadata",
+                "publisher": "sahi.com",
+                "title": "Bajaj Auto September Total Sales At 5,38,443 Units vs 510,504 YoY",
+                "url": "https://www.sahi.com/news/bajaj-auto-september-total-sales-at-5-38-443-units-vs-510-504-yoy"
+              }
+            ],
+            "status": "WATCH"
+          },
+          {
+            "assumption": "strong EV promise",
+            "reason": "no clear evidence in the last 30 days",
+            "signalStrength": "soft",
+            "sources": [],
+            "status": "No new evidence"
+          }
+        ],
+        "checkedAt": 1791575169667,
+        "modelCalls": 1,
+        "searchAudit": [
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "nsearchives.nseindia.com",
+            "quality": "primary",
+            "reason": "Not an HTML article; publication date could not be verified.",
+            "searchDate": null,
+            "url": "https://nsearchives.nseindia.com/corporate/lkwalimbe_bajajauto_co_in_01102026085327_Sales_Report_Sep26.pdf"
+          },
+          {
+            "date": "2017-10-03",
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/article/news-cm/bajaj-auto-gains-after-good-sales-in-september-117100300185_1.html"
+          },
+          {
+            "date": "2024-10-16",
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/companies/results/bajaj-auto-q2-results-profit-up-9-to-rs-2-005-cr-as-motorcycle-sales-jump-124101600883_1.html"
+          },
+          {
+            "date": "2021-07-22",
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/article/markets/bajaj-auto-s-net-profit-doubles-in-q1-to-rs-1-061-cr-forays-into-ev-space-121072200479_1.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/topic/bajaj-group/page-3"
+          },
+          {
+            "date": "2021-12-30",
+            "decision": "dropped",
+            "publisher": "techradar.com",
+            "quality": "outlet",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://www.techradar.com/news/bajaj-auto-ev-plant-to-start-production-by-mid-2022"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/topic/two-wheeler-market/page-2"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "kept",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Verified publication date in the 30-day window; selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://www.business-standard.com/markets/news/bajaj-auto-m-m-hero-moto-skid-up-to-6-here-s-why-auto-stocks-are-down-126100100251_1.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/topic/bajaj-auto"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/topic/bajaj-auto/page-3"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "investing.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.investing.com/equities/bajaj-auto-earnings"
+          },
+          {
+            "date": "2026-10-06",
+            "decision": "dropped",
+            "publisher": "sahi.com",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "3 days ago",
+            "url": "https://www.sahi.com/news/bajaj-auto-to-consider-q2-financial-results-on-october-27"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "screener.in",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "2291 days ago",
+            "url": "https://www.screener.in/company/BAJAJ-AUTO/consolidated/"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "kept",
+            "publisher": "sahi.com",
+            "quality": "other",
+            "reason": "Verified publication date in the 30-day window; selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://www.sahi.com/news/bajaj-auto-september-total-sales-at-5-38-443-units-vs-510-504-yoy"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "in.investing.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://in.investing.com/equities/bajaj-auto-earnings"
+          },
+          {
+            "date": "2026-10-09",
+            "decision": "dropped",
+            "publisher": "ad-hoc-news.de",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "0 days ago",
+            "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/bajaj-auto-reported-5-percent-sales-growth-what-it-means-for-bajaj-auto-stock/70276163"
+          },
+          {
+            "date": "2026-10-08",
+            "decision": "dropped",
+            "publisher": "ad-hoc-news.de",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "1 days ago",
+            "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/motilal-oswal-targeted-bajaj-auto-stock-as-september-sales-grew/70265380"
+          },
+          {
+            "date": "2026-10-07",
+            "decision": "dropped",
+            "publisher": "ad-hoc-news.de",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "2 days ago",
+            "url": "https://www.ad-hoc-news.de/boerse/news/corporate-news/bajaj-auto-stock-falls-2-17-percent-ahead-of-q2-results-date/70253070"
+          },
+          {
+            "date": "2026-10-03",
+            "decision": "dropped",
+            "publisher": "bikeadvice.in",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "6 days ago",
+            "url": "https://bikeadvice.in/bajaj-september-2026-sales-5-yoy-growth-4-51-lakh-units/"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "dropped",
+            "publisher": "rushlane.com",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://www.rushlane.com/amp/bajaj-auto-domestic-two-wheeler-sales-decline-12-in-sep-2026-12557179.html"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "dropped",
+            "publisher": "freepressjournal.in",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://www.freepressjournal.in/business/bajaj-auto-reports-538-lakh-unit-sales-in-september-2026-up-5-year-on-year"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "dropped",
+            "publisher": "taxguru.in",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "7 days ago",
+            "url": "https://taxguru.in/finance/business/bajaj-auto-reports-mixed-sales-performance-for-september-2026.html"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "dropped",
+            "publisher": "storyboard18.com",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://www.storyboard18.com/brand-marketing/bajaj-auto-sales-rise-5-to-5-38-lakh-units-in-september-2026-exports-drive-growth-ws-lo-111760.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "msn.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.msn.com/en-in/news/other/bajaj-auto-total-september-sales-up-5-yoy-at-538-lakh-units/vi-AA2djgvZ"
+          },
+          {
+            "date": "2026-10-03",
+            "decision": "dropped",
+            "publisher": "retailintel.in",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "6 days ago",
+            "url": "https://retailintel.in/signal/bajaj-auto-s-september-sales-rise-5-to-5-38-443-units-as-32-6365adc6"
+          },
+          {
+            "date": "2026-10-01",
+            "decision": "dropped",
+            "publisher": "scanx.trade",
+            "quality": "other",
+            "reason": "Verified and allowed, but not selected for an assumption.",
+            "searchDate": "8 days ago",
+            "url": "https://scanx.trade/stock-market-news/companies/bajaj-auto-september-2026-sales-total-volume-up-5-yoy-5-38-443-units/52370828"
+          },
+          {
+            "date": "2026-02-03",
+            "decision": "dropped",
+            "publisher": "indiatvnews.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "248 days ago",
+            "url": "https://www.indiatvnews.com/auto/bajaj-auto-to-launch-8-new-bikes-by-mid-2026-major-pulsar-refresh-planned-2026-02-03-1028729"
+          },
+          {
+            "date": "2025-12-18",
+            "decision": "dropped",
+            "publisher": "autocarpro.in",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "295 days ago",
+            "url": "https://www.autocarpro.in/news/bajaj-auto-launches-2026-pulsar-220f-with-led-indicators-130218"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bajajauto.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.bajajauto.com/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bajajauto.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.bajajauto.com/corporate/media-centre"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "godigit.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "43 days ago",
+            "url": "https://www.godigit.com/bike-guides/upcoming-bajaj-bikes-in-india"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "youtube.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "221 days ago",
+            "url": "https://www.youtube.com/watch?v=4LDWNifkVO8"
+          },
+          {
+            "date": "2026-02-09",
+            "decision": "dropped",
+            "publisher": "autocarpro.in",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "242 days ago",
+            "url": "https://www.autocarpro.in/news/bajaj-auto-launches-%E2%82%B9441-lakh-wego-p9018-indias-longest-range-electric-three-wheeler-131080"
+          },
+          {
+            "date": "2026-04-13",
+            "decision": "dropped",
+            "publisher": "trucks.cardekho.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "179 days ago",
+            "url": "https://trucks.cardekho.com/en/news/detail/bajaj-auto-set-to-launch-new-electric-3-wheeler-to-redefine-the-future-of-last-mile-mobility-expected-features-3613.html"
+          },
+          {
+            "date": "2025-12-22",
+            "decision": "dropped",
+            "publisher": "eauto.co.in",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "291 days ago",
+            "url": "https://eauto.co.in/blogs/news/bajaj-auto-gears-up-for-extensive-two-wheeler-and-ev-launches-in-2026"
+          },
+          {
+            "date": "2026-08-06",
+            "decision": "dropped",
+            "publisher": "thestrategystory.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "64 days ago",
+            "url": "https://thestrategystory.com/blog/bajaj-auto-pestel-analysis-in-2026/"
+          },
+          {
+            "date": "2026-08-06",
+            "decision": "dropped",
+            "publisher": "thestrategystory.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "64 days ago",
+            "url": "https://thestrategystory.com/blog/bajaj-auto-swot-analysis-in-2026/"
+          },
+          {
+            "date": "2026-08-06",
+            "decision": "dropped",
+            "publisher": "thestrategystory.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "64 days ago",
+            "url": "https://thestrategystory.com/blog/bajaj-auto-business-strategy-in-2026/"
+          },
+          {
+            "date": "2026-03-11",
+            "decision": "dropped",
+            "publisher": "domain-b.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "212 days ago",
+            "url": "https://www.domain-b.com/industry/industry-general/bajaj-auto-chetak-ev-expansion-2026"
+          },
+          {
+            "date": "2026-05-29",
+            "decision": "dropped",
+            "publisher": "electroiq.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "133 days ago",
+            "url": "https://electroiq.com/stats/bajaj-statistics/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "carbikegpt.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "38 days ago",
+            "url": "https://www.carbikegpt.com/news/bajaj-ev-sales-cross-3-lakh-mark-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "icicidirect.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "100 days ago",
+            "url": "https://www.icicidirect.com/research/equity/trending-news/bajaj-auto-claims-top-spot-in-india-s-booming-electric-two-wheeler-market-in-june-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "pitchbook.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://pitchbook.com/profiles/company/164798-02"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "analyticsinsight.net",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "0 days ago",
+            "url": "https://www.analyticsinsight.net/ampstories/automotive/indias-ev-2-wheeler-sales-in-september-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trucks.cardekho.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "43 days ago",
+            "url": "https://trucks.cardekho.com/en/news/detail/bajaj-3-wheeler-dominates-the-indian-market-in-july-2026-3843.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trucks.cardekho.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "212 days ago",
+            "url": "https://trucks.cardekho.com/en/news/detail/brand-wise-indian-3-wheeler-market-share-in-february-2026-bajaj-holds-38-while-mahindra-amp;-piaggio-get-more-than-7-share-3551.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trucks.cardekho.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "87 days ago",
+            "url": "https://trucks.cardekho.com/en/news/detail/brand-wise-three-wheeler-market-in-june-2026-by-fada-bajaj-auto-tops-with-34-amp;-mahindra-follows-with-11-share-3766.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "accio.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "29 days ago",
+            "url": "https://www.accio.com/business/bajaj-tvs-king-for-india"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bajajauto.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://www.bajajauto.com/investors/policies-codes"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "investors.bajajauto.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "107 days ago",
+            "url": "https://investors.bajajauto.com/ar26/corporate-governance/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Bajaj_Chetak"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Bajaj_Life_Insurance"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "thetimesofbengal.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://www.thetimesofbengal.com/financial/bajaj-auto-limited/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "pakera.pk",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "11 days ago",
+            "url": "https://pakera.pk/auto-policy-2026-31-car-buyers-what-changes/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "motorbeam.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "283 days ago",
+            "url": "https://www.motorbeam.com/bajaj-auto-ktm-takeover-global-turnaround-2026/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "motorcycle.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "323 days ago",
+            "url": "https://www.motorcycle.com/bikes/news/bajaj-to-acquire-ktm-44622745"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "motorcycle.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "316 days ago",
+            "url": "https://www.motorcycle.com/bikes/news/bajaj-completes-acquisition-of-ktm-44657143"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bikernet.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "496 days ago",
+            "url": "https://www.bikernet.com/bajaj-to-acquire-ktm/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "kiwavmotors.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "304 days ago",
+            "url": "https://kiwavmotors.com/en/blog/bajaj-completes-ktm-takeover-what-the-new-strategy-means-for-riders-production-and-the-motorcycle-market-in-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "whalesbook.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "289 days ago",
+            "url": "https://www.whalesbook.com/news/English/Auto/Bajaj-Autos-Bold-KTM-Rescue-Plan-Can-It-Save-the-Premium-Bike-Giant-Amidst-Domestic-Woes/694b397be10c98d0787a2f65"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "scanx.trade",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "106 days ago",
+            "url": "https://scanx.trade/stock-market-news/companies/bajaj-auto-declares-150-dividend-appoints-rakesh-sharma-as-jmd/43918409"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "auto.katadata.co.id",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://auto.katadata.co.id/motor/bajaj-auto-acquires-ktm-for-rp-153-trillion-21894"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "icicidirect.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "250 days ago",
+            "url": "https://www.icicidirect.com/mailcontent/idirect_bajajauto_q3fy26.pdf"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "investors.bajajauto.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "107 days ago",
+            "url": "https://investors.bajajauto.com/ar26/management-discussion-analysis/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bajajautocredit.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "81 days ago",
+            "url": "https://www.bajajautocredit.com/writable/upload/public/footer/annual_reports/annual_report_for_fy_2025_26.pdf"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "in.investing.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "80 days ago",
+            "url": "https://in.investing.com/news/transcripts/earnings-call-transcript-bajaj-auto-posts-record-q1-2026-growth-shares-slip-93CH-5506115"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "whalesbook.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "155 days ago",
+            "url": "https://www.whalesbook.com/news/English/auto/Bajaj-Auto-Q4-Meets-Targets-Amid-Rising-Costs-and-Export-Worries/69fc5b9bfba933f42cc4f5c3"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "whalesbook.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "183 days ago",
+            "url": "https://www.whalesbook.com/news/English/auto/Auto-Sector-Split-Bajaj-Auto-Upgraded-Amid-Inflation-Fears/69d72abad8f8f73d53409943"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "futurecaps.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://futurecaps.com/portfolio/bajaj-auto-multibagger-analysis-2026/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tr.tradingview.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://tr.tradingview.com/news/moneycontrol%3A0b5887e46094b%3A0-bajaj-auto-warns-of-demand-supply-challenges-from-abs-mandate-on-entry-level-bikes"
+          }
+        ],
+        "searches": 0,
+        "takeaway": "In the last 30 days, Bajaj Auto reported September 2026 sales up 5% year-on-year driven by strong exports, but domestic two-wheeler volumes fell 12%, missing analyst estimates and testing near-term fundamentals; no EV business metrics were disclosed during the period.",
+        "windowEnd": "2026-10-09",
+        "windowStart": "2026-09-09"
+      },
+      "stock": "Bajaj Auto"
+    },
+    {
+      "match": {
+        "aliases": [
+          "Zomato"
+        ],
+        "id": "IN:ETERNAL",
+        "market": "India",
+        "name": "Eternal Ltd.",
+        "ticker": "ETERNAL"
+      },
+      "reasons": [
+        "Blinkit and Zomato order growth",
+        "the platform fee rising"
+      ],
+      "result": {
+        "assumptions": [
+          {
+            "assumption": "Blinkit and Zomato order growth",
+            "reason": "no clear evidence in the last 30 days",
+            "signalStrength": "soft",
+            "sources": [],
+            "status": "No new evidence"
+          },
+          {
+            "assumption": "the platform fee rising",
+            "reason": "no clear evidence in the last 30 days",
+            "signalStrength": "soft",
+            "sources": [],
+            "status": "No new evidence"
+          }
+        ],
+        "checkedAt": 1791575181525,
+        "modelCalls": 1,
+        "searchAudit": [
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/1289308/000162828026005449/ex991_earningsx3qfy26.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001944399/000121390026101514/ea0305669-20fa1_perpetuals.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001944399/000121390026100218/ea0305348-20f_perpetuals.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001944399/000121390026082803/ea0299660-6k_perpetuals.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001497649/000190359626000365/ex99_1.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001878848/000187884826000052/iren-20260630.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sec.gov",
+            "quality": "primary",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.sec.gov/Archives/edgar/data/0001848763/000119312526325073/rnw-20260331.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "74 days ago",
+            "url": "https://www.business-standard.com/companies/quarterly-results/eternal-ltd-quarterly-results-68117"
+          },
+          {
+            "date": "2025-07-21",
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://www.business-standard.com/amp/companies/news/zomatos-parent-eternal-net-profit-falls-90-yoy-125072101198_1.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "business-standard.com",
+            "quality": "outlet",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "226 days ago",
+            "url": "https://www.business-standard.com/markets/eternal-ltd-share-price-68117/news"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "bloomberg.com",
+            "quality": "outlet",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": "102 days ago",
+            "url": "https://www.bloomberg.com/news/articles/2026-06-29/amazon-s-rapid-delivery-push-triggers-15-billion-rout-for-eternal-swiggy"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trendlyne.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "164 days ago",
+            "url": "https://trendlyne.com/latest-news/589490/ETERNAL/eternal-ltd/"
+          },
+          {
+            "date": "2023-04-01",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Eternal_(Young_K_EP)"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "sharekhan.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "519 days ago",
+            "url": "https://www.sharekhan.com/stock/eternal-ltd"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tracxn.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": "9 days ago",
+            "url": "https://tracxn.com/d/legal-entities/india/eternal-limited/__8-Zy7VfV6ek_bn5RGJuqiRVs03o9BXE6dSt9D8Dpbb0"
+          },
+          {
+            "date": "2018-01-25",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Eternal_(record_label)"
+          },
+          {
+            "date": "2022-07-08",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Eternal_Fire_(esports)"
+          },
+          {
+            "date": "2025-08-28",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/The_Eternal_Sunshine_Tour"
+          },
+          {
+            "date": "2024-07-29",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Eternal_(Taemin_EP)"
+          },
+          {
+            "date": "2025-10-02",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/To_Your_Eternity_season_3"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "quartr.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://quartr.com/companies/eternal-limited_12607"
+          },
+          {
+            "date": "2026-01-21",
+            "decision": "dropped",
+            "publisher": "angelone.in",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "261 days ago",
+            "url": "https://www.angelone.in/news/stocks/eternal-formerly-zomato-q3fy26-earnings-results-out-net-profit-rises-73-yoy"
+          },
+          {
+            "date": "2026-01-21",
+            "decision": "dropped",
+            "publisher": "entrackr.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "261 days ago",
+            "url": "https://entrackr.com/fintrackr/eternal-posts-rs-16315-cr-revenue-in-q3-fy26-profit-grows-54-11018870"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "indmoney.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": "261 days ago",
+            "url": "https://www.indmoney.com/blog/stocks/10-things-to-know-from-eternal-zomato-q3-results"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "eternal.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "261 days ago",
+            "url": "https://www.eternal.com/blog/q3fy26/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "marketscreener.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.marketscreener.com/quote/stock/ETERNAL-LIMITED-125138034/calendar/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "zerodha.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "11 days ago",
+            "url": "https://zerodha.com/markets/stocks/NSE/ETERNAL/"
+          },
+          {
+            "date": "2026-06-10",
+            "decision": "dropped",
+            "publisher": "whalesbook.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "121 days ago",
+            "url": "https://www.whalesbook.com/corporate-news/English/sebiexchange/Eternal-Ltd-Faces-indian-rupee963-Crore-GST-Demand-Plans-Appeal/6a293ef5d7b7b190c072ab1d"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "eternal-group.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.eternal-group.com/EN/Home"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "preqin.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.preqin.com/data/profile/asset/wuhan-eternal-technologies-co-ltd-/333929"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "indiainfoline.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://www.indiainfoline.com/company/eternal-ltd/summary"
+          },
+          {
+            "date": "2025-02-07",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Eternal_Limited"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tracxn.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": "47 days ago",
+            "url": "https://tracxn.com/d/companies/eternal/__VZnGEpKMtZ4CoWnfGy90PhM_4XdTYPf3VESL1HUMOYA"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tracxn.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": "45 days ago",
+            "url": "https://tracxn.com/d/companies/eternal/__W2zgRkJOazdAkSRSFeyfw7wnGDXEzxftV0T240syXi0"
+          },
+          {
+            "date": "2021-03-22",
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Nothing_(company)"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 404.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/21Shares"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "finance.yahoo.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": null,
+            "url": "https://finance.yahoo.com/quote/ETERNAL.NS/profile/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "alphaspread.com",
+            "quality": "other",
+            "reason": "Publisher fetch returned HTTP 403.",
+            "searchDate": null,
+            "url": "https://www.alphaspread.com/security/nse/eternal/investor-relations/earnings-call/q4-2026"
+          },
+          {
+            "date": "2026-04-29",
+            "decision": "dropped",
+            "publisher": "finance.yahoo.com",
+            "quality": "other",
+            "reason": "Publication date outside 2026-09-09 through 2026-10-09.",
+            "searchDate": "163 days ago",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/eternal-ltd-bom-543320-q4-070329402.html"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trendlyne.com",
+            "quality": "other",
+            "reason": "Missing or conflicting publication metadata; date unverified.",
+            "searchDate": "163 days ago",
+            "url": "https://trendlyne.com/latest-news/all/589490/ETERNAL/eternal-ltd/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tipranks.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "2 days ago",
+            "url": "https://tipranks.com/news/company-announcements/eternal-hospitality-group-adds-stores-as-torikizoku-sales-edge-higher-in-september"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "alphaspread.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://www.alphaspread.com/security/nse/eternal/investor-relations"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Hengyi_Industries"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "finminutes.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "9 days ago",
+            "url": "https://finminutes.com/company/eternal/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/EVE_Energy"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "quashbugs.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "897 days ago",
+            "url": "https://quashbugs.com/blog/blinkit-surpasses-zomato-in-quick-commerce"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "ziromarket.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "64 days ago",
+            "url": "https://www.ziromarket.com/blog/swiggy-vs-zomato-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "hdfcsky.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "3 days ago",
+            "url": "https://hdfcsky.com/sky-learn/market-wtf-by-sky/why-swiggy-struggled-to-match-zomatos-market-debut"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "univest.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "84 days ago",
+            "url": "https://univest.in/blogs/zomato-vs-swiggy-business-model-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "indiantelevision.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "78 days ago",
+            "url": "https://indiantelevision.com/mam/blinkit-outpaces-zepto-swiggy-on-orders-and-profitability-eternal/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "brineweb.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "214 days ago",
+            "url": "https://www.brineweb.com/blog/swiggy-vs-zomato-who-is-winning-indias-food-delivery-war-in-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "startupwired.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "340 days ago",
+            "url": "https://startupwired.com/2025/11/03/zomato-vs-swiggy-q2-results-which-food-tech-startup-wins/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "techcrunch.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://techcrunch.com/?p=2293459"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "tipranks.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "121 days ago",
+            "url": "https://www.tipranks.com/news/company-announcements/eternal-limited-faces-inr-6-49-crore-gst-demand-plans-to-appeal"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "upstox.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "273 days ago",
+            "url": "https://upstox.com/news/business-news/latest-updates/eternal-faces-27-55-crore-gst-demand-from-west-bengal-authorities-plans-to-appeal/article-187472/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "storyboard18.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "386 days ago",
+            "url": "https://www.storyboard18.com/how-it-works/eternal-faces-gst-demand-orders-worth-rs-40-32-crore-81137.htm"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "enacton.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "57 days ago",
+            "url": "https://www.enacton.com/blog/zomato-business-model/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "whalesbook.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "121 days ago",
+            "url": "https://www.whalesbook.com/corporate-news/Hinglish/sebiexchange/Eternal-Ltd-Faces-indian-rupee963-Crore-GST-Demand-Plans-Appeal/6a293ef5d7b7b190c072ab1d"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "scanx.trade",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "205 days ago",
+            "url": "https://scanx.trade/stock-market-news/companies/eternal-limited-receives-gst-orders-worth-10-97-crore-for-fy20-and-fy23-periods/35395796"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "trendlyne.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "74 days ago",
+            "url": "https://trendlyne.com/equity/589490/ETERNAL/eternal-ltd/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "investing.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "105 days ago",
+            "url": "https://www.investing.com/equities/zomato-consensus-estimates"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "groww.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "220 days ago",
+            "url": "https://groww.in/stocks/zomato-ltd"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "theglobeandmail.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "147 days ago",
+            "url": "https://www.theglobeandmail.com/investing/markets/markets-news/Tipranks/1956547/geojit-research-sticks-to-their-buy-rating-for-zomato-ltd-eternal/"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "in.investing.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "273 days ago",
+            "url": "https://in.investing.com/news/analyst-ratings/goldman-sachs-lowers-eternal-stock-price-target-to-inr375-on-zomato-concerns-93CH-5179871"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "univest.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "179 days ago",
+            "url": "https://univest.in/blogs/blogs-zomato-target-share-price-target-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "univest.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "108 days ago",
+            "url": "https://univest.in/blogs/eternal-zomato-stock-prediction-2026"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "univest.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "184 days ago",
+            "url": "https://univest.in/blogs/zomato-eternal-share-price-target-2026-analyst-forecast-bull-amp-bear-case"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "dollarrupee.in",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "731 days ago",
+            "url": "https://dollarrupee.in/zomato-stock"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/Modella_Capital"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "en.wikipedia.org",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": null,
+            "url": "https://en.wikipedia.org/wiki/E%26_PPF_Telecom_Group"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "marketsmojo.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "6 days ago",
+            "url": "https://marketsmojo.com/news/stocks-in-action/eternal-ltd-falls-636-6-key-factors-driving-the-weekly-decline-4212609"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "marketsmojo.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "8 days ago",
+            "url": "https://www.marketsmojo.com/news/stocks-in-action/eternal-ltd-sees-high-value-trading-amid-mixed-market-signals-4211358"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "marketsmojo.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "6 days ago",
+            "url": "https://www.marketsmojo.com/news/stock-recommendation/eternal-ltd-is-rated-hold-by-marketsmojo-4212401"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "marketsmojo.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "1 days ago",
+            "url": "https://marketsmojo.com/news/stocks-in-action/eternal-ltd-strengthens-position-as-nifty-50-constituent-amid-institutional-shifts-4218376"
+          },
+          {
+            "date": null,
+            "decision": "dropped",
+            "publisher": "globenewswire.com",
+            "quality": "other",
+            "reason": "Outside the 40-page verification limit after ranking.",
+            "searchDate": "0 days ago",
+            "url": "https://globenewswire.com/news-release/2026/10/09/3377999/0/en/transaction-in-own-shares.html"
+          }
+        ],
+        "searches": 0,
+        "takeaway": "There is no clear evidence in the last 30 days to judge whether this thesis still holds.",
+        "windowEnd": "2026-10-09",
+        "windowStart": "2026-09-09"
+      },
+      "stock": "Eternal"
+    }
+  ],
+  "datesAllInWindow": true
+}

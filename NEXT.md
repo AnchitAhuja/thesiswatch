@@ -90,3 +90,12 @@ Review the saved provisional thesis and decide whether why, whatWouldProveItWron
 - Replaced four starter chips and the separate AI Infrastructure card with one linked pill beneath the idea box. Hero/photo/headline/composer/Build/guided-link content and styling unchanged.
 - Dev browser proof at 1280px and 390px: one pill, no old chips/card, prebuilt navigation works, idea input and guided link visible, Build-my-idea focuses input. Full page text contains none of the four prohibited standalone words. No browser errors or horizontal overflow.
 - 38 tests pass. Dev upload only. Screenshots and proof: .impeccable/review/landing-pill/. No model calls or emails for this check.
+
+## My holdings — dev-only proof
+- New route: https://fearless-ferret-257.convex.site/?create=holdings. Existing landing/hero untouched.
+- Claude parses exact stock/reason substrings; review supports editing/removal. Exact exchange matching only; unknown names/funds remain Not supported yet. No previous stock catalogs existed, so official Nifty/Nasdaq/NYSE snapshots are included; refresh with node scripts/update-stock-lists.mjs.
+- Existing research/assessment and source ranking reused. Stock-wide research cache lasts seven days across private sessions; each session assesses its own exact reasons. Errors/cap stops are visible without substitute statuses. Confirmation runs the stock checks on the backend; interrupted sessions can continue.
+- Existing Saturday signup saves each stock and exact reasons to customTheses/standingActive. Test address saved on dev; no email sent. Existing schedule/live-email gates unchanged.
+- 42 tests passed, backend type check/build passed, real dev browser exact input completed. Fresh-session proof: 3 Claude requests, zero searches, INR 8.8791. Initial uncached news+assessment proof: 5 requests, 17 searches, INR 104.9375. Total verification INR 113.8166, below daily cap INR600 (daily total213.539).
+- Final raw page and public result/source/spend evidence: .impeccable/review/holdings/result.txt and proof.json. Actual 1280px/390px captures: desktop.png/mobile.png in same directory. No horizontal overflow. Visual reviewer disposition ship; documenter confirmed ordinary extension and preserved DESIGN.md, including its existing light-theme drift.
+- Production not deployed. Private session URLs remain in ignored tmp/standing only; no credentials included in proof files.

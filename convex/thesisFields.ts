@@ -13,6 +13,7 @@ export const interpretation = v.object({
   risks: v.array(v.string()), strengtheningEvidence: v.array(v.string()), weakeningEvidence: v.array(v.string()),
 });
 export const thesisFields = {
+  standingStockId:v.optional(v.string()),
   standingResult: v.optional(standingResult), standingKey: v.optional(v.string()), standingBusySince: v.optional(v.number()), standingEmail: v.optional(v.string()), standingSubscribedAt: v.optional(v.number()), standingActive:v.optional(v.boolean()), standingUnsubscribeToken:v.optional(v.string()),
   email: v.optional(v.string()),
   tokenHash: v.string(), original: v.string(), investments: v.array(v.string()),
