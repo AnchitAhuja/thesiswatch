@@ -84,3 +84,9 @@ Review the saved provisional thesis and decide whether why, whatWouldProveItWron
 - 38 tests passed; backend type checking, build and dev upload passed. Cached action proof produced three assessments with no new model calls or spend. Source inventory: AI_INFRASTRUCTURE_SOURCES.md.
 - User authorized Playwright. Actual dev browser proof at 1280px and 390px: landing link, company context, populated 30-day check and native email validation passed; no browser errors or horizontal overflow. Reused the existing private dev fixture/cache, with no new model calls. No signup was submitted or email sent. Comparison and full-page captures are in .impeccable/review/. Finish reviewer disposition: ship after labels and title tracking fixes.
 - Production untouched. No GitHub push.
+
+## Landing prebuilt pill - 2026-10-09
+
+- Replaced four starter chips and the separate AI Infrastructure card with one linked pill beneath the idea box. Hero/photo/headline/composer/Build/guided-link content and styling unchanged.
+- Dev browser proof at 1280px and 390px: one pill, no old chips/card, prebuilt navigation works, idea input and guided link visible, Build-my-idea focuses input. Full page text contains none of the four prohibited standalone words. No browser errors or horizontal overflow.
+- 38 tests pass. Dev upload only. Screenshots and proof: .impeccable/review/landing-pill/. No model calls or emails for this check.

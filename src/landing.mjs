@@ -1,7 +1,6 @@
 import { captureComposerMarkup } from './ui-fragments.mjs';
-import { bindCustomThesis, thesisStarters } from './thesis.mjs';
+import { bindCustomThesis } from './thesis.mjs';
 import { howItWorksMarkup, animateHowItWorks } from './how-it-works.mjs';
-const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 
 export function bindLanding(root) {
   document.body.classList.add('lookout-dark');
@@ -15,9 +14,8 @@ export function bindLanding(root) {
         <p class="dark-intro">Add your investment ideas. Lookout tracks the evidence behind each belief and flags what changes, so you know when to revisit your reasoning.</p>
         <div class="landing-capture" id="capture-box">
           ${captureComposerMarkup()}
-          <div class="landing-starters" aria-label="Ideas to start from">${thesisStarters.map(x => `<button type="button">${esc(x)}</button>`).join('')}</div>
+          <div class="landing-prebuilt"><a class="landing-thesis-pill" href="/?thesis=ai-infrastructure">AI Infrastructure</a></div>
           <button class="landing-ask" type="button">I can't put it into words, ask me</button>
-          <a class="ai-thesis-choice" href="/?thesis=ai-infrastructure"><h2>AI Infrastructure</h2><p>Explore the power constraint: connected companies, assumptions, risks and a check against the last 30 days.</p></a>
         </div>
       </div>
     </div>
@@ -27,7 +25,6 @@ export function bindLanding(root) {
   </div>`;
   animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
-  root.querySelectorAll('.landing-starters button').forEach(button => button.onclick = () => { input.value = button.textContent; input.focus(); });
   root.querySelectorAll('.build-idea').forEach(link => link.addEventListener('click', event => { event.preventDefault(); input.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); input.focus({ preventScroll: true }); }));
   const start = entry => {
     document.body.classList.remove('lookout-dark');

@@ -347,16 +347,16 @@ body.lookout-dark { color-scheme: dark; background: #131C17; color: #F0F0E7; }
 @media(max-width:760px) { .how-it-works { margin: 0 20px; padding: 32px 0 40px; } .how-steps { grid-template-columns: 1fr; gap: 20px; } .how-example { min-height: 0; padding: 16px; } .how-step h3 { margin-bottom: 10px; } .how-header { margin-bottom: 20px; } }
 @media(prefers-reduced-motion:reduce) { .how-it-works *, .how-it-works .typed-belief > span span { animation: none !important; opacity: 1 !important; transform: none !important; } }
 /* Select the complete shared thesis below the belief composer. */
-.ai-thesis-choice { display: block; margin-top: 12px; padding: 12px 14px; border: 1px solid #536457; border-radius: 10px; background: rgba(24,38,29,.92); color: #F0F0E7; text-decoration: none; }
-.ai-thesis-choice h2 { font-size: 14px; line-height: 20px; font-weight: 600; }
-.ai-thesis-choice p { margin-top: 5px; font-size: 12px; line-height: 18px; color: #CDD8CF; }
-.ai-thesis-choice:hover { border-color: #D7EABB; }
+.landing-prebuilt { margin-top: 12px; }
+.landing-thesis-pill { display: inline-block; padding: 7px 12px; border: 1px solid #536457; border-radius: 999px; background: rgba(24,38,29,.9); color: #F0F0E7; font-size: 12px; line-height: 18px; text-decoration: none; }
+.landing-thesis-pill:hover { border-color: #D7EABB; }
+.landing-thesis-pill:focus-visible { outline: 2px solid #DFFA35; outline-offset: 4px; }
 .lookout-photo .landing-capture { max-width: 530px; }
 .lookout-photo .landing-composer { max-width: 490px; }
 .lookout-photo .dark-hero-left { max-width: 570px; }
 .lookout-photo .dark-hero h1 { max-width: 21ch; }
 .lookout-photo .dark-footer { margin-bottom: 24px; }
-@media(max-width:760px) { .lookout-photo .landing-capture { max-width: 350px; } .ai-thesis-choice { padding: 10px 12px; } .ai-thesis-choice p { font-size: 11px; line-height: 16px; } .lookout-photo .dark-hero h1 { max-width: 21ch; } }
+@media(max-width:760px) { .lookout-photo .landing-capture { max-width: 350px; } .lookout-photo .dark-hero h1 { max-width: 21ch; } }
 /* The reasoning becomes clearer, then evidence arrives; each motion runs once. */
 .how-step { position: relative; }
 .how-step:not(:last-child)::after { content: ''; position: absolute; top: 12px; right: -21px; width: 18px; height: 1px; background: #D7EABB; }

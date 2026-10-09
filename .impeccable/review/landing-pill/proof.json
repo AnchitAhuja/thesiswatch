@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1280,
+    "pillCount": 1,
+    "oldChips": 0,
+    "oldCard": 0,
+    "forbiddenWords": [],
+    "overflow": false,
+    "errors": [],
+    "prebuiltNavigation": true,
+    "heroInputAndGuidedLink": true,
+    "buildLinkFocus": true
+  },
+  {
+    "width": 390,
+    "pillCount": 1,
+    "oldChips": 0,
+    "oldCard": 0,
+    "forbiddenWords": [],
+    "overflow": false,
+    "errors": [],
+    "prebuiltNavigation": true,
+    "heroInputAndGuidedLink": true,
+    "buildLinkFocus": true
+  }
+]
