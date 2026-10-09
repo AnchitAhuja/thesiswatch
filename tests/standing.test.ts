@@ -35,7 +35,7 @@ it('keeps strength separate from direction, rejects invented URLs and uses expli
  const assumptions=['a','b','c'];const row={status:'WEAKENING',signalStrength:'hard',reason:'Capacity improved.',sourceUrls:['https://example.com/news']};
  const source={url:row.sourceUrls[0],title:'News',publisher:'example.com',date:'2026-10-08',dateVerification:'metadata'};
  const data={takeaway:'Evidence is mixed.',assumptions:[row,{...row,sourceUrls:[]},row]};
- const result=validateStanding(data,assumptions,[source]);expect(result.assumptions[0].signalStrength).toBe('hard');expect(result.assumptions[0].status).toBe('WEAKENING');expect(result.assumptions[1].reason).toBe(NO_EVIDENCE);expect(result.assumptions[1].status).toBe('WATCH');
+ const result=validateStanding(data,assumptions,[source]);expect(result.assumptions[0].signalStrength).toBe('hard');expect(result.assumptions[0].status).toBe('WEAKENING');expect(result.assumptions[1].reason).toBe(NO_EVIDENCE);expect(result.assumptions[1].status).toBe('No new evidence');
  expect(()=>validateStanding(data,assumptions,[])).toThrow('Source was not verified');
  expect(()=>validateStanding({...data,takeaway:'Buy shares.'},assumptions,[source])).toThrow();
 });
