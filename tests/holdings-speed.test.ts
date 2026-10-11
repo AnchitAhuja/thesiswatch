@@ -23,3 +23,10 @@ it('sends only source metadata and up to three relevant paragraphs, preserving q
  expect(packets[0].excerpt.split('\n\n').length).toBeLessThanOrEqual(3);
  expect(packets[0].excerpt.length).toBeLessThanOrEqual(3604);
 });
+
+it('keeps attributed shipment evidence for a scale reason in older flat-text caches',()=>{
+ const sources=[{title:'Report',date:'2026-10-09',publisher:'publisher',url:'https://example.com/report',excerpt:'Navigation tech delivery BT Bazaar Subscribe Home '+ 'menus '.repeat(100)+'. MOFSL stated that Express shipment volumes rose 55% YoY, led by e-commerce expansion. The brokerage said the acquisition strengthens rural reach and network density. Delhivery provides logistics and software services.'}];
+ const packet=evidencePackets(sources,['scale it is able to bring','network design is good','one of the few tech delivery platforms'])[0];
+ expect(packet.excerpt).toContain('MOFSL stated that Express shipment volumes rose 55%');
+ expect(packet.excerpt).not.toContain('Navigation');
+});
