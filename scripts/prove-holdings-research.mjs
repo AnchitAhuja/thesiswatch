@@ -13,4 +13,7 @@ if(!process.argv.includes('--cached'))run('holdings:confirm',{token:parsed.token
 run('holdingsActions:checkAll',{token:parsed.token});
 const view=run('holdings:read',{token:parsed.token});const after=run('aiSpend:today',{});
 const proof={deployment,queries:holdingsQueries('Delhivery Ltd.',reasons),view,spend:{estimatedInr:after.estimatedInr-before.estimatedInr,calls:after.calls-before.calls,before,after}};
-writeFileSync('tmp/standing/delhivery-result.json',JSON.stringify(proof,null,2));console.log(JSON.stringify(proof,null,2));
+writeFileSync('tmp/standing/delhivery-result.json',JSON.stringify(proof,null,2));const line=view?.lines?.[0];
+if(!line||JSON.stringify(line.reasons)!==JSON.stringify(reasons))throw Error('Saved reasons changed.');
+if(line.error||!line.result)throw Error(line.error||'Evidence check did not finish.');
+console.log(JSON.stringify(proof,null,2));
