@@ -14,9 +14,9 @@ async function perform(ctx:ActionCtx,args:{token?:string,id?:Id<'customTheses'>}
  let evidence,researchReused=false;
  if(claim.stockId){
   const stock=getStockById(claim.stockId);if(!stock)throw Error('Not supported yet');
-  const cache=await ctx.runMutation(internal.stockResearch.claim,{stockId:stock.id});
+  const cache=await ctx.runMutation(internal.stockResearch.claim,{stockId:stock.id,reasons:claim.assumptions});
   if(cache.evidence){evidence=cache.evidence;researchReused=true;}
-  else {try {evidence=await researchEvidence(ctx,{thesis:stock.name+' ('+stock.ticker+')',assumptions:[],windowStart,windowEnd});await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,lease:cache.lease!,evidence});}catch(e){await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,lease:cache.lease!});throw e;}}
+  else {try {evidence=await researchEvidence(ctx,{thesis:stock.name,company:stock.name,assumptions:claim.assumptions,windowStart,windowEnd});await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!,evidence});}catch(e){await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!});throw e;}}
   evidence={...evidence,verified:evidence.verified.filter(s=>withinWindow(s.date,windowStart,windowEnd)),windowStart,windowEnd};
  }else evidence=await researchEvidence(ctx,{thesis:claim.thesis,assumptions:claim.assumptions,windowStart,windowEnd,legacy:true});
  const result=await assessEvidence(ctx,{...evidence,thesis:claim.thesis,assumptions:claim.assumptions,researchReused});

@@ -2,6 +2,7 @@ import { v } from 'convex/values';
 import { internalMutation, mutation } from './_generated/server';
 import { digest } from './theses';
 import { standingResult } from './standingFields';
+import {HOLDINGS_RESEARCH_VERSION} from '../shared/holdings-research.mjs';
 import { SOURCE_POLICY_VERSION } from '../shared/source-quality.mjs';
 export const claim = internalMutation({
  args: { token: v.optional(v.string()), id:v.optional(v.id('customTheses')) }, returns: v.object({ id: v.id('customTheses'), thesis: v.string(), assumptions: v.array(v.string()), stockId:v.optional(v.string()), key: v.string(), result: v.union(standingResult,v.null()) }),
@@ -12,7 +13,7 @@ export const claim = internalMutation({
   const thesis = row.confirmedReflection || row.thesis?.thesis || row.interpretation.reflection;
   const assumptions = row.thesis?.assumptions || row.interpretation.inferredAssumptions;
   if (row.standingStockId ? assumptions.length<1||assumptions.length>6 : assumptions.length !== 3) throw Error('Valid reasons are required.');
-  const key = JSON.stringify([SOURCE_POLICY_VERSION, thesis, assumptions]);
+  const key = JSON.stringify([SOURCE_POLICY_VERSION, row.standingStockId?HOLDINGS_RESEARCH_VERSION+':attribution-v2':null, thesis, assumptions]);
   const cached = row.standingKey === key && row.standingResult && Date.now()-row.standingResult.checkedAt < 86400000 ? row.standingResult : null;
   if (!cached && row.standingBusySince && Date.now()-row.standingBusySince < 600000) throw Error('A check is already running. Try again shortly.');
   if (!cached) await ctx.db.patch(row._id,{standingBusySince:Date.now(),standingKey:key,standingResult:undefined});

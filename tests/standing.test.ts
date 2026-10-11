@@ -38,6 +38,7 @@ it('keeps strength separate from direction, rejects invented URLs and uses expli
  const result=validateStanding(data,assumptions,[source]);expect(result.assumptions[0].signalStrength).toBe('hard');expect(result.assumptions[0].status).toBe('WEAKENING');expect(result.assumptions[1].reason).toBe(NO_EVIDENCE);expect(result.assumptions[1].status).toBe('No new evidence');
  expect(()=>validateStanding(data,assumptions,[])).toThrow('Source was not verified');
  expect(()=>validateStanding({...data,takeaway:'Buy shares.'},assumptions,[source])).toThrow();
+ expect(()=>validateStanding({...data,takeaway:'Our target price is INR 500.'},assumptions,[source])).toThrow();
 });
 it('locks concurrent checks, caches for 24 hours and invalidates when assumptions change',async()=>{
  const t=convexTest(schema,modules),token='f'.repeat(64);

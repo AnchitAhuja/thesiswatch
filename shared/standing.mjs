@@ -23,6 +23,6 @@ export function validateStanding(data, assumptions, sources) {
     return { assumption: assumptions[i], status: selected.length ? row.status : 'No new evidence', signalStrength: selected.length ? row.signalStrength : 'soft', reason: selected.length ? row.reason : NO_EVIDENCE, sources: selected };
   });
   const takeaway = rows.every(r => !r.sources.length) ? 'There is no clear evidence in the last 30 days to judge whether this thesis still holds.' : data.takeaway;
-  if (/\b(buy|sell|hold|exit|recommend\w*)\b/i.test([takeaway,...rows.map(r=>r.reason)].join(' '))) throw Error('Unacceptable recommendation wording.');
+  if (/\b(buy|sell|hold|exit|recommend\w*|target\s+price|price\s+target)\b/i.test([takeaway,...rows.map(r=>r.reason)].join(' '))) throw Error('Unacceptable recommendation wording.');
   return { takeaway, assumptions: rows };
 }
