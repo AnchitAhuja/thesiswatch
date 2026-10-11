@@ -52,14 +52,14 @@ it("validates short single-question replies, final-card shape and prohibited wor
 it("saves an edited assumption without inventing missing context", async () => {
   const { t, token, id } = await setup();
   const data = parseChatResponse(JSON.stringify({ ...draft, context: { ...context, why: null, timeHorizon: null } }), true);
-  expect(data.missingFields).toEqual(["why", "timeHorizon"]); expect(data.needsConfirmation).toBe(true);
+  expect(data.missingFields).toEqual(["why"]); expect(data.needsConfirmation).toBe(true);
   await t.mutation(internal.thesisConversation.claim, { token, requestId: "1" });
   await t.mutation(internal.thesisConversation.finish, { id, requestId: "1", reply: data.reply, thesis: data.thesis, context: data.context, missingFields: data.missingFields, needsConfirmation: true, result: legacyInterpretation(data) });
   const assumptions = ["Edited first assumption", ...data.thesis.assumptions.slice(1)];
   await t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, assumptions });
   const provisional = await t.query(api.theses.read, { token });
   expect(provisional?.state).toBe("saved"); expect(provisional?.context?.why).toBeNull();
-  expect(provisional?.missingFields).toEqual(["why", "timeHorizon"]); expect(provisional?.needsConfirmation).toBe(true);
+  expect(provisional?.missingFields).toEqual(["why"]); expect(provisional?.needsConfirmation).toBe(true);
   expect(provisional?.thesis?.assumptions).toEqual(assumptions); expect(provisional?.interpretation?.inferredAssumptions).toEqual(assumptions);
   await expect(t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, assumptions: ["one"] })).rejects.toThrow("three assumptions");
   await t.mutation(api.theses.confirm, { email: "test@example.com", token, reflection: data.thesis.thesis, context });
@@ -73,4 +73,11 @@ it("accepts neutral retail business descriptions while blocking securities trade
  expect(parseChatResponse(JSON.stringify(response), true).reply).toContain("providing groceries");
  expect(() => parseChatResponse(JSON.stringify({ ...response, reply: "Consider selling shares." }), true)).toThrow("Unacceptable wording");
  expect(() => parseChatResponse(JSON.stringify({ ...response, reply: "Would these fit?" }), true)).toThrow();
+});
+
+it('uses the default horizon without asking the user for a time frame',()=>{
+ const question={...draft,type:'question',thesis:null,context:{...context,timeHorizon:null},reply:'What evidence would make you rethink this?'};
+ expect(parseChatResponse(JSON.stringify(question),false).context.timeHorizon).toBe('3-5 years');
+ expect(()=>parseChatResponse(JSON.stringify({...question,reply:'What time frame do you have in mind?'}),false)).toThrow('Do not ask for a time frame');
+ expect(parseChatResponse(JSON.stringify({...question,reply:'Would two years of flat spending make you rethink this?'}),false).context.why).toBe(context.why);
 });

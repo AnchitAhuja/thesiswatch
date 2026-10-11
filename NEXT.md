@@ -1,4 +1,4 @@
-﻿# Next session
+# Next session
 
 ## What works now
 
@@ -118,3 +118,16 @@ Review the saved provisional thesis and decide whether why, whatWouldProveItWron
 - User explicitly requested npm run deploy again after being told it targets production. Deployed application code at f520f7f to first-yak-309 production. Build, backend type checking, schema validation and all 33 static-file uploads passed. Deployment completed successfully. Earlier dev-only notes describe the state before this authorized release.
 - Live URL: https://first-yak-309.convex.site. Verified landing and ?create=holdings return HTTP 200 with the expected new build; main JS, holdings JS and CSS load, and main JS targets https://first-yak-309.convex.cloud. Read-only production holdings:match lookup for Delhivery returned IN:DELHIVERY. No model call, research run, subscription or email was triggered in production verification.
 - Browser inventory empty: no production click-through or screenshot proof. Next verification: connect a browser and walk the live holdings flow. GitHub pushes remain unsuccessful because this Wi-Fi has working IPv6 but no usable IPv4 address/default route; application code commits 2942e93 and f520f7f were deployed from local files, not from GitHub.
+
+
+### October 11: parallel holdings work, pending dev proof
+
+- Local implementation launches all supported stocks together and renders each result from a live Convex query. Individual cards update without resetting the signup email field.
+- Convex stores actual stock steps as searches, article reads, assessment and independent evidence review start. Cached research skips search steps; completion is Done, failures are Stopped.
+- Holdings model inputs contain source headline, publisher, date, URL and at most three relevant original passages. Fresh publisher HTML retains paragraph boundaries; older cached flat text uses original sentence passages. Seven-day reason-specific research cache remains unchanged.
+- Chat uses the default 3-5 year window without asking for a time frame; new thesis cards and holdings results state "Checked against a 3-5 year view". Original holdings reasons, source ranking, evidence/trading filters and existing daily spend checks remain in place.
+- 51 tests, backend type checking and frontend build passed. DOM test proves ITC can finish before Delhivery while preserving focused email input; this is not live browser proof.
+- Nothing from this change has been deployed, and production has not been touched. Keep dev on its old code until the requested before measurement is captured.
+- Pending: user's exact ITC reason (asked, unanswered); connected browser (inventory is empty, in-app browser unavailable); before/after Delhivery+ITC timing, actual status trace and 390px mid-run screenshot.
+- scripts/prove-holdings-parallel.mjs accepts before/after/warm plus a JSON file of exact ITC reasons, guards dev:fearless-ferret-257, saves private tokens only under ignored tmp/standing, and records backend events/spend. Browser-visible timing must be measured separately. Compare equally warm research caches; do not claim cold-before versus warm-after as speed proof.
+- Dev deployment commands after baseline: npx convex dev --once, then npx @convex-dev/static-hosting upload --build. Do not use npm run deploy: it targets production.

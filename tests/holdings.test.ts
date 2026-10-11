@@ -34,3 +34,18 @@ it('derives a mixed top line from actual assessed statuses and keeps no evidence
  expect(stockTakeaway([{status:'WEAKENING'},{status:'STRENGTHENING'}])).toBe('Mixed: reason 1 weakened; reason 2 strengthened.');
  expect(stockTakeaway([{status:'No new evidence'}])).toBe('No new evidence for your reasons.');
 });
+
+it('saves real stock steps privately and ignores progress after completion',async()=>{
+ const t=convexTest(schema,modules),token='e'.repeat(64),items=[{stock:'ITC',reasons:['exact original reason']}];
+ await t.mutation(internal.holdings.create,{token,original:'ITC',items});await t.mutation(api.holdings.confirm,{token,items});
+ const session=await t.query(internal.holdings.get,{token}),id=session!.lines[0].thesisId!;
+ const claim=await t.mutation(internal.standing.claim,{id});
+ await t.mutation(internal.standing.progress,{id,key:'wrong',step:'Searching recent news'});
+ expect((await t.query(api.holdings.read,{token}))?.lines[0].progress).toBeUndefined();
+ await t.mutation(internal.standing.progress,{id,key:claim.key,step:'Checking your reason against evidence'});
+ expect((await t.query(api.holdings.read,{token}))?.lines[0].progress?.step).toBe('Checking your reason against evidence');
+ expect(await t.query(api.holdings.read,{token:'f'.repeat(64)})).toBeNull();
+ await t.mutation(internal.standing.finish,{id,key:claim.key});
+ await t.mutation(internal.standing.progress,{id,key:claim.key,step:'Searching recent news'});
+ expect((await t.query(api.holdings.read,{token}))?.lines[0].progress?.step).toBe('Stopped');
+});

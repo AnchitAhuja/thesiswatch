@@ -1,3 +1,4 @@
+export const DEFAULT_HORIZON = '3-5 years';
 export const contextFields = ['belief', 'why', 'whatWouldProveItWrong', 'timeHorizon'];
 const text = (value, words, length) => typeof value === 'string' && value.trim() && value.length <= length && value.trim().split(/\s+/).length <= words;
 export function parseChatResponse(raw, forceThesis) {
@@ -7,6 +8,8 @@ export function parseChatResponse(raw, forceThesis) {
   if (data.type !== (forceThesis ? 'thesis' : 'question')) throw Error('Invalid turn type.');
   if (!text(data.reply, 65, 500) || (data.reply.match(/\?/g) || []).length !== (data.type === 'question' ? 1 : 0)) throw Error('Reply must be short and ask one question at a time.');
   if (!data.context || contextFields.some(key => data.context[key] !== null && !text(data.context[key], 35, 300))) throw Error('Invalid context.');
+  data.context.timeHorizon = DEFAULT_HORIZON;
+  if (data.type === 'question' && /(?:time[ -]?frame|time horizon|how (?:long|many years)|over (?:what|which) period)/i.test(data.reply)) throw Error('Do not ask for a time frame.');
   // Unknown fields are derived, never accepted from a model's inconsistent flags.
   data.missingFields = contextFields.filter(key => data.context[key] === null);
   data.needsConfirmation = data.type === 'thesis' && data.missingFields.length > 0;

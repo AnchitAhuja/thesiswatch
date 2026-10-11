@@ -556,7 +556,7 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
 .holdings-primary,.holdings-page .standing-email button { color:#131c17; background:#dffa35; border:1px solid #dffa35; }
 .holdings-page button:disabled { opacity:.6; cursor:wait; }
 .holdings-remove { background:transparent; color:#d7eabb; border:1px solid #63766a; }
-.holdings-match,.holdings-window,.holdings-source { color:#a8b7ac; font-size:14px; }
+.holdings-match,.holdings-window,.holdings-source,.holdings-step { color:#a8b7ac; font-size:14px; }
 .holdings-takeaway { font-size:18px; font-weight:600; }
 .holdings-reason { margin-top:26px; border-top:1px solid #41534a; padding-top:24px; }
 .holdings-reason h3 { font-size:18px; margin:0 0 12px; line-height:1.5; }

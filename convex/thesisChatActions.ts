@@ -28,7 +28,7 @@ export const reply = action({
       if (!process.env.ANTHROPIC_API_KEY) throw Error("AI key unavailable.");
       threadId ||= await createThread(ctx, components.agent, { title: "Private Lookout conversation" });
       const agent = new Agent(components.agent, { name: "Lookout conversation", languageModel: meteredClaude(ctx, anthropic("claude-sonnet-4-5")), instructions: chatSystemPrompt, contextOptions: { recentMessages: 0 } });
-      const finalInstructions = final ? 'This is the fourth and last turn: return type thesis. Your reply MUST contain only statements and ZERO question marks. Do NOT ask which company fits or request confirmation; the conversation is finished. Missing details remain null and must be confirmed. If the latest answer is you tell me, your reply MUST give two or three connected company examples with their business connections.' : `This is turn ${turn} of four, NOT the final turn. You MUST return type question and thesis:null. Ask one short question reacting to the latest answer. If all details are established, ask for confirmation of your understanding. Do not produce a provisional thesis before the fourth turn.`;
+      const finalInstructions = final ? 'This is the fourth and last turn: return type thesis. Your reply MUST contain only statements and ZERO question marks. Do NOT ask which company fits or request confirmation; the conversation is finished. Missing details remain null and must be confirmed, except timeHorizon which is always 3-5 years. If the latest answer is you tell me, your reply MUST give two or three connected company examples with their business connections.' : `This is turn ${turn} of four, NOT the final turn. You MUST return type question and thesis:null. Ask one short question reacting to the latest answer. If all details are established, ask for confirmation of your understanding. Do not produce a provisional thesis before the fourth turn.`;
       console.log(`LOOKOUT_MODEL_CALL_START ${trace}`);
       const response = await agent.generateObject(ctx, { threadId }, {
         schema: jsonSchema(chatReplySchema(final)),
@@ -58,7 +58,7 @@ function chatReplySchema(final: boolean): import("ai").JSONSchema7 {
   const shortText = (maxLength: number) => ({ type: "string" as const, minLength: 1, maxLength });
   const context = {
     type: "object" as const, additionalProperties: false,
-    properties: Object.fromEntries(["belief", "why", "whatWouldProveItWrong", "timeHorizon"].map(key => [key, { anyOf: [shortText(300), { type: "null" }] }])),
+    properties: Object.fromEntries(["belief", "why", "whatWouldProveItWrong", "timeHorizon"].map(key => [key, key === "timeHorizon" ? { type: "string", enum: ["3-5 years"] } : { anyOf: [shortText(300), { type: "null" }] }])),
     required: ["belief", "why", "whatWouldProveItWrong", "timeHorizon"],
   };
   const thesis = {

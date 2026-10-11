@@ -10,6 +10,7 @@ import {meteredClaude} from './meteredClaude';
 import {holdingInput} from './holdingsFields';
 import {validateExtracted} from '../shared/stock-matching.mjs';
 import {validateEmail} from '../shared/email.mjs';
+import {checkStocksTogether} from '../shared/holdings-progress.mjs';
 function safeError(error:unknown){const text=String(error);return /thinking limit/.test(text)?'Check stopped: daily spending limit reached. Try again tomorrow.':/credit balance/.test(text)?'Check stopped: research account credits are unavailable. Try again later.':/already running/.test(text)?'Research is already running for this stock. Try again shortly.':'Check stopped: the evidence could not be verified. Try again.';}
 export const interpret=action({args:{text:v.string()},returns:v.object({token:v.string(),items:v.array(holdingInput)}),handler:async(ctx,{text})=>{
  if(!text.trim()||text.length>6000)throw Error('Enter your stocks and reasons in up to 6,000 characters.');
@@ -21,7 +22,7 @@ export const interpret=action({args:{text:v.string()},returns:v.object({token:v.
 }});
 export const checkStock=action({args:{token:v.string(),index:v.number()},returns:v.null(),handler:async(ctx,args)=>{
  const session=await ctx.runQuery(internal.holdings.get,{token:args.token}),line=session?.lines[args.index];if(!session||!line)throw Error('Entry not found.');if(!line.thesisId)return null;
- try{await ctx.runAction(internal.standingActions.checkSaved,{id:line.thesisId});await ctx.runMutation(internal.holdings.recordError,{id:session.id,index:args.index});}
+ try{await ctx.runMutation(internal.holdings.recordError,{id:session.id,index:args.index});await ctx.runAction(internal.standingActions.checkSaved,{id:line.thesisId});await ctx.runMutation(internal.holdings.recordError,{id:session.id,index:args.index});}
  catch(error){await ctx.runMutation(internal.holdings.recordError,{id:session.id,index:args.index,error:safeError(error)});}return null;
 }});
 export const subscribe=action({args:{token:v.string(),email:v.string()},returns:v.null(),handler:async(ctx,args)=>{
@@ -33,5 +34,5 @@ export const subscribe=action({args:{token:v.string(),email:v.string()},returns:
 }});
 export const checkAll=action({args:{token:v.string()},returns:v.null(),handler:async(ctx,{token})=>{
  const session=await ctx.runQuery(internal.holdings.get,{token});if(!session)throw Error('This draft could not be found.');
- for(let index=0;index<session.lines.length;index++)await ctx.runAction(api.holdingsActions.checkStock,{token,index});return null;
+ await checkStocksTogether(session.lines,(index:number)=>ctx.runAction(api.holdingsActions.checkStock,{token,index}));return null;
 }});

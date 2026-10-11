@@ -24,7 +24,7 @@ export function attributeBrokerage(row, sources) {
  if(reason.length>500)throw Error('Brokerage attribution is too long.');
  return {...row,reason,signalStrength:'soft'};
 }
-export const HOLDINGS_ASSESSMENT_VERSION = 'direct-reason-match-v1';
+export const HOLDINGS_ASSESSMENT_VERSION = 'direct-reason-match-paragraphs-v2';
 export function gateReasonMatch(row, review, sources) {
  if (!review || !['direct','indirect','unrelated'].includes(review.match)) throw Error('Invalid reason match review.');
  if (review.match !== 'direct' || !row.sourceUrls.length) return {...row,status:'No new evidence',signalStrength:'soft',reason:'no clear evidence in the last 30 days',sourceUrls:[],brokerageEvidence:[]};
