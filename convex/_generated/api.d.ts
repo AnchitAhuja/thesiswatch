@@ -24,6 +24,7 @@ import type * as prebuilt from "../prebuilt.js";
 import type * as prebuiltActions from "../prebuiltActions.js";
 import type * as prebuiltFields from "../prebuiltFields.js";
 import type * as prompts from "../prompts.js";
+import type * as reasonMatching from "../reasonMatching.js";
 import type * as research from "../research.js";
 import type * as researchActions from "../researchActions.js";
 import type * as researchPrompt from "../researchPrompt.js";
@@ -62,6 +63,7 @@ declare const fullApi: ApiFromModules<{
   prebuiltActions: typeof prebuiltActions;
   prebuiltFields: typeof prebuiltFields;
   prompts: typeof prompts;
+  reasonMatching: typeof reasonMatching;
   research: typeof research;
   researchActions: typeof researchActions;
   researchPrompt: typeof researchPrompt;

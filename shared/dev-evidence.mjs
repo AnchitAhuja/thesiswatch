@@ -1,8 +1,8 @@
-import {holdingsQueries} from './holdings-research.mjs';
 import {publication} from './standing.mjs';
-export function recentQueries(company,reasons,end) {
+export function recentQueries(company,_reasons,end) {
+ const name=company.replace(/\s+(?:limited|ltd\.?|inc\.?)$/i,'').trim();
  const month=new Date(end+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
- return holdingsQueries(company,reasons).map(query=>query+' '+month);
+ return ['results','partnership OR deal OR order','news','brokerage target'].map(topic=>`${name} ${topic} ${month}`);
 }
 export function skipResearchPage(url,title='') {
  return /(?:wikipedia\.org|britannica\.com|crunchbase\.com|zoominfo\.com|enlyft\.com|startupintros\.com|highperformr\.ai|tracxn\.com|naukri\.com|indeed\.com|glassdoor\.com|play\.google\.com|apps\.apple\.com|softonic\.com|franchisebazar\.com)/i.test(url)

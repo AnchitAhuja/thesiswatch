@@ -1,8 +1,9 @@
 import {it,expect} from 'vitest';
 import {recentQueries,skipResearchPage,recoverPublication} from '../shared/dev-evidence.mjs';
 import {reasonEvidencePackets} from '../shared/evidence-packets.mjs';
-it('adds the current month and year to every company query',()=>{
- expect(recentQueries('Delhivery Ltd.',['tech first company optimising logistics cost','partnerships already with multiple ecommerce players'],'2026-10-12')).toEqual(['Delhivery tech first company October 2026','Delhivery partnerships already multiple October 2026','Delhivery brokerage report October 2026','Delhivery quarterly results October 2026']);
+it('uses the same four recent company queries for every set of private reasons',()=>{
+ expect(recentQueries('Delhivery Ltd.',['tech first company optimising logistics cost','partnerships already with multiple ecommerce players'],'2026-10-12')).toEqual(['Delhivery results October 2026','Delhivery partnership OR deal OR order October 2026','Delhivery news October 2026','Delhivery brokerage target October 2026']);
+ expect(recentQueries('Delhivery Ltd.',['other reason'],'2026-10-12')).toEqual(recentQueries('Delhivery Ltd.',['tech intensive company','cost optimization'],'2026-10-12'));
 });
 it('skips profiles and other non-news page types before verification',()=>{
  for(const url of ['https://en.wikipedia.org/wiki/Delhivery','https://www.naukri.com/code360/interview-bundle/delhivery','https://play.google.com/store/apps/details?id=example','https://www.franchisebazar.com/blog/delhivery','https://startupintros.com/orgs/delhivery'])expect(skipResearchPage(url,'Delhivery')).toBe(true);

@@ -28,7 +28,7 @@ it('shares stock research for seven days, prevents concurrent duplicate searches
  const t=convexTest(schema,modules),stockId='IN:BAJAJ-AUTO',reasons=['EV promise'];
  const first=await t.mutation(internal.stockResearch.claim,{stockId,reasons});await expect(t.mutation(internal.stockResearch.claim,{stockId,reasons})).rejects.toThrow('already running');
  const evidence={verified:[],searchAudit:[],searches:8,windowStart:'2026-09-10',windowEnd:'2026-10-10',researchedAt:Date.now()};
- await t.mutation(internal.stockResearch.finish,{stockId,reasons,lease:first.lease!,evidence});expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toEqual(evidence);expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons:['different reason']})).evidence).toBeNull();
+ await t.mutation(internal.stockResearch.finish,{stockId,reasons,lease:first.lease!,evidence});expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toEqual(evidence);expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons:['different reason']})).evidence).toEqual(evidence);
  vi.spyOn(Date,'now').mockReturnValue(evidence.researchedAt+7*86400000+1);try{expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toBeNull();}finally{vi.restoreAllMocks();vi.unstubAllEnvs();}
 });
 it('derives a mixed top line from actual assessed statuses and keeps no evidence separate',()=>{
@@ -49,4 +49,14 @@ it('saves real stock steps privately and ignores progress after completion',asyn
  await t.mutation(internal.standing.finish,{id,key:claim.key});
  await t.mutation(internal.standing.progress,{id,key:claim.key,step:'Searching recent news'});
  expect((await t.query(api.holdings.read,{token}))?.lines[0].progress?.step).toBe('Stopped');
+});
+
+it('clears only the requested company research on dev',async()=>{
+ vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');
+ try{const t=convexTest(schema,modules);
+ await t.run(async ctx=>{await ctx.db.insert('stockResearchCache',{key:'old-company-policy',stockId:'IN:DELHIVERY'});await ctx.db.insert('stockResearchCache',{key:'other-company',stockId:'IN:ITC'});});
+ expect(await t.mutation(internal.stockResearch.clearForDev,{stockId:'IN:DELHIVERY'})).toBe(1);
+ expect(await t.run(ctx=>ctx.db.query('stockResearchCache').withIndex('by_stock_id',q=>q.eq('stockId','IN:DELHIVERY')).take(10))).toEqual([]);
+ expect((await t.run(ctx=>ctx.db.query('stockResearchCache').withIndex('by_stock_id',q=>q.eq('stockId','IN:ITC')).take(10)))).toHaveLength(1);
+ }finally{vi.unstubAllEnvs();}
 });

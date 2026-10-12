@@ -6,7 +6,7 @@ import {holdingLine,researchEvidenceFields} from './holdingsFields';
 
 export default defineSchema({
   holdingSessions:defineTable({tokenHash:v.string(),original:v.string(),lines:v.array(holdingLine),createdAt:v.number(),confirmedAt:v.optional(v.number()),email:v.optional(v.string())}).index('by_token_hash',['tokenHash']),
-  stockResearchCache:defineTable({key:v.string(),stockId:v.string(),busySince:v.optional(v.number()),lease:v.optional(v.string()),evidence:v.optional(researchEvidenceFields)}).index('by_key',['key']),
+  stockResearchCache:defineTable({key:v.string(),stockId:v.string(),busySince:v.optional(v.number()),lease:v.optional(v.string()),evidence:v.optional(researchEvidenceFields)}).index('by_key',['key']).index('by_stock_id',['stockId']),
   customTheses: defineTable(thesisFields).index("by_token_hash", ["tokenHash"]).index("by_created_at", ["createdAt"]).index("by_state", ["state"]).index("by_email_state", ["email", "state"]).index('by_standing_active',['standingActive']).index('by_standing_unsubscribe',['standingUnsubscribeToken']),
   standingDeliveries: defineTable({thesisId:v.id('customTheses'),edition:v.string(),emailId:v.string(),queuedAt:v.number()}).index('by_thesis_edition',['thesisId','edition']),
   aiDailySpend: defineTable({ day: v.string(), estimatedInr: v.number(), inputTokens: v.number(), outputTokens: v.number(), calls: v.number() }).index("by_day", ["day"]),
