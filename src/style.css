@@ -583,3 +583,48 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
 }
 
 .lookout-brand-logo { display: block; width: 160px; height: 32px; object-fit: contain; object-position: center; }
+
+/* Dev results use Lookout's existing reading palette and type sizes. */
+.holdings-body.holdings-results-active { background: #F7F6F2; color: #202824; }
+.holdings-results-active .holdings-page { max-width: 1200px; }
+.holdings-results-active .holdings-page > header { background: #131c17; padding: 20px 24px; border-radius: 12px; margin-bottom: 40px; align-items: center; }
+.holdings-results-active .holdings-lead { color: #41534A; }
+.holdings-results-layout { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: 28px; align-items: start; }
+.holdings-results-active .holdings-card { background: #FFFFFF; border-color: #dce1dc; padding: 28px; }
+.holding-company-summary { display: flex; justify-content: space-between; gap: 24px; align-items: start; }
+.holding-company-summary h2 { margin-bottom: 8px; }
+.holdings-results-active .holdings-match { display: flex; gap: 12px; color: #41534A; font-size: 12px; line-height: 18px; }
+.holdings-results-active .holdings-window,.holdings-results-active .holdings-step { color: #41534A; font-size: 12px; line-height: 18px; }
+.holding-company-summary .holdings-window { white-space: nowrap; padding-top: 6px; }
+.holding-check-summary { border-top: 1px solid #dce1dc; margin-top: 16px; padding-top: 20px; }
+.holdings-results-active .holdings-takeaway { font-size: 16px; line-height: 24px; }
+.holding-reasons-title { font-size: 18px; line-height: 26px; margin-top: 28px; margin-bottom: 16px; }
+.holding-reasons-list,.holding-sources { list-style: none; margin: 0; padding: 0; }
+.holdings-results-active .holdings-reason { border-color: #dce1dc; margin-top: 0; padding-top: 24px; padding-bottom: 24px; }
+.holdings-results-active .holdings-reason:last-child { padding-bottom: 0; }
+.holding-reason-heading { display: grid; grid-template-columns: 24px minmax(0,1fr) auto; gap: 12px; align-items: start; }
+.holdings-results-active .holding-reason-heading h3 { font-size: 14px; line-height: 22px; font-weight: 600; margin: 0; letter-spacing: 0; }
+.holding-reason-number { color: #41534A; font-size: 12px; line-height: 22px; }
+.holding-status { display: inline-block; border-radius: 4px; padding: 4px 8px; font-size: 12px; line-height: 18px; font-weight: 600; white-space: nowrap; }
+.holding-status.no-evidence { color: #41534A; background: #EFF2EF; }
+.holding-reason-detail { padding-left: 36px; margin-top: 12px; }
+.holdings-results-active .holding-signal { color: #41534A; font-size: 12px; line-height: 18px; margin-bottom: 12px; }
+.holdings-results-active .holding-evidence { font-size: 14px; line-height: 22px; }
+.holdings-results-active .holdings-source { font-size: 12px; line-height: 18px; color: #41534A; margin-top: 16px; overflow-wrap: anywhere; }
+.holdings-results-active .holdings-source a { color: #254E43; }
+.holdings-results-active .holdings-source p { line-height: 18px; margin-top: 6px; margin-bottom: 0; }
+.holdings-results-active .holdings-signup { background: #202d24; color: #f0f0e7; position: sticky; top: 28px; }
+.holdings-results-active .holdings-signup h2 { font-size: 22px; line-height: 28px; }
+.holdings-results-active .holdings-signup p { font-size: 14px; line-height: 22px; color: #d7eabb; }
+.holdings-results-active .holdings-signup .standing-email div { flex-direction: column; }
+.holdings-results-active .holding-horizon-note { margin: 0 0 24px; }
+@media(max-width:1000px) { .holdings-results-layout { grid-template-columns: minmax(0,1fr); } .holdings-results-active .holdings-signup { position: static; } }
+@media(max-width:600px) {
+ .holdings-results-active .holdings-card { padding: 20px; }
+ .holdings-results-active .holdings-page > header { padding: 16px; margin-bottom: 32px; }
+ .holding-company-summary { flex-direction: column; gap: 4px; }
+ .holding-company-summary .holdings-window { padding-top: 0; }
+ .holding-reason-heading { grid-template-columns: 20px minmax(0,1fr); gap: 8px; }
+ .holding-reason-heading .holding-status { grid-column: 2; justify-self: start; margin-top: 4px; }
+ .holding-reason-detail { padding-left: 28px; }
+}
