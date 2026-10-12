@@ -16,7 +16,7 @@ it('restores the original landing design with holdings as its only visible app d
  const links=[...root.querySelectorAll('a')].filter(link=>!link.closest('[hidden]'));
  expect(links.filter(link=>link.getAttribute('href')?.startsWith('/?')).map(link=>link.getAttribute('href'))).toEqual(['/?create=holdings']);
  expect(root.querySelector('.dark-intro')?.textContent).toBe("You don't need to follow every headline to stay on top of your investments. Lookout watches the reasons behind your decisions and lets you know when they're worth revisiting.");
- expect(root.querySelector('.dark-brand')?.textContent).toBe('Lookout');
+ expect(root.querySelector('.dark-brand img')?.getAttribute('alt')).toBe('Lookout');
  expect(root.querySelector('.dark-header a[href="#how-it-works"]')?.textContent).toBe('How It Works');
  expect(root.querySelectorAll('#how-it-works li')).toHaveLength(3);
  expect(root.textContent).not.toContain('Sign in');
