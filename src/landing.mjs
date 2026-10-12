@@ -29,7 +29,7 @@ export function bindLanding(root) {
     root.querySelector('.photo-hero').classList.add('dev-centered-hero');
     const target='/?create=holdings';
     root.querySelector('.dark-brand').textContent='Lookout';
-    root.querySelector('h1').innerHTML='Invest. <span>Then move on with your life.</span>';
+    root.querySelector('h1').innerHTML='Invest. <span>Then move on with your life</span>';
     root.querySelector('.dark-intro').textContent="You don't need to follow every headline to stay on top of your investments. Lookout watches the reasons behind your decisions and lets you know when they're worth revisiting.";
     const how=root.querySelector('.how-it-works');
     how.id='how-it-works';

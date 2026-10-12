@@ -6,7 +6,7 @@ it('restores the original landing design with holdings as its only visible app d
  vi.stubGlobal('matchMedia',()=>({matches:true}));
  document.body.innerHTML='<div id="app"></div>';const root=document.querySelector('#app')!;
  bindLanding(root);
- expect(root.querySelector('h1')?.textContent).toBe('Invest. Then move on with your life.');
+ expect(root.querySelector('h1')?.textContent).toBe('Invest. Then move on with your life');
  expect(root.querySelector('.family-photo')?.getAttribute('src')).toBe('/hero-family.webp');
  const form=root.querySelector('.landing-capture form')!;
  expect(form.getAttribute('action')).toBe('/?create=holdings');
