@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 import {it,expect,vi} from 'vitest';
 import {bindLanding} from '../src/landing.mjs';
-it('restores the original landing design with holdings as its only visible app destination on dev',()=>{
- vi.stubEnv('VITE_CONVEX_URL','https://fearless-ferret-257.convex.cloud');
+it.each(['https://fearless-ferret-257.convex.cloud','https://first-yak-309.convex.cloud'])('shows the current landing with holdings as its only visible app destination for %s',url=>{
+ vi.stubEnv('VITE_CONVEX_URL',url);
  vi.stubGlobal('matchMedia',()=>({matches:true}));
  document.body.innerHTML='<div id="app"></div>';const root=document.querySelector('#app')!;
  bindLanding(root);

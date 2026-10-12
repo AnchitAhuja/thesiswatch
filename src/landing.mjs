@@ -1,4 +1,5 @@
 import { captureComposerMarkup } from './ui-fragments.mjs';
+import { currentHoldingsExperience } from './lookout-experience.mjs';
 import { bindCustomThesis } from './thesis.mjs';
 import { howItWorksMarkup, animateHowItWorks } from './how-it-works.mjs';
 
@@ -25,7 +26,7 @@ export function bindLanding(root) {
   </div>`;
   animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
-  if(import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud') {
+  if(currentHoldingsExperience) {
     root.querySelector('.photo-hero').classList.add('dev-centered-hero');
     const target='/?create=holdings';
     root.querySelector('.dark-brand').innerHTML='<img class="lookout-brand-logo" src="/Lookout_brand_logo-transparent.png" alt="Lookout" width="160" height="32">';

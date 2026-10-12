@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import {it,expect,vi} from 'vitest';
-it('dev home uses the saved-list picker and exact reason box, blocks unmatched stocks and links only home',async()=>{
- vi.stubEnv('VITE_CONVEX_URL','https://fearless-ferret-257.convex.cloud');
+it.each(['https://fearless-ferret-257.convex.cloud','https://first-yak-309.convex.cloud'])('uses the current saved-list picker and exact reason box for %s',async url=>{
+ vi.stubEnv('VITE_CONVEX_URL',url);
  const {bindHoldings}=await import('../src/holdings.mjs');
  history.replaceState(null,'','/');document.body.innerHTML='<div id="app"></div>';
  const client={action:vi.fn(),query:vi.fn(),close:vi.fn()};

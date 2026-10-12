@@ -40,7 +40,6 @@ export const checkAll=action({args:{token:v.string()},returns:v.null(),handler:a
 }});
 
 export const startHolding=action({args:{stock:v.string(),text:v.string()},returns:v.object({token:v.string(),items:v.array(holdingInput)}),handler:async(ctx,{stock,text})=>{
- if(process.env.CONVEX_CLOUD_URL!=='https://fearless-ferret-257.convex.cloud')throw Error('Dev deployment required.');
  const match=matchStock(stock);if(!match)throw Error('Not supported yet');
  if(text.length>3000)throw Error('Reasons are too long.');
  const items=[{stock:match.name,reasons:splitHoldingReasons(text)}],token=randomBytes(32).toString('hex');
