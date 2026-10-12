@@ -27,12 +27,21 @@ export function bindLanding(root) {
   const input = root.querySelector('#landing-belief');
   if(import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud') {
     const target='/?create=holdings';
+    root.querySelector('.dark-brand').textContent='Lookout';
+    root.querySelector('h1').innerHTML='Invest. <span>Then move on with your life.</span>';
+    root.querySelector('.dark-intro').textContent="You don't need to follow every headline to stay on top of your investments. Lookout watches the reasons behind your decisions and lets you know when they're worth revisiting.";
+    const how=root.querySelector('.how-it-works');
+    how.id='how-it-works';
+    how.innerHTML=`<header class="how-header"><h2 id="how-heading">How It Works</h2></header><ol class="how-steps"><li class="how-step"><h3><span class="step-number">1</span>Pick a stock you hold</h3><p>Choose from our saved Nifty 500 and US stock lists.</p></li><li class="how-step"><h3><span class="step-number">2</span>Write why you hold it in your own words</h3><p>Lookout checks your reasons against recent evidence.</p></li><li class="how-step"><h3><span class="step-number">3</span>Get a Saturday email when a reason is worth revisiting</h3><p>Save your email after checking your reasons.</p></li></ol>`;
     root.querySelectorAll('.build-idea').forEach(link=>{link.href=target;link.textContent='My holdings';});
+    const howLink=root.querySelector('.dark-header .build-idea');
+    howLink.textContent='How It Works';howLink.href='#how-it-works';
+    howLink.addEventListener('click',event=>{event.preventDefault();history.replaceState(null,'','#how-it-works');how.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});});
     root.querySelector('.landing-ask').hidden=true;
     root.querySelector('.landing-prebuilt').hidden=true;
     input.hidden=true;input.required=false;
     const form=root.querySelector('.landing-capture form');
-    const button=form.querySelector('button');button.textContent='My holdings';
+    const button=form.querySelector('button');button.textContent='Get started';
     form.action=target;
     form.addEventListener('submit',event=>{event.preventDefault();window.location.assign(target);});
     return;
