@@ -7,7 +7,7 @@ it('dev home uses the saved-list picker and exact reason box, blocks unmatched s
  const client={action:vi.fn(),query:vi.fn(),close:vi.fn()};
  await bindHoldings(document.querySelector('#app'),client);
  expect(document.querySelector('h1')?.textContent).toBe('My holdings');
- expect(document.body.textContent).toContain('Why do you hold it?');
+ expect(document.body.textContent).toContain('What makes you believe in these stocks?');
  expect(document.querySelectorAll('textarea')).toHaveLength(1);
  expect(document.querySelectorAll('datalist option').length).toBeGreaterThan(500);
  expect([...document.querySelectorAll('a')].map(a=>a.getAttribute('href'))).toEqual(['/','/']);
