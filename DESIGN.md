@@ -20,15 +20,15 @@ Read this before building or changing any screen. If a choice isn't covered here
 
 \## 2. References, one per component
 
-References show layout only. Type and colour always come from section 3.
+References guide component layout and styling. Holdings check and results follow our own Lookout reference below; current colours and type are specified in section 3.
 
 
 
-Status row: references/groww-card.png
+Holdings check and results layout: references/inv_thesis_dashboard (our own Lookout design).
 
-Take: name on top, status dot bottom-right
+Take: dark cards; company header with symbol, exchange/country chips and sector tag; three-step progress card; numbered reasons with status, signal strength, evidence and credited sources together.
 
-Ignore: Groww's font, colours, % and rating grade
+Use: the current Lookout dark theme, lime accent and transparent logo; match the holdings reference closely.
 
 
 
@@ -64,9 +64,9 @@ Ignore: font and colours
 
 Font: Inter
 
-Sizes: ticker 12px weight 600 · status 12px weight 600 · reason 14px / 22px line height · date and source 12px / 18px line height
+Sizes: landing headline 50px desktop / 32px phone, line height 1.03; holdings check/results heading 32-48px, weight 600; company name 30px / 36px desktop and 23px / 28px phone.
 
-Text: #202824 on #FFFFFF, page background #F7F6F2
+Text: #F0F0E7 on dark surfaces; landing secondary text #E1E8E1; holdings form secondary text #A8B7AC; check/results secondary text #B7C5BF; credited source links #D7EABB.
 
 STRENGTHENING: text #245740 on #EAF3ED
 
@@ -76,9 +76,29 @@ WATCH: text #805719 on #FBF1DD
 
 WEAKENING: text #8B3932 on #F8EBE8
 
-Accent: #254E43, only on primary actions, active navigation and source links
+Accent: #DFFA35 lime for primary buttons, active progress indicators, input tags and recent-source counts; primary button text #18251D on the landing page and #131C17 on My holdings.
 
-Errors: #8B3932 on #F8EBE8
+Errors: holdings messages use readable light text on the current dark surfaces; retain #8B3932 on #F8EBE8 where an existing component already uses that error treatment.
+
+Backgrounds: landing and holdings form #131C17; holdings check/results page #0C1712; form cards #202D24; check/results cards #14221B; reason rows and chips #1B2C23; progress footer #20352A; landing retains the family photo and its existing dark gradient overlay.
+
+Body type: Inter throughout; landing subtitle 16px / 24px desktop and 14px / 21px phone; holdings reason text 16px / 24px; evidence text 14px / 22px.
+
+Detail type: check/results ticker 16px / 24px desktop and 14px on phone, weight 600; status, signal strength, date and source 12px / 18px; recent-source count 14px / 22px, weight 600.
+
+Logo: public/Lookout_brand_logo-transparent.png; transparent icon and wordmark without tagline, 32px high, 160px wide (132px on phone holdings check/results), object-fit contain; link to home with alt text "Lookout".
+
+Cards: 1px borders; form border #41534A with 12px corners and 28px padding (20px on phone); check/results border #3C5147 with 16px corners and 28px 32px padding (22px 18px on phone).
+
+Fields and buttons: fields use #131C17, #63766A borders, 7px corners and 14px padding; holdings buttons use 15px type, weight 600, 14px 18px padding and 46px minimum height; landing button uses 16px type, 8px corners, 11px 22px padding and 44px minimum height, without an outer bordered box.
+
+Chips and reason rows: rounded exchange, country and sector chips with #3C5147 borders; numbered reason rows have 12px corners, 18px 20px padding (16px 14px on phone), and circles filled #354940.
+
+No new evidence badge: text #C3D0C8 on #354940; all status badges use 4px corners and 4px 10px padding; the four existing status palettes above remain in use.
+
+Progress styling: lime ring and active/completed step dots, three named steps, a visible "Step x of 3" footer, and a lime recent-source count on completed results; footer border #41594B with 12px corners; respect reduced-motion settings.
+
+Visual layout: landing headline, subtitle and standalone button are centred; holdings check/results use stacked company/progress and numbered-reason cards, followed by the horizon note and Saturday email card; maximum content width 1220px, with 40px desktop and 18px phone horizontal padding.
 
 
 
