@@ -22,3 +22,29 @@ export function evidencePackets(sources,reasons) {
   return {title,date,publisher,url,excerpt:selected.map(p=>p.text.slice(0,1200)).join('\n\n')};
  });
 }
+export function reasonEvidencePackets(sources,reasons) {
+ const ignored=new Set('the a an of to is are and or it for with this that one few good able bring years view first company already multiple its their'.split(' '));
+ const normalize=text=>text.toLowerCase().replace(/e[- ]commerce/g,'ecommerce').replace(/optimization|optimisation|optimizing|optimising|optimize|optimise/g,'optimisation').replace(/[^a-z0-9 ]/g,' ');
+ const related={tech:['technology','software','automation','digital'],optimisation:['efficiency','routing','automation','margin','cost'],cost:['costs','expense','expenses','efficiency','margin'],logistics:['routing','shipment','parcel'],partnerships:['partnership','partners','partner','customers','customer','agreements'],ecommerce:['ecommerce','amazon','flipkart','marketplace','marketplaces'],players:['customers','partners'],scale:['volume','shipment','capacity','growth'],network:['routing','route','density','efficiency'],design:['routing','efficiency','service']};
+ const terms=reasons.map(reason=>[...new Set((normalize(reason).match(/[a-z0-9]{3,}/g)||[]).filter(word=>!ignored.has(word)).flatMap(word=>[word,...(related[word]||[])]))]);
+ return sources.map(({title,date,publisher,url,excerpt})=>{
+  const paragraphs=excerpt.includes('\n\n')?excerpt.split(/\n\s*\n/):excerpt.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g)||[excerpt];
+  const ranked=paragraphs.map((text,index)=>{
+   text=text.trim();const tokens=new Set(normalize(text).split(/\s+/));
+   const market=/\b(?:share price|stock price|target price|price target|relative strength index|rsi|oversold|overbought|market cap|moving averages|stock gained|shares rose|shares of)\b/i.test(text);
+   return {text,index,scores:terms.map(words=>market?0:words.reduce((score,word)=>score+(tokens.has(word)?1:0),0)/Math.sqrt(Math.max(1,text.length/200)))};
+  }).filter(p=>p.text.length>=30&&p.text.length<=1200&&!/(?:Subscribe Home|BT Bazaar|Home Markets|Menu Business News)/i.test(p.text));
+  const selected=new Map();
+  // Each reason gets its own best passage before any remaining slots are filled.
+  for(let reason=0;reason<terms.length;reason++){
+   const best=[...ranked].sort((a,b)=>b.scores[reason]-a.scores[reason]||a.index-b.index)[0];
+   if(best?.scores[reason]>0&&(selected.has(best.index)||selected.size<3))selected.set(best.index,best);
+  }
+  const capacity=3;
+  for(const passage of [...ranked].sort((a,b)=>Math.max(...b.scores)-Math.max(...a.scores)||a.index-b.index)){
+   if(selected.size>=capacity)break;
+   if(Math.max(...passage.scores)>0)selected.set(passage.index,passage);
+  }
+  return {title,date,publisher,url,excerpt:[...selected.values()].sort((a,b)=>a.index-b.index).map(p=>p.text).join('\n\n')};
+ });
+}
