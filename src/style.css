@@ -568,3 +568,12 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
 .holdings-page .standing-email button { white-space:nowrap; }
 .holdings-page :focus-visible { outline:2px solid #dffa35; outline-offset:4px; }
 @media(max-width:600px){ .holdings-page { padding:24px 18px 56px; } .holdings-page header { margin-bottom:44px; } .holdings-card { padding:20px; } .holdings-page .standing-email div { flex-direction:column; } .holdings-primary { width:100%; } .holdings-page header a:last-child { font-size:14px; } }
+
+/* Dev landing hero only; preserve production's existing presentation. */
+.lookout-photo .dev-centered-hero .dark-hero { text-align: center; }
+.lookout-photo .dev-centered-hero .dark-hero-left { margin-inline: auto; }
+.lookout-photo .dev-centered-hero h1,
+.lookout-photo .dev-centered-hero .dark-intro,
+.lookout-photo .dev-centered-hero .landing-capture { margin-left: auto; margin-right: auto; }
+.lookout-photo .dev-centered-hero .landing-composer { margin-inline: auto; justify-content: center; background: transparent; border: 0; padding: 0; border-radius: 0; }
+.lookout-photo .dev-centered-hero .landing-composer button { padding: 11px 22px; font-size: 16px; min-height: 44px; }

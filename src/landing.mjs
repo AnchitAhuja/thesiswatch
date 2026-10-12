@@ -26,6 +26,7 @@ export function bindLanding(root) {
   animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
   if(import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud') {
+    root.querySelector('.photo-hero').classList.add('dev-centered-hero');
     const target='/?create=holdings';
     root.querySelector('.dark-brand').textContent='Lookout';
     root.querySelector('h1').innerHTML='Invest. <span>Then move on with your life.</span>';
