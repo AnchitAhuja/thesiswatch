@@ -25,6 +25,18 @@ export function bindLanding(root) {
   </div>`;
   animateHowItWorks(root);
   const input = root.querySelector('#landing-belief');
+  if(import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud') {
+    const target='/?create=holdings';
+    root.querySelectorAll('.build-idea').forEach(link=>{link.href=target;link.textContent='My holdings';});
+    root.querySelector('.landing-ask').hidden=true;
+    root.querySelector('.landing-prebuilt').hidden=true;
+    input.hidden=true;input.required=false;
+    const form=root.querySelector('.landing-capture form');
+    const button=form.querySelector('button');button.textContent='My holdings';
+    form.action=target;
+    form.addEventListener('submit',event=>{event.preventDefault();window.location.assign(target);});
+    return;
+  }
   root.querySelectorAll('.build-idea').forEach(link => link.addEventListener('click', event => { event.preventDefault(); input.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); input.focus({ preventScroll: true }); }));
   const start = entry => {
     document.body.classList.remove('lookout-dark');
