@@ -13,7 +13,7 @@ const app = document.querySelector('#app');
 const isThesis = new URLSearchParams(window.location.search).get('thesis') === 'ai';
 const skip = document.querySelector('.skip');
 window.addEventListener('popstate', () => window.location.reload());
-if (new URLSearchParams(window.location.search).get('create') === 'holdings') {
+if (import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud' || new URLSearchParams(window.location.search).get('create') === 'holdings') {
   document.title = 'My holdings · Lookout';
   skip.href = '#app'; skip.textContent = 'Skip to your stocks';
   void import('./holdings.mjs').then(({bindHoldings})=>bindHoldings(app));

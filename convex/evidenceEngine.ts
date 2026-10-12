@@ -11,7 +11,7 @@ import {articleParagraphs,evidencePackets} from '../shared/evidence-packets.mjs'
 import { standingResult,standingSource,searchAuditEntry } from './standingFields';
 import { publication,withinWindow,validateStanding } from '../shared/standing.mjs';
 import { sourceQuality } from '../shared/source-quality.mjs';
-import {holdingsQueries,assertSearchRan,attributeBrokerage,gateReasonMatch} from '../shared/holdings-research.mjs';
+import {sourceAboutCompany,holdingsQueries,assertSearchRan,attributeBrokerage,gateReasonMatch} from '../shared/holdings-research.mjs';
 type Progress=(step:Infer<typeof holdingProgressStep>)=>Promise<void>;
 type VerifiedSource = Infer<typeof standingSource> & { excerpt: string };
 async function verify(url: string, title: string, start: string, end: string): Promise<{source:VerifiedSource|null,date:string|null,reason:string}> {
@@ -54,6 +54,7 @@ export async function researchEvidence(ctx:ActionCtx,{thesis,assumptions,windowS
     if(!meta.title.trim()) return {...base,reason:'Search result has no title.'};
     if(index>=40) return {...base,reason:'Outside the 40-page verification limit after ranking.'};
     const outcome=await verify(url,meta.title,windowStart,windowEnd);
+    if(outcome.source && company && process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud' && !sourceAboutCompany(company,outcome.source.title,outcome.source.excerpt))return {...base,date:outcome.date,reason:'Source is not about the picked company.'};
     if(outcome.source) verified.push(outcome.source);
     return {...base,date:outcome.date,reason:outcome.reason};
    }));

@@ -35,3 +35,15 @@ it('renders only reviewed direct evidence and drops unrelated brokerage ratings 
  const checked=gateReasonMatch(row,{match:'direct',quotes:[{sourceUrl:source.url,firm:'MOFSL',quote:'express volumes grew 55% year on year.'}]},[source]);
  expect(attributeBrokerage(checked,[source]).reason).toBe('MOFSL (reported 2026-10-09) stated: express volumes grew 55% year on year.');
 });
+
+import {splitHoldingReasons,sourceAboutCompany} from '../shared/holdings-research.mjs';
+it('splits every supplied reason verbatim without adding, merging or rewriting',()=>{
+ expect(splitHoldingReasons('Tech intensive, dense network, cost optimisation')).toEqual(['Tech intensive','dense network','cost optimisation']);
+ expect(splitHoldingReasons('R&D and delivery; Scale\nScale')).toEqual(['R&D and delivery','Scale','Scale']);
+});
+it('rejects sources about other companies and incidental company mentions',()=>{
+ expect(sourceAboutCompany('Delhivery Ltd.','Delhivery expands its network','Delhivery added new delivery centres.')).toBe(true);
+ expect(sourceAboutCompany('Delhivery Ltd.','Amazon expands its network','Amazon added new delivery centres.')).toBe(false);
+ expect(sourceAboutCompany('Delhivery Ltd.','Amazon expands its network','Competitors include Delhivery.')).toBe(false);
+ expect(holdingsQueries('Delhivery Ltd.',splitHoldingReasons('Tech intensive, dense network, cost optimisation')).every(query=>query.includes('Delhivery'))).toBe(true);
+});

@@ -24,11 +24,12 @@ it('isolates private sessions, saves edits and removals, flags unsupported names
  await t.mutation(internal.holdings.recordError,{id:session!.id,index:0,error:'Check stopped: daily spending limit reached.'});expect((await t.query(api.holdings.read,{token}))?.lines[0].result).toBeNull();
 });
 it('shares stock research for seven days, prevents concurrent duplicate searches, renews stale research',async()=>{
+ vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');
  const t=convexTest(schema,modules),stockId='IN:BAJAJ-AUTO',reasons=['EV promise'];
  const first=await t.mutation(internal.stockResearch.claim,{stockId,reasons});await expect(t.mutation(internal.stockResearch.claim,{stockId,reasons})).rejects.toThrow('already running');
  const evidence={verified:[],searchAudit:[],searches:8,windowStart:'2026-09-10',windowEnd:'2026-10-10',researchedAt:Date.now()};
  await t.mutation(internal.stockResearch.finish,{stockId,reasons,lease:first.lease!,evidence});expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toEqual(evidence);expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons:['different reason']})).evidence).toBeNull();
- vi.spyOn(Date,'now').mockReturnValue(evidence.researchedAt+7*86400000+1);try{expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toBeNull();}finally{vi.restoreAllMocks();}
+ vi.spyOn(Date,'now').mockReturnValue(evidence.researchedAt+7*86400000+1);try{expect((await t.mutation(internal.stockResearch.claim,{stockId,reasons})).evidence).toBeNull();}finally{vi.restoreAllMocks();vi.unstubAllEnvs();}
 });
 it('derives a mixed top line from actual assessed statuses and keeps no evidence separate',()=>{
  expect(stockTakeaway([{status:'WEAKENING'},{status:'STRENGTHENING'}])).toBe('Mixed: reason 1 weakened; reason 2 strengthened.');

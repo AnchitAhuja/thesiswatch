@@ -46,3 +46,15 @@ export function gateReasonMatch(row, review, sources) {
  if(reason.length>500)throw Error('Direct evidence quotation is too long.');
  return {...row,brokerageEvidence:[],reason,signalStrength:brokerageEvidence.length?'soft':row.signalStrength};
 }
+
+export function splitHoldingReasons(text) {
+ const reasons=text.split(/[,;\r\n]+/).map(reason=>reason.trim()).filter(Boolean);
+ if(!reasons.length || reasons.length>6 || reasons.some(reason=>reason.length>500))throw Error('Enter one to six reasons, each up to 500 characters.');
+ return reasons;
+}
+export function sourceAboutCompany(company,title,excerpt) {
+ const name=company.replace(/\s+(?:limited|ltd\.?|inc\.?)$/i,'').trim();
+ const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const pattern=new RegExp('\\b'+escaped+'\\b','i');
+ return pattern.test(title)&&pattern.test(excerpt);
+}
