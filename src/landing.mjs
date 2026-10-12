@@ -28,7 +28,7 @@ export function bindLanding(root) {
   if(import.meta.env.VITE_CONVEX_URL === 'https://fearless-ferret-257.convex.cloud') {
     root.querySelector('.photo-hero').classList.add('dev-centered-hero');
     const target='/?create=holdings';
-    root.querySelector('.dark-brand').innerHTML='<img class="lookout-brand-logo" src="/Lookout_brand_logo.png" alt="Lookout" width="160" height="32">';
+    root.querySelector('.dark-brand').innerHTML='<img class="lookout-brand-logo" src="/Lookout_brand_logo-transparent.png" alt="Lookout" width="160" height="32">';
     root.querySelector('h1').innerHTML='Invest. <span>Then move on with your life</span>';
     root.querySelector('.dark-intro').textContent="You don't need to follow every headline to stay on top of your investments. Lookout watches the reasons behind your decisions and lets you know when they're worth revisiting.";
     const how=root.querySelector('.how-it-works');

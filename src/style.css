@@ -582,4 +582,4 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
  .lookout-photo .dev-centered-hero .dark-hero { margin-top: 310px; }
 }
 
-.lookout-brand-logo { display: block; width: 160px; height: 32px; object-fit: cover; object-position: center; }
+.lookout-brand-logo { display: block; width: 160px; height: 32px; object-fit: contain; object-position: center; }

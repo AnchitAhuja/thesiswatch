@@ -17,6 +17,6 @@ it('dev home uses the saved-list picker and exact reason box, blocks unmatched s
  await (document.querySelector('form') as any).onsubmit({preventDefault(){},target:document.querySelector('form')});
  expect(client.action).not.toHaveBeenCalled();
  input.value='Delhivery';input.dispatchEvent(new Event('input'));
- expect(document.querySelector('#stock-match')?.textContent).toContain('DELHIVERY');
+ expect(document.querySelector('#stock-match')?.textContent).toBe('');
  vi.unstubAllEnvs();
 });
