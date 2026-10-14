@@ -6,7 +6,7 @@ it('keeps each original reason, status, strength, evidence and credited source t
  document.body.innerHTML=renderHoldingsStock(line);
  expect(document.querySelector('h2')?.textContent).toBe('Delhivery Ltd.');expect(document.body.textContent).toContain('DELHIVERY');expect(document.body.textContent).toContain('2026-09-12 to 2026-10-12');
  const rows=document.querySelectorAll('.holdings-reason');expect(rows).toHaveLength(2);
- expect(rows[0].querySelector('h3')?.textContent).toBe(reason);expect(rows[0].textContent).toContain('WATCH');expect(rows[0].textContent).toContain('Signal strength: soft');expect(rows[0].textContent).toContain('exact credited evidence');expect(rows[0].querySelector('a')?.getAttribute('href')).toBe('https://publisher.example/news');expect(rows[0].textContent).toContain('publisher.example');expect(rows[0].textContent).toContain('2026-10-09');
+ expect(rows[0].querySelector('h3')?.textContent).toBe(reason);expect(rows[0].textContent).toContain('WATCH');expect(rows[0].textContent).toContain('Signal strength: soft');expect(rows[0].textContent).toContain('exact credited evidence');expect(rows[0].querySelector('a')?.getAttribute('href')).toBe('https://publisher.example/news');expect(rows[0].textContent).toContain('publisher.example');expect(rows[0].textContent).toContain('2026-10-09');expect(rows[0].querySelector('.holdings-source p').textContent).toBe('publisher.example ? 2026-10-09');expect(rows[0].textContent).not.toContain('Publisher date metadata');
  expect(rows[1].textContent).toContain('another exact reason');expect(rows[1].textContent).toContain('No new evidence');expect(rows[1].querySelector('a')).toBeNull();
 });
 
@@ -22,4 +22,6 @@ it('shows the indirect analyst label beside the status, reviewer explanation and
  document.body.innerHTML=renderHoldingsStock({stock:'Delhivery',reasons:['technology helps reduce delivery costs'],result:{windowStart:'2026-09-14',windowEnd:'2026-10-14',assumptions:[{assumption:'technology helps reduce delivery costs',status:'INTACT',signalStrength:'soft',reason:'PL Capital forecasts savings.',sources:[{url:'https://publisher.example/news',title:'Report',publisher:'publisher.example',date:'2026-10-09'}],indirectEvidence:{explanation:'Forecast savings are not reported results.',firms:[{firm:'PL Capital',sourceUrl:'https://publisher.example/news'}]}}]}});
  const heading=document.querySelector('.holding-reason-heading');expect(heading.textContent).toContain('INTACT');expect(heading.textContent).toContain('Based on analyst view, not reported results');
  expect(document.body.textContent).toContain('Forecast savings are not reported results.');expect(document.querySelector('.holding-sources a').textContent).toContain('PL Capital');
+ expect(document.querySelector('.holdings-takeaway').textContent).toBe("Your reason 'technology helps reduce delivery costs' still holds.");
+ const toggle=document.querySelector('details.holding-review');expect(toggle.open).toBe(false);expect(toggle.querySelector('summary').textContent).toBe('Why soft?');toggle.open=true;expect(toggle.textContent).toContain('Forecast savings are not reported results.');
 });

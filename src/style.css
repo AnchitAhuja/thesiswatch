@@ -685,3 +685,5 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
 .holding-review-explanation { color: #b7c5bf; font-size: 14px; line-height: 22px; }
 
 @media (max-width: 760px) { .holding-reason-heading .holding-status-group { grid-column: 2; justify-self: start; } }
+
+.holding-review summary { cursor: pointer; color: #b7c5bf; font-size: 14px; line-height: 22px; }
