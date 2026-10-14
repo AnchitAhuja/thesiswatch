@@ -687,3 +687,12 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
 @media (max-width: 760px) { .holding-reason-heading .holding-status-group { grid-column: 2; justify-self: start; } }
 
 .holding-review summary { cursor: pointer; color: #b7c5bf; font-size: 14px; line-height: 22px; }
+
+/* Only the holdings entry stock picker uses these rules. */
+#holdings-entry { overflow: visible; }
+.holding-stock-picker { position: relative; z-index: 20; overflow: visible; }
+#holding-stock { scroll-margin-top: 16px; }
+#stock-suggestions { position: absolute; z-index: 100; top: 100%; left: 0; right: 0; max-height: 240px; overflow-y: auto; overscroll-behavior: contain; background: #202d24; border: 1px solid #63766a; border-radius: 7px; box-shadow: 0 8px 24px #0006; }
+#stock-suggestions[hidden] { display: none; }
+.holdings-page #stock-suggestions button { display: block; width: 100%; text-align: left; white-space: normal; color: #f0f0e7; background: transparent; border: 0; border-radius: 0; min-height: 48px; }
+#stock-suggestions button:hover, #stock-suggestions button[aria-selected="true"] { background: #41534a; }
