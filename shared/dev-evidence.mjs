@@ -15,30 +15,32 @@ function day(year,month,date) {
  const stamp=Date.parse(value+'T12:00:00Z');
  return Number.isFinite(stamp)&&new Date(stamp).toISOString().slice(0,10)===value?value:null;
 }
-export function recoverPublication(html,url) {
+function dateIn(text) {
+ if(typeof text!=='string')return null;
+ const iso=text.match(/\b(20\d{2})[-/](\d{2})[-/](\d{2})(?:\b|T)/);
+ if(iso)return day(+iso[1],+iso[2],+iso[3]);
+ const names='January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec';
+ const m=text.match(new RegExp('\\b('+names+')\\.?\\s+(\\d{1,2}),?\\s+(20\\d{2})\\b','i'));
+ const d=text.match(new RegExp('\\b(\\d{1,2})\\s+('+names+')\\.?,?\\s+(20\\d{2})\\b','i'));
+ if(!m&&!d)return null;
+ const name=(m?m[1]:d[2]).toLowerCase();
+ return day(+(m?m[3]:d[3]),months.findIndex(month=>month.startsWith(name))+1,+(m?m[2]:d[1]));
+}
+/** @param {string|null} searchDate */
+export function recoverPublication(html,url,searchDate=null,referenceDay=new Date().toISOString().slice(0,10)) {
  const metadata=publication(html);
- if(metadata)return {date:metadata,verification:'Publisher page datePublished / publication metadata'};
- // Conflicting publication metadata is not repaired using a convenient URL date.
- if(/datePublished|article:published_time|pubdate|publish-date/i.test(html))return {date:null,verification:'Conflicting or invalid publication metadata'};
- const dates=new Set();
- for(const tag of html.match(/<time\b[^>]*>[\s\S]*?<\/time>/gi)||[]) {
-  if(/modified|updated/i.test(tag))continue;
-  const m=tag.match(/(?:datetime=["']|\b)(\d{4})-(\d{2})-(\d{2})/i);
-  if(m){const value=day(+m[1],+m[2],+m[3]);if(value)dates.add(value);}
- }
- const visible=html.replace(/<(script|style|nav|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ');
- const dateText='(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)';
- const contexts=[...visible.matchAll(new RegExp('(?:published|posted|publication date)\\s*(?:on|at|:)?:?\\s*('+dateText+'\\s+\\d{1,2},?\\s+\\d{4}|\\d{1,2}\\s+'+dateText+',?\\s+\\d{4}|\\d{4}-\\d{2}-\\d{2})','gi'))].map(m=>m[1]);
- for(const text of contexts){
-  const iso=text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  const parts=text.toLowerCase().replace(/,/g,'').split(/\s+/);
-  const month=months.findIndex(name=>name.startsWith(parts.find(part=>/^[a-z]+$/.test(part))||'!'))+1;
-  const numeric=parts.filter(part=>/^\d+$/.test(part));
-  const value=iso?day(+iso[1],+iso[2],+iso[3]):day(+numeric.find(n=>n.length===4),month,+numeric.find(n=>n.length<4));
-  if(value)dates.add(value);
- }
- if(dates.size>1)return {date:null,verification:'Conflicting publication dates in page text'};
- if(dates.size===1)return {date:[...dates][0],verification:'Publisher visible publication date / time element'};
- for(const m of url.matchAll(/(?:\/|-)(20\d{2})[-/](\d{2})[-/](\d{2})(?=[-/._?]|$)/g)){const value=day(+m[1],+m[2],+m[3]);if(value)dates.add(value);}
- return {date:dates.size===1?[...dates][0]:null,verification:dates.size===1?'Publication date encoded in publisher URL':'Publication date unverified'};
+ if(metadata&&dateIn(metadata)===metadata)return {date:metadata,verification:'Publisher page datePublished / publication metadata'};
+ let searched=dateIn(searchDate);
+ const relative=typeof searchDate==='string'?searchDate.match(/^\s*(\d+)\s+days?\s+ago\s*$/i):null;
+ if(!searched&&relative&&dateIn(referenceDay))searched=new Date(Date.parse(referenceDay+'T12:00:00Z')-Number(relative[1])*86400000).toISOString().slice(0,10);
+ if(searched)return {date:searched,verification:'Search result publication date'};
+ const urlDate=dateIn(url);
+ if(urlDate)return {date:urlDate,verification:'Publication date encoded in publisher URL'};
+ // Limit text recovery to the opening visible lines, not dates in the article body.
+ let visible=html.replace(/<(script|style|nav|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]+\b(?:hidden|aria-hidden=["']true["'])[^>]*>[\s\S]*?<\/[^>]+>/gi,' ');
+ visible=visible.replace(/<time\b[^>]*datetime=["']([^"']+)["'][^>]*>/gi,'\n$1 ')
+  .replace(/<\/?(?:p|h[1-6]|div|article|section|main|time)\b[^>]*>|<br\s*\/?\s*>/gi,'\n').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/gi,' ');
+ const firstLines=visible.split(/\r?\n/).map(line=>line.replace(/\s+/g,' ').trim()).filter(Boolean).slice(0,30).join('\n').slice(0,4000);
+ const pageDate=dateIn(firstLines);
+ return {date:pageDate,verification:pageDate?'First visible page lines':'Publication date unverified'};
 }
