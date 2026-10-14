@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "stats:prod": "node scripts/stats-prod.cjs",
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "prebuild": "node scripts/sync-research-prompt.mjs",

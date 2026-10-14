@@ -34,6 +34,7 @@ import type * as standing from "../standing.js";
 import type * as standingActions from "../standingActions.js";
 import type * as standingFields from "../standingFields.js";
 import type * as standingMail from "../standingMail.js";
+import type * as stats from "../stats.js";
 import type * as stockResearch from "../stockResearch.js";
 import type * as theses from "../theses.js";
 import type * as thesisActions from "../thesisActions.js";
@@ -75,6 +76,7 @@ declare const fullApi: ApiFromModules<{
   standingActions: typeof standingActions;
   standingFields: typeof standingFields;
   standingMail: typeof standingMail;
+  stats: typeof stats;
   stockResearch: typeof stockResearch;
   theses: typeof theses;
   thesisActions: typeof thesisActions;
