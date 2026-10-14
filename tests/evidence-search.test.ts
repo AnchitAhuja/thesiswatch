@@ -3,6 +3,8 @@ import {convexTest} from 'convex-test';
 import agentTest from '@convex-dev/agent/test';
 import {Agent} from '@convex-dev/agent';
 import schema from '../convex/schema';
+import {api,internal} from '../convex/_generated/api';
+import {renderHoldingsStock} from '../src/holdings-results.mjs';
 const modules=import.meta.glob('../convex/**/*.ts');
 afterEach(()=>{vi.unstubAllEnvs();vi.unstubAllGlobals();vi.restoreAllMocks();vi.resetModules();});
 async function setup(){
@@ -68,4 +70,23 @@ it('continues with three successful searches when one times out and identifies i
  expect(result.searches).toBe(3);
  expect(result.queryTrace).toHaveLength(4);
  expect(events.find(e=>e.timedOut)).toMatchObject({step:'Search/web call failed',query:expect.stringContaining('brokerage target'),results:0,ms:expect.any(Number)});
-},12000);
+},30000);
+
+it('shows a retryable unavailable state without assessment or either cached result, then retries',async()=>{
+ const {t}=await setup();
+ vi.spyOn(console,'log').mockImplementation(()=>{});
+ const search=vi.spyOn(Agent.prototype,'generateText').mockRejectedValue(new Error('Search provider unavailable'));
+ const model=vi.spyOn(Agent.prototype,'generateObject');
+ const {token}=await t.action(api.holdingsActions.startHolding,{stock:'NVIDIA',text:'ai chip demand will increase'});
+ await t.action(api.holdingsActions.checkStock,{token,index:0});
+ const view=await t.query(api.holdings.read,{token});
+ expect(view!.lines[0].result!.assumptions[0]).toMatchObject({status:"Couldn't check right now",reason:"Our sources didn't respond. Try again in a minute."});
+ const html=renderHoldingsStock(view!.lines[0]);
+ expect(html).toContain("Couldn&#39;t check right now");expect(html).toContain("Our sources didn&#39;t respond. Try again in a minute.");expect(html).not.toContain('No new evidence');
+ expect(model).not.toHaveBeenCalled();expect(search).toHaveBeenCalledTimes(4);
+ const session=await t.query(internal.holdings.get,{token});
+ const saved=await t.run(async ctx=>({thesis:await ctx.db.get(session!.lines[0].thesisId!),research:await ctx.db.query('stockResearchCache').withIndex('by_stock_id',q=>q.eq('stockId',session!.lines[0].match!.id)).take(10)}));
+ expect(saved.thesis!.standingResult).toBeUndefined();expect(saved.thesis!.standingBusySince).toBeUndefined();
+ expect(saved.research.every(row=>!row.evidence&&!row.busySince)).toBe(true);
+ await t.action(api.holdingsActions.checkStock,{token,index:0});expect(search).toHaveBeenCalledTimes(8);expect(model).not.toHaveBeenCalled();
+});

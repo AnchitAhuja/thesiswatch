@@ -1,6 +1,6 @@
 import {v} from 'convex/values';
 import {standingSource,searchAuditEntry} from './standingFields';
-export const holdingProgressStep=v.union(v.literal('Searching recent news'),v.literal('Searching brokerage reports'),v.literal('Searching quarterly results'),v.literal('Searching company announcements'),v.literal('Matching articles to your reasons'),v.literal('Reading source articles'),v.literal('Reading brokerage reports'),v.literal('Checking your reason against evidence'),v.literal('Verifying evidence matches your reason'),v.literal('Done'),v.literal('Stopped'));
+export const holdingProgressStep=v.union(v.literal('Searching recent news'),v.literal('Searching brokerage reports'),v.literal('Searching quarterly results'),v.literal('Searching company announcements'),v.literal('Matching articles to your reasons'),v.literal('Reading source articles'),v.literal('Reading brokerage reports'),v.literal('Checking your reason against evidence'),v.literal('Verifying evidence matches your reason'),v.literal('Done'),v.literal('Stopped'),v.literal("Couldn't check right now"));
 export const holdingProgress=v.object({step:holdingProgressStep,updatedAt:v.number()});
 export const stockMatch=v.object({id:v.string(),ticker:v.string(),name:v.string(),market:v.string(),aliases:v.array(v.string())});
 export const holdingInput=v.object({stock:v.string(),reasons:v.array(v.string())});

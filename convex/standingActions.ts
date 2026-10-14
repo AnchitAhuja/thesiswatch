@@ -7,6 +7,7 @@ import {standingResult} from './standingFields';
 import {researchEvidence,assessEvidence} from './evidenceEngine';
 import {getStockById} from '../shared/stock-matching.mjs';
 import {evidenceLogger,evidenceError,timedEvidence,type SourceReadDiagnostics} from './evidenceLogging';
+import {unavailableEvidence} from '../shared/unavailable-evidence.mjs';
 import {withinWindow} from '../shared/standing.mjs';
 async function perform(ctx:ActionCtx,args:{token?:string,id?:Id<'customTheses'>,bypassCache?:boolean}):Promise<Infer<typeof standingResult>> {
  const started=Date.now();
@@ -24,10 +25,17 @@ async function perform(ctx:ActionCtx,args:{token?:string,id?:Id<'customTheses'>,
   const stock=getStockById(claim.stockId);if(!stock)throw Error('Not supported yet');
   const cache=await timedEvidence(log,'Claim stockResearchCache',()=>ctx.runMutation(internal.stockResearch.claim,{stockId:stock.id,reasons:claim.assumptions,...(args.bypassCache?{bypassCache:true}:{})}));
   if(cache.evidence){evidence=cache.evidence;researchReused=true;}
-  else {try {evidence=await researchEvidence(ctx,{thesis:stock.name,company:stock.name,assumptions:claim.assumptions,windowStart,windowEnd,onProgress,log,readDiagnostics});await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!,evidence});}catch(e){await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!});throw e;}}
+  else {try {evidence=await researchEvidence(ctx,{thesis:stock.name,company:stock.name,assumptions:claim.assumptions,windowStart,windowEnd,onProgress,log,readDiagnostics});await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!,...(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'&&!evidence.searchAudit.length?{}:{evidence})});}catch(e){await ctx.runMutation(internal.stockResearch.finish,{stockId:stock.id,reasons:claim.assumptions,lease:cache.lease!});throw e;}}
   log('Filter cached evidence to current window',{sourcesFound:evidence.verified.length,dropped:evidence.verified.filter(s=>!withinWindow(s.date,windowStart,windowEnd)).map(s=>({url:s.url,why:'Publication date outside current window'}))});
   evidence={...evidence,verified:evidence.verified.filter(s=>withinWindow(s.date,windowStart,windowEnd)),windowStart,windowEnd};
  }else evidence=await researchEvidence(ctx,{thesis:claim.thesis,assumptions:claim.assumptions,windowStart,windowEnd,legacy:true,log});
+ if(claim.stockId&&process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'&&!evidence.searchAudit.length){
+  log('Sources unavailable',{sourcesFound:0,modelCallSkipped:true,cacheWriteSkipped:true});
+  await ctx.runMutation(internal.standing.finish,{id:claim.id,key:claim.key,unavailable:true});
+  const result=unavailableEvidence(claim.assumptions) as Infer<typeof standingResult>;
+  for(const row of result.assumptions)log('Final reason',{reason:row.assumption,status:row.status,assessment:row.reason,sourcesKept:[]});
+  log('Check complete',{ms:Date.now()-started});return result;
+ }
  const result=await assessEvidence(ctx,{...evidence,thesis:claim.thesis,assumptions:claim.assumptions,researchReused,checkReasonMatch:!!claim.stockId,onProgress,log,readDiagnostics});
  await timedEvidence(log,'Save check result',()=>ctx.runMutation(internal.standing.finish,{id:claim.id,key:claim.key,result}));log('Check complete',{ms:Date.now()-started});return result;
  }catch(e){log('Check failed',{ms:Date.now()-started,error:evidenceError(e)});await ctx.runMutation(internal.standing.finish,{id:claim.id,key:claim.key});throw e;}

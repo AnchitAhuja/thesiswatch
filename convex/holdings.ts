@@ -2,6 +2,7 @@ import {v} from 'convex/values';
 import {query,mutation,internalQuery,internalMutation} from './_generated/server';
 import {digest} from './theses';
 import {holdingInput,holdingLine,stockMatch,holdingProgress} from './holdingsFields';
+import {unavailableEvidence} from '../shared/unavailable-evidence.mjs';
 import {standingResult} from './standingFields';
 import {matchStock,restricted} from '../shared/stock-matching.mjs';
 const sessionView=v.object({confirmed:v.boolean(),email:v.optional(v.string()),lines:v.array(v.object({stock:v.string(),reasons:v.array(v.string()),match:v.union(stockMatch,v.null()),error:v.optional(v.string()),progress:v.optional(holdingProgress),result:v.union(standingResult,v.null())}))});
@@ -12,7 +13,7 @@ export const create=internalMutation({args:{token:v.string(),original:v.string()
 }});
 export const read=query({args:{token:v.string()},returns:v.union(sessionView,v.null()),handler:async(ctx,{token})=>{
  const tokenHash=await digest(token);const row=await ctx.db.query('holdingSessions').withIndex('by_token_hash',q=>q.eq('tokenHash',tokenHash)).unique();if(!row)return null;
- const lines=await Promise.all(row.lines.map(async line=>{const thesis=line.thesisId?await ctx.db.get(line.thesisId):null;const stale=thesis?.standingBusySince&&Date.now()-thesis.standingBusySince>=600000;return {stock:line.stock,reasons:line.reasons,match:line.match,error:line.error,progress:stale?{step:'Stopped' as const,updatedAt:thesis!.standingProgress?.updatedAt||thesis!.standingBusySince!}:thesis?.standingProgress,result:line.error?null:thesis?.standingResult||null};}));
+ const lines=await Promise.all(row.lines.map(async line=>{const thesis=line.thesisId?await ctx.db.get(line.thesisId):null;const stale=thesis?.standingBusySince&&Date.now()-thesis.standingBusySince>=600000;return {stock:line.stock,reasons:line.reasons,match:line.match,error:line.error,progress:stale?{step:'Stopped' as const,updatedAt:thesis!.standingProgress?.updatedAt||thesis!.standingBusySince!}:thesis?.standingProgress,result:line.error?null:thesis?.standingResult||(thesis?.standingProgress?.step==="Couldn't check right now"?unavailableEvidence(line.reasons,thesis.standingProgress.updatedAt) as import('convex/values').Infer<typeof standingResult>:null)};}));
  return {confirmed:!!row.confirmedAt,email:row.email,lines};
 }});
 export const confirm=mutation({args:{token:v.string(),items:v.array(holdingInput)},returns:v.null(),handler:async(ctx,{token,items})=>{

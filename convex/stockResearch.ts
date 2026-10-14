@@ -8,7 +8,7 @@ import {getStockById} from '../shared/stock-matching.mjs';
 export const claim=internalMutation({args:{stockId:v.string(),reasons:v.array(v.string()),bypassCache:v.optional(v.boolean())},returns:v.object({lease:v.optional(v.string()),evidence:v.union(researchEvidenceFields,v.null())}),handler:async(ctx,{stockId,reasons,bypassCache})=>{
  if(bypassCache && process.env.CONVEX_CLOUD_URL!=='https://fearless-ferret-257.convex.cloud')throw Error('Dev cache bypass only.');
  if(!getStockById(stockId))throw Error('Not supported yet');
- const key=JSON.stringify([SOURCE_POLICY_VERSION,HOLDINGS_RESEARCH_VERSION+':company-recent-meaning-v3',stockId,[]]);
+ const key=JSON.stringify([SOURCE_POLICY_VERSION,HOLDINGS_RESEARCH_VERSION+(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'?':company-recent-available-v4':':company-recent-meaning-v3'),stockId,[]]);
  const log=evidenceLogger(getStockById(stockId)?.name||stockId,reasons);
  log('stockResearchCache lookup',{cacheKey:key});
  const row=await ctx.db.query('stockResearchCache').withIndex('by_key',q=>q.eq('key',key)).unique();
@@ -19,7 +19,7 @@ export const claim=internalMutation({args:{stockId:v.string(),reasons:v.array(v.
  return {lease,evidence:null};
 }});
 export const finish=internalMutation({args:{stockId:v.string(),reasons:v.array(v.string()),lease:v.string(),evidence:v.optional(researchEvidenceFields)},returns:v.null(),handler:async(ctx,args)=>{
- const key=JSON.stringify([SOURCE_POLICY_VERSION,HOLDINGS_RESEARCH_VERSION+':company-recent-meaning-v3',args.stockId,[]]);
+ const key=JSON.stringify([SOURCE_POLICY_VERSION,HOLDINGS_RESEARCH_VERSION+(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'?':company-recent-available-v4':':company-recent-meaning-v3'),args.stockId,[]]);
  const row=await ctx.db.query('stockResearchCache').withIndex('by_key',q=>q.eq('key',key)).unique();
  if(row?.lease===args.lease)await ctx.db.patch(row._id,{busySince:undefined,lease:undefined,...(args.evidence?{evidence:args.evidence}:{})});return null;
 }});
