@@ -13,3 +13,5 @@ export async function timedEvidence<T>(log:EvidenceLog|undefined,step:string,ope
  try {const result=await operation();log?.(step+' complete',{ms:Date.now()-started});return result;}
  catch(error){log?.(step+' failed',{ms:Date.now()-started,error:evidenceError(error)});throw error;}
 }
+
+export type SourceReadDiagnostics=Map<string,{ms:number,characters:number}>;
