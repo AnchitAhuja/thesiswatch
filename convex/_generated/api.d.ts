@@ -13,6 +13,7 @@ import type * as crons from "../crons.js";
 import type * as editionFields from "../editionFields.js";
 import type * as editions from "../editions.js";
 import type * as evidenceEngine from "../evidenceEngine.js";
+import type * as evidenceLogging from "../evidenceLogging.js";
 import type * as holdings from "../holdings.js";
 import type * as holdingsActions from "../holdingsActions.js";
 import type * as holdingsFields from "../holdingsFields.js";
@@ -52,6 +53,7 @@ declare const fullApi: ApiFromModules<{
   editionFields: typeof editionFields;
   editions: typeof editions;
   evidenceEngine: typeof evidenceEngine;
+  evidenceLogging: typeof evidenceLogging;
   holdings: typeof holdings;
   holdingsActions: typeof holdingsActions;
   holdingsFields: typeof holdingsFields;
