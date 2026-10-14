@@ -9,6 +9,7 @@
  */
 
 import type * as aiSpend from "../aiSpend.js";
+import type * as combinedEvidence from "../combinedEvidence.js";
 import type * as crons from "../crons.js";
 import type * as editionFields from "../editionFields.js";
 import type * as editions from "../editions.js";
@@ -49,6 +50,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   aiSpend: typeof aiSpend;
+  combinedEvidence: typeof combinedEvidence;
   crons: typeof crons;
   editionFields: typeof editionFields;
   editions: typeof editions;

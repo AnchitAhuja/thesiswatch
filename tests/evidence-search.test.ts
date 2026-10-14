@@ -42,10 +42,11 @@ it('sends SEC identification and keeps a loaded article using its search date',a
 it('logs the kept passages and retains an indirect DEV assessment',async()=>{
  const {t}=await setup();const {assessEvidence}=await import('../convex/evidenceEngine');
  const source={url:'https://publisher.com/news',title:'Delhivery Ltd. costs',publisher:'publisher.com',date:'2026-10-10',excerpt:'Delhivery Ltd. has expanded its delivery network across several cities.'};
- vi.spyOn(Agent.prototype,'generateObject')
-  .mockResolvedValueOnce({object:{articles:[{sourceUrl:source.url,reasonIndices:[0],paragraphIndices:[0]}]}} as never)
-  .mockResolvedValueOnce({object:{takeaway:'Evidence is related.',assumptions:[{status:'INTACT',signalStrength:'soft',reason:'Network expanded.',sourceUrls:[source.url],brokerageEvidence:[]}]}} as never)
-  .mockResolvedValueOnce({object:{reviews:[{match:'indirect',explanation:'Network expansion does not establish technology reducing costs.',quotes:[]}]}} as never);
+ vi.spyOn(Agent.prototype,'generateObject').mockResolvedValueOnce({object:{
+ articles:[{sourceUrl:source.url,reasonIndices:[0],paragraphIndices:[0]}],
+ takeaway:'Evidence is related.',assumptions:[{status:'INTACT',signalStrength:'soft',reason:'Network expanded.',sourceUrls:[source.url],brokerageEvidence:[]}],
+ reviews:[{match:'indirect',explanation:'Network expansion does not establish technology reducing costs.',quotes:[]}]
+ }} as never);
  const events:any[]=[];
  const result=await t.action(ctx=>assessEvidence(ctx,{thesis:'Delhivery Ltd.',assumptions:['Its technology helps reduce delivery costs'],verified:[source],searchAudit:[],searches:4,windowStart:'2026-09-14',windowEnd:'2026-10-14',checkReasonMatch:true,readDiagnostics:new Map([[source.url,{ms:123,characters:source.excerpt.length}]]),log:(step,details)=>events.push({step,...details})}));
  expect(result.assumptions[0]).toMatchObject({status:'INTACT',signalStrength:'soft',sources:[{url:source.url}],indirectEvidence:{explanation:'Network expansion does not establish technology reducing costs.'}});
@@ -53,5 +54,18 @@ it('logs the kept passages and retains an indirect DEV assessment',async()=>{
  expect(events.find(event=>event.step==='Assessment model input')).toMatchObject({sourcesSent:1,paragraphsSent:1});
  expect(events.find(event=>event.step==='Source verdict')).toMatchObject({rawPerSourceVerdict:null,rawReasonVerdict:{status:'INTACT'}});
  expect(events.some(event=>event.step==='Final status rule'&&event.match==='indirect'&&!event.ruleApplied&&event.after==='INTACT')).toBe(true);
- expect(Agent.prototype.generateObject).toHaveBeenCalledTimes(3);
+ expect(Agent.prototype.generateObject).toHaveBeenCalledTimes(1);
 });
+
+it('continues with three successful searches when one times out and identifies it',async()=>{
+ const {t,researchEvidence}=await setup();
+ vi.spyOn(Agent.prototype,'generateText').mockImplementation(async(_ctx,_thread,options)=>{
+  if((options.prompt as string).includes(' brokerage target '))await new Promise(()=>{});
+  return searchResult(options.prompt as string) as never;
+ });
+ const events:any[]=[];
+ const result=await t.action(ctx=>researchEvidence(ctx,{thesis:'NVIDIA Corporation',company:'NVIDIA Corporation',assumptions:['AI demand'],windowStart:'2026-09-14',windowEnd:'2026-10-14',log:(step,details)=>events.push({step,...details})}));
+ expect(result.searches).toBe(3);
+ expect(result.queryTrace).toHaveLength(4);
+ expect(events.find(e=>e.timedOut)).toMatchObject({step:'Search/web call failed',query:expect.stringContaining('brokerage target'),results:0,ms:expect.any(Number)});
+},12000);

@@ -51,3 +51,22 @@ it('locks concurrent checks, caches for 24 hours and invalidates when assumption
  await t.mutation(internal.standing.finish,{id,key:first.key,result});await t.run(async ctx=>{const row=await ctx.db.get(id);await ctx.db.patch(id,{interpretation:{...row!.interpretation!,inferredAssumptions:['changed','b','c']}});});const changed=await t.mutation(internal.standing.claim,{token});expect(changed.result).toBeNull();
  await t.mutation(internal.standing.finish,{id,key:changed.key});expect((await t.mutation(internal.standing.claim,{token})).result).toBeNull();
 });
+
+it('reuses a DEV result across entries with the same stock and normalized reason',async()=>{
+ vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');
+ try {
+ const t=convexTest(schema,modules);
+ const make=async(reason:string)=>{
+ const id=await t.mutation(internal.theses.reserve,{tokenHash:await digest((crypto.randomUUID()+crypto.randomUUID()).replaceAll('-','')),original:reason,investments:[]});
+ await t.mutation(internal.theses.finish,{id,result:{belief:reason,reflection:reason,statedReasons:[reason],inferredAssumptions:[reason],unverifiedClaims:[],risks:[],strengtheningEvidence:[],weakeningEvidence:[]}});
+ await t.run(ctx=>ctx.db.patch(id,{standingStockId:'delhivery'}));return id;
+ };
+ const id=await make(' Technology helps reduce delivery costs '),first=await t.mutation(internal.standing.claim,{id});
+ const result={takeaway:'Unclear.',assumptions:[{assumption:' Technology helps reduce delivery costs ',status:'No new evidence' as const,signalStrength:'soft' as const,reason:NO_EVIDENCE,sources:[]}],checkedAt:Date.now(),windowStart:'2026-09-14',windowEnd:'2026-10-14',modelCalls:5,searches:4};
+ await t.mutation(internal.standing.finish,{id,key:first.key,result});
+ const secondId=await make(' ITS   TECHNOLOGY helps REDUCE delivery costs '),second=await t.mutation(internal.standing.claim,{id:secondId});
+ expect(second.key).toBe(first.key);expect(second.result?.checkedAt).toBe(result.checkedAt);expect(second.result?.assumptions[0].assumption).toBe(' ITS   TECHNOLOGY helps REDUCE delivery costs ');
+ expect((await t.run(ctx=>ctx.db.get(secondId)))?.standingResult).toEqual(second.result);
+ const changed=await make('Demand will grow');expect((await t.mutation(internal.standing.claim,{id:changed})).result).toBeNull();
+ }finally{vi.unstubAllEnvs();}
+});
