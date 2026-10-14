@@ -16,7 +16,7 @@ export const claim = internalMutation({
   if (row.standingStockId ? assumptions.length<1||assumptions.length>6 : assumptions.length !== 3) throw Error('Valid reasons are required.');
   const holding=!!row.standingStockId;
   const normalize=(reason:string)=>reason.toLowerCase().trim().replace(/\s+/g,' ').replace(/^its /,'');
-  const key = JSON.stringify([SOURCE_POLICY_VERSION, row.standingStockId?HOLDINGS_RESEARCH_VERSION+(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'?':company-combined-alias-v6':':company-combined-v4')+':'+HOLDINGS_ASSESSMENT_VERSION:null, holding?row.standingStockId:thesis, holding?assumptions.map(normalize):assumptions]);
+  const key = JSON.stringify([SOURCE_POLICY_VERSION, row.standingStockId?HOLDINGS_RESEARCH_VERSION+(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'?':company-combined-references-v7':':company-combined-v4')+':'+HOLDINGS_ASSESSMENT_VERSION:null, holding?row.standingStockId:thesis, holding?assumptions.map(normalize):assumptions]);
   const shared=holding?await ctx.db.query('customTheses').withIndex('by_standing_key',q=>q.eq('standingKey',key)).order('desc').take(100):[];
   const saved=shared.find(item=>item.standingResult&&Date.now()-item.standingResult.checkedAt<86400000)?.standingResult;
   const cachedLocal = row.standingKey === key && row.standingResult && Date.now()-row.standingResult.checkedAt < 86400000 ? row.standingResult : null;

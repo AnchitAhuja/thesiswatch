@@ -45,8 +45,8 @@ it('logs the kept passages and retains an indirect DEV assessment',async()=>{
  const {t}=await setup();const {assessEvidence}=await import('../convex/evidenceEngine');
  const source={url:'https://publisher.com/news',title:'Delhivery Ltd. costs',publisher:'publisher.com',date:'2026-10-10',excerpt:'Delhivery Ltd. has expanded its delivery network across several cities.'};
  vi.spyOn(Agent.prototype,'generateObject').mockResolvedValueOnce({object:{
- articles:[{sourceUrl:source.url,reasonIndices:[0],paragraphIndices:[0]}],
- takeaway:'Evidence is related.',assumptions:[{status:'INTACT',signalStrength:'soft',reason:'Network expanded.',sourceUrls:[source.url],brokerageEvidence:[]}],
+ articles:[{sourceUrl:source.url,reasonIndices:[0],paragraphIds:['s0p0']}],
+ takeaway:'Evidence is related.',assumptions:[{status:'INTACT',signalStrength:'soft',reason:'Network expanded.',citations:[{sourceUrl:source.url,brokerageEvidence:[]}]}],
  reviews:[{match:'indirect',explanation:'Network expansion does not establish technology reducing costs.',quotes:[]}]
  }} as never);
  const events:any[]=[];
