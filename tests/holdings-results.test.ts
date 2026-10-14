@@ -17,3 +17,9 @@ it('shows the three real research steps and the verified recent-source count',()
  document.body.innerHTML=renderHoldingsStock({...line,result:{windowStart:'2026-09-12',windowEnd:'2026-10-12',recentSourcesChecked:7,assumptions:[{assumption:'tech intensive company',status:'No new evidence',signalStrength:'soft',reason:'no clear evidence in the last 30 days',sources:[]}]}});
  expect(document.body.textContent).toContain('7 recent sources checked');
 });
+
+it('shows the indirect analyst label beside the status, reviewer explanation and firm link',()=>{
+ document.body.innerHTML=renderHoldingsStock({stock:'Delhivery',reasons:['technology helps reduce delivery costs'],result:{windowStart:'2026-09-14',windowEnd:'2026-10-14',assumptions:[{assumption:'technology helps reduce delivery costs',status:'INTACT',signalStrength:'soft',reason:'PL Capital forecasts savings.',sources:[{url:'https://publisher.example/news',title:'Report',publisher:'publisher.example',date:'2026-10-09'}],indirectEvidence:{explanation:'Forecast savings are not reported results.',firms:[{firm:'PL Capital',sourceUrl:'https://publisher.example/news'}]}}]}});
+ const heading=document.querySelector('.holding-reason-heading');expect(heading.textContent).toContain('INTACT');expect(heading.textContent).toContain('Based on analyst view, not reported results');
+ expect(document.body.textContent).toContain('Forecast savings are not reported results.');expect(document.querySelector('.holding-sources a').textContent).toContain('PL Capital');
+});

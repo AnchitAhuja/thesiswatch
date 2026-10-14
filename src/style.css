@@ -679,3 +679,9 @@ body.prebuilt-page main.thesis-memo { max-width:960px; padding:64px 40px 32px; m
  .holdings-results-active .holdings-signup { padding: 22px 18px; }
 }
 @media(prefers-reduced-motion:reduce) { .holding-progress-ring { animation: none; } }
+
+.holding-status-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; max-width: 300px; }
+.holding-analyst-label { max-width: 220px; color: #b7c5bf; font-size: 12px; line-height: 18px; overflow-wrap: anywhere; }
+.holding-review-explanation { color: #b7c5bf; font-size: 14px; line-height: 22px; }
+
+@media (max-width: 760px) { .holding-reason-heading .holding-status-group { grid-column: 2; justify-self: start; } }

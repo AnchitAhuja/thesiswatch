@@ -39,7 +39,7 @@ it('sends SEC identification and keeps a loaded article using its search date',a
  expect(events.find(event=>event.step==='Source filtering')).toMatchObject({kept:true,dateSource:'Search result publication date'});
 });
 
-it('logs the kept passages and exact status gate without changing the result',async()=>{
+it('logs the kept passages and retains an indirect DEV assessment',async()=>{
  const {t}=await setup();const {assessEvidence}=await import('../convex/evidenceEngine');
  const source={url:'https://publisher.com/news',title:'Delhivery Ltd. costs',publisher:'publisher.com',date:'2026-10-10',excerpt:'Delhivery Ltd. has expanded its delivery network across several cities.'};
  vi.spyOn(Agent.prototype,'generateObject')
@@ -48,10 +48,10 @@ it('logs the kept passages and exact status gate without changing the result',as
   .mockResolvedValueOnce({object:{reviews:[{match:'indirect',explanation:'Network expansion does not establish technology reducing costs.',quotes:[]}]}} as never);
  const events:any[]=[];
  const result=await t.action(ctx=>assessEvidence(ctx,{thesis:'Delhivery Ltd.',assumptions:['Its technology helps reduce delivery costs'],verified:[source],searchAudit:[],searches:4,windowStart:'2026-09-14',windowEnd:'2026-10-14',checkReasonMatch:true,readDiagnostics:new Map([[source.url,{ms:123,characters:source.excerpt.length}]]),log:(step,details)=>events.push({step,...details})}));
- expect(result.assumptions[0]).toMatchObject({status:'No new evidence',reason:'no clear evidence in the last 30 days',sources:[]});
+ expect(result.assumptions[0]).toMatchObject({status:'INTACT',signalStrength:'soft',sources:[{url:source.url}],indirectEvidence:{explanation:'Network expansion does not establish technology reducing costs.'}});
  expect(events.find(event=>event.step==='Kept source details')).toMatchObject({url:source.url,readMs:123,characters:source.excerpt.length,paragraphsMatched:['Delhivery Ltd.']});
  expect(events.find(event=>event.step==='Assessment model input')).toMatchObject({sourcesSent:1,paragraphsSent:1});
  expect(events.find(event=>event.step==='Source verdict')).toMatchObject({rawPerSourceVerdict:null,rawReasonVerdict:{status:'INTACT'}});
- expect(events.some(event=>event.step==='Final status rule'&&event.match==='indirect'&&event.ruleApplied&&event.after==='No new evidence')).toBe(true);
+ expect(events.some(event=>event.step==='Final status rule'&&event.match==='indirect'&&!event.ruleApplied&&event.after==='INTACT')).toBe(true);
  expect(Agent.prototype.generateObject).toHaveBeenCalledTimes(3);
 });

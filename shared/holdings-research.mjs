@@ -25,9 +25,12 @@ export function attributeBrokerage(row, sources) {
  return {...row,reason,signalStrength:'soft'};
 }
 export const HOLDINGS_ASSESSMENT_VERSION = 'direct-reason-match-paragraphs-v2';
-export function gateReasonMatch(row, review, sources) {
- if (!review || !['direct','indirect','unrelated'].includes(review.match)) throw Error('Invalid reason match review.');
- if (review.match !== 'direct' || !row.sourceUrls.length) return {...row,status:'No new evidence',signalStrength:'soft',reason:'no clear evidence in the last 30 days',sourceUrls:[],brokerageEvidence:[]};
+export function gateReasonMatch(row, review, sources, allowIndirect=true) {
+ if (!review || !['direct','indirect','none','unrelated'].includes(review.match)) throw Error('Invalid reason match review.');
+ if (['none','unrelated'].includes(review.match) || (!allowIndirect && review.match !== 'direct') || !row.sourceUrls.length) return {...row,status:'No new evidence',signalStrength:'soft',reason:'no clear evidence in the last 30 days',sourceUrls:[],brokerageEvidence:[]};
+ if(review.match==='indirect'){
+  return {...row,signalStrength:'soft',indirectEvidence:{explanation:review.explanation.replace(/\s+/g,' ').trim(),firms:row.brokerageEvidence.map(({firm,sourceUrl})=>({firm,sourceUrl}))}};
+ }
  const normalize=text=>text.replace(/\s+/g,' ').trim();
  if (!Array.isArray(review.quotes) || !review.quotes.length) throw Error('Missing direct evidence quote.');
  const supported=new Set(),brokerageEvidence=[],statements=[];

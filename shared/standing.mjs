@@ -20,7 +20,7 @@ export function validateStanding(data, assumptions, sources) {
     if (!['STRENGTHENING','INTACT','WATCH','WEAKENING','No new evidence'].includes(row.status) || !['soft','hard'].includes(row.signalStrength) || typeof row.reason !== 'string' || row.reason.length > 500 || !Array.isArray(row.sourceUrls) || row.sourceUrls.length > 2) throw Error('Invalid assumption result.');
     const selected = [...new Set(row.sourceUrls)].map(url => { if (!known.has(url)) throw Error('Source was not verified.'); return known.get(url); });
     if (selected.length && row.status === 'No new evidence') throw Error('No new evidence cannot cite sources.');
-    return { assumption: assumptions[i], status: selected.length ? row.status : 'No new evidence', signalStrength: selected.length ? row.signalStrength : 'soft', reason: selected.length ? row.reason : NO_EVIDENCE, sources: selected };
+    return { assumption: assumptions[i], status: selected.length ? row.status : 'No new evidence', signalStrength: selected.length ? row.signalStrength : 'soft', reason: selected.length ? row.reason : NO_EVIDENCE, sources: selected,...(selected.length&&row.indirectEvidence?{indirectEvidence:row.indirectEvidence}:{}) };
   });
   const takeaway = rows.every(r => !r.sources.length) ? 'There is no clear evidence in the last 30 days to judge whether this thesis still holds.' : data.takeaway;
   if (/\b(buy|sell|hold|exit|recommend\w*|target\s+price|price\s+target)\b/i.test([takeaway,...rows.map(r=>r.reason)].join(' '))) throw Error('Unacceptable recommendation wording.');
