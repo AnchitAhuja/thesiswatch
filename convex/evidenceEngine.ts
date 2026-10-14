@@ -14,6 +14,7 @@ import { sourceQuality } from '../shared/source-quality.mjs';
 import {sourceAboutCompany,holdingsQueries,assertSearchRan,attributeBrokerage,gateReasonMatch} from '../shared/holdings-research.mjs';
 import {articlePassages,assembleMeaningMatches} from '../shared/meaning-matches.mjs';
 import {combinedEvidence} from './combinedEvidence';
+import {companyAliasMatch} from '../shared/company-aliases.mjs';
 import {searchDeadline} from '../shared/search-deadline.mjs';
 import {recentQueries,skipResearchPage,recoverPublication} from '../shared/dev-evidence.mjs';
 const enhancedEvidence=true;
@@ -76,7 +77,12 @@ export async function researchEvidence(ctx:ActionCtx,{thesis,assumptions,windowS
     if(index>=40) return {...base,reason:'Outside the 40-page verification limit after ranking.'};
     const outcome=await verify(url,meta.title,windowStart,windowEnd,enhancedEvidence,verifyLog,meta.searchDate);
     if(outcome.source)datePassed.add(url);
-    if(outcome.source && company && enhancedEvidence && !sourceAboutCompany(company,outcome.source.title,outcome.source.excerpt))return {...base,date:outcome.date,reason:'Source is not about the picked company.'};
+    if(outcome.source && company && enhancedEvidence){
+     const dev=process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud';
+     const alias=dev?companyAliasMatch(company,outcome.source.title,outcome.source.excerpt,url):null;
+     if(dev)log?.('Company alias match',{url,matched:!!alias,alias:alias?.alias??null,aliasKind:alias?.kind??null});
+     if(dev?!alias:!sourceAboutCompany(company,outcome.source.title,outcome.source.excerpt))return {...base,date:outcome.date,reason:'Source is not about the picked company.'};
+    }
     if(outcome.source){companyPassed.add(url);verified.push(outcome.source);}
     return {...base,date:outcome.date,reason:outcome.reason};
    }));

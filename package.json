@@ -12,6 +12,7 @@
     "test": "node scripts/check-email.mjs",
     "test:tracking": "node scripts/check-tracking.cjs",
     "test:newsletter": "vitest run tests/newsletter.test.ts",
+    "eval:holdings": "node scripts/eval-holdings.mjs",
     "test:research": "vitest run tests/research.test.ts",
     "deploy": "npx @convex-dev/static-hosting deploy"
   },
