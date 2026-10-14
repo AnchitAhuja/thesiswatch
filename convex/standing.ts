@@ -14,14 +14,14 @@ export const claim = internalMutation({
   const thesis = row.confirmedReflection || row.thesis?.thesis || row.interpretation.reflection;
   const assumptions = row.thesis?.assumptions || row.interpretation.inferredAssumptions;
   if (row.standingStockId ? assumptions.length<1||assumptions.length>6 : assumptions.length !== 3) throw Error('Valid reasons are required.');
-  const devHolding=!!row.standingStockId&&process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud';
+  const holding=!!row.standingStockId;
   const normalize=(reason:string)=>reason.toLowerCase().trim().replace(/\s+/g,' ').replace(/^its /,'');
-  const key = JSON.stringify([SOURCE_POLICY_VERSION, row.standingStockId?HOLDINGS_RESEARCH_VERSION+(process.env.CONVEX_CLOUD_URL==='https://fearless-ferret-257.convex.cloud'?':company-combined-v4':'')+':'+HOLDINGS_ASSESSMENT_VERSION:null, devHolding?row.standingStockId:thesis, devHolding?assumptions.map(normalize):assumptions]);
-  const shared=devHolding?await ctx.db.query('customTheses').withIndex('by_standing_key',q=>q.eq('standingKey',key)).order('desc').take(100):[];
+  const key = JSON.stringify([SOURCE_POLICY_VERSION, row.standingStockId?HOLDINGS_RESEARCH_VERSION+':company-combined-v4'+':'+HOLDINGS_ASSESSMENT_VERSION:null, holding?row.standingStockId:thesis, holding?assumptions.map(normalize):assumptions]);
+  const shared=holding?await ctx.db.query('customTheses').withIndex('by_standing_key',q=>q.eq('standingKey',key)).order('desc').take(100):[];
   const saved=shared.find(item=>item.standingResult&&Date.now()-item.standingResult.checkedAt<86400000)?.standingResult;
   const cachedLocal = row.standingKey === key && row.standingResult && Date.now()-row.standingResult.checkedAt < 86400000 ? row.standingResult : null;
   const reusable=cachedLocal||saved;
-  const cached=devHolding&&reusable?{...reusable,assumptions:reusable.assumptions.map((item,index)=>({...item,assumption:assumptions[index]})),...(reusable.reasonArticleMatches?{reasonArticleMatches:reusable.reasonArticleMatches.map((item,index)=>({...item,reason:assumptions[index]}))}:{})}:cachedLocal;
+  const cached=holding&&reusable?{...reusable,assumptions:reusable.assumptions.map((item,index)=>({...item,assumption:assumptions[index]})),...(reusable.reasonArticleMatches?{reasonArticleMatches:reusable.reasonArticleMatches.map((item,index)=>({...item,reason:assumptions[index]}))}:{})}:cachedLocal;
   if (!cached && row.standingBusySince && Date.now()-row.standingBusySince < 600000) throw Error('A check is already running. Try again shortly.');
   if (!cached) await ctx.db.patch(row._id,{standingBusySince:Date.now(),standingKey:key,standingResult:undefined,standingProgress:undefined});
   else if(row.standingStockId)await ctx.db.patch(row._id,{standingKey:key,standingResult:cached,standingProgress:{step:'Done',updatedAt:Date.now()}});

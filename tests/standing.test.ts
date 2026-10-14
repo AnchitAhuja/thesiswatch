@@ -52,8 +52,8 @@ it('locks concurrent checks, caches for 24 hours and invalidates when assumption
  await t.mutation(internal.standing.finish,{id,key:changed.key});expect((await t.mutation(internal.standing.claim,{token})).result).toBeNull();
 });
 
-it('reuses a DEV result across entries with the same stock and normalized reason',async()=>{
- vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');
+it('reuses a production result across entries with the same stock and normalized reason',async()=>{
+ vi.stubEnv('CONVEX_CLOUD_URL','https://production.convex.cloud');
  try {
  const t=convexTest(schema,modules);
  const make=async(reason:string)=>{
