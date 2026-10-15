@@ -14,15 +14,24 @@ const fixture=()=>readFile('tests/fixtures/sample-pnl.xlsx');
 const sheets=async()=>readExcelFile(await fixture());
 afterEach(()=>{vi.unstubAllEnvs();vi.restoreAllMocks();});
 it('reads the actual fake .xlsx, locates the lower header, and excludes broker-review rows',async()=>{
- const raw=await sheets();expect(raw).toHaveLength(2);expect(raw[0].data[9][0]).toBe('Symbol');expect(raw[0].data.slice(10)).toHaveLength(6);
+ const raw=await sheets();expect(raw).toHaveLength(2);expect(raw[0].data[9][1]).toBe('Symbol');expect(raw[1].data[1][1]).toBe('Particulars');expect(raw.every(sheet=>sheet.data.every(row=>row[0]==null))).toBe(true);expect(raw[0].data.slice(10)).toHaveLength(6);
  const p=parsePortfolioSheets(raw);expect(p.entries).toHaveLength(4);expect(p.review.map(r=>r.symbol)).toEqual(['FAKEEPSILON','FAKEZETA']);
  expect(p.total).toBe(11120);expect(p.invested).toBe(11110);expect(p.gain).toBe(10);expect(p.gainPct).toBeCloseTo(10/11110*100);
  expect(p.entries.reduce((sum,row)=>sum+row.weight,0)).toBeCloseTo(100);
  expect(p.account).toEqual({realised:250,charges:75,other:-25,delayed:30});
  expect(JSON.stringify(p)).not.toContain('FAKE-CLIENT-NEVER-SEND');expect(JSON.stringify(p)).not.toMatch(/client.?id/i);
 });
+it.each([0,3])('preserves the entire parsed result, flags and report when tables begin at column index %s',async offset=>{
+ const raw=await sheets();
+ const shifted=raw.map(sheet=>({...sheet,data:sheet.data.map(row=>[...Array(offset).fill(null),...row.slice(1)])}));
+ shifted[0].data[9][offset]='  sYmBoL  ';shifted[1].data[1][offset]='  pArTiCuLaRs  ';
+ const expected=parsePortfolioSheets(raw),actual=parsePortfolioSheets(shifted);
+ expect(actual).toEqual(expected);expect(actual.account.delayed).toBe(30);
+ expect(portfolioFlags(actual,5)).toEqual(portfolioFlags(expected,5));
+ expect(renderPortfolioReport(actual)).toBe(renderPortfolioReport(expected));
+});
 it('uses open quantity, aggregates duplicate ISINs, and handles zero, absent and Indian-formatted values',async()=>{
- const raw=await sheets();raw[0].data.push(['CLOSED','FAKEISIN9999',9,10,9,0,0,0,0,'Long',10,9,0]);
+ const raw=await sheets();raw[0].data.push([null,'CLOSED','FAKEISIN9999',9,10,9,0,0,0,0,'Long',10,9,0]);
  raw[0].data.push([...raw[0].data[10]]);const p=parsePortfolioSheets(raw);
  expect(p.entries).toHaveLength(4);expect(p.entries[0].quantity).toBe(20);expect(p.entries[0].value).toBe(12000);
  expect(amount('₹ 1,23,456.75')).toBe(123456.75);expect(amount('(125.50)')).toBe(-125.5);expect(Number.isNaN(amount(null))).toBe(true);

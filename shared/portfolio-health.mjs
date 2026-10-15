@@ -11,7 +11,7 @@ export function amount(value){
 const cents=value=>Math.round(value*100);
 export function parsePortfolioSheets(sheets){
  const rows=sheets[0]?.data;if(!Array.isArray(rows))throw Error('Choose a Zerodha equity P&L .xlsx statement.');
- const header=rows.findIndex(row=>key(row[0])==='symbol');
+ const header=rows.findIndex(row=>row.some(cell=>key(cell)==='symbol'));
  if(header<0)throw Error('The first sheet needs a Symbol header row.');
  const columns=new Map(rows[header].map((cell,index)=>[key(cell),index]));
  for(const name of ['symbol','isin','open quantity','open value','unrealized p&l'])if(!columns.has(name))throw Error('A required equity P&L column is missing: '+name+'.');
@@ -35,11 +35,11 @@ export function parsePortfolioSheets(sheets){
   const name=key(row[index]);if(!['charges','other credit & debit','realized p&l','unrealized p&l'].includes(name))continue;
   const value=row.slice(index+1).map(amount).find(Number.isFinite);if(value!==undefined)summary.set(name,value);
  }
- const ledger=sheets[1]?.data||[];const ledgerHeader=ledger.findIndex(row=>key(row[0])==='particulars');
+ const ledger=sheets[1]?.data||[];const ledgerHeader=ledger.findIndex(row=>row.some(cell=>key(cell)==='particulars'));
  let delayed=0;
- if(ledgerHeader>=0){const fields=ledger[ledgerHeader].map(key),debit=fields.indexOf('debit'),credit=fields.indexOf('credit');
+ if(ledgerHeader>=0){const fields=ledger[ledgerHeader].map(key),particulars=fields.indexOf('particulars'),debit=fields.indexOf('debit'),credit=fields.indexOf('credit');
   if(debit<0||credit<0)throw Error('The account sheet needs Debit and Credit columns.');
-  for(const row of ledger.slice(ledgerHeader+1))if(/delayed\s+payment\s+charges/i.test(clean(row[0]))){const d=amount(row[debit]),c=amount(row[credit]);if(clean(row[debit])&&!Number.isFinite(d)||clean(row[credit])&&!Number.isFinite(c))throw Error('A delayed payment entry has an invalid amount.');delayed+=cents(Number.isFinite(d)?d:0)-cents(Number.isFinite(c)?c:0);}
+  for(const row of ledger.slice(ledgerHeader+1))if(/delayed\s+payment\s+charges/i.test(clean(row[particulars]))){const d=amount(row[debit]),c=amount(row[credit]);if(clean(row[debit])&&!Number.isFinite(d)||clean(row[credit])&&!Number.isFinite(c))throw Error('A delayed payment entry has an invalid amount.');delayed+=cents(Number.isFinite(d)?d:0)-cents(Number.isFinite(c)?c:0);}
  }
  return {entries,review,total,invested,gain:total-invested,gainPct:invested?(total-invested)/invested*100:0,account:{realised:summary.get('realized p&l')??null,charges:summary.has('charges')?Math.abs(summary.get('charges')):null,other:summary.get('other credit & debit')??null,delayed:ledgerHeader>=0?delayed/100:null}};
 }
