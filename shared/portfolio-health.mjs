@@ -45,16 +45,16 @@ export function parsePortfolioSheets(sheets){
 }
 export function portfolioFacts(portfolio){const small=portfolio.entries.filter(row=>row.weight<0.5);return {largestPct:Number((portfolio.entries[0]?.weight||0).toFixed(1)),smallCount:small.length,count:portfolio.entries.length};}
 export function factualSummaries(facts){const small=`${facts.smallCount} ${facts.smallCount===1?'position is':'positions are'} under 0.5% each`;return [`The largest position is ${facts.largestPct.toFixed(1)}% of your portfolio; ${small}.`,`${facts.count} ${facts.count===1?'position makes':'positions make'} up your portfolio; the largest is ${facts.largestPct.toFixed(1)}%.`,`${small}, and the largest position is ${facts.largestPct.toFixed(1)}% of your portfolio.`];}
-export function portfolioFlags(portfolio,limit){
+export function portfolioFlags(portfolio,limit,sectors={}){
  const flags=[];
- for(const row of portfolio.entries){const why=`${row.weight.toFixed(1)}% of portfolio, ${row.returnPct>=0?'+':''}${row.returnPct.toFixed(1)}% return`;
-  const add=flag=>flags.push({...row,flag,why});
+ for(const [index,row] of portfolio.entries.entries()){const why=`${row.weight.toFixed(1)}% of portfolio, ${row.returnPct>=0?'+':''}${row.returnPct.toFixed(1)}% return`;
+  const add=flag=>flags.push({...row,noteId:`p${index}`,flag,why});
   if(row.weight>limit)add(`Above your ${limit}% limit`);
   if(row.value/row.invested>5)add('Up more than 5x');
   if(row.returnPct< -40)add('Down more than 40%');
-  if(row.weight<0.5)add('Under 0.5% of portfolio');
+  if(row.weight<0.5&&Number(row.weight.toFixed(1))<0.5&&!/BEES$/i.test(row.symbol)&&sectors[row.symbol]!=='ETF')add('Under 0.5% of portfolio');
  }
- for(const row of portfolio.review)flags.push({...row,flag:'Check with your broker',why:`ISIN present: ${Number(row.isinPresent)}, value: ${row.value===null?'unavailable':row.value.toFixed(2)}`});
+ for(const [index,row] of portfolio.review.entries())flags.push({...row,noteId:`r${index}`,flag:'Check with your broker',why:`ISIN present: ${Number(row.isinPresent)}, value: ${row.value===null?'unavailable':row.value.toFixed(2)}`});
  return flags;
 }
 export function sectorTotals(portfolio,sectors){const totals=new Map();for(const row of portfolio.entries){const sector=SECTORS.includes(sectors[row.symbol])?sectors[row.symbol]:'Other';totals.set(sector,(totals.get(sector)||0)+row.value);}return [...totals].map(([name,value])=>({name,value,weight:portfolio.total?value/portfolio.total*100:0})).sort((a,b)=>b.value-a.value);}
