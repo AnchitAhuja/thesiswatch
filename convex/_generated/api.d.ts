@@ -22,6 +22,8 @@ import type * as http from "../http.js";
 import type * as mail from "../mail.js";
 import type * as mailActions from "../mailActions.js";
 import type * as meteredClaude from "../meteredClaude.js";
+import type * as portfolioAI from "../portfolioAI.js";
+import type * as portfolioSectors from "../portfolioSectors.js";
 import type * as prebuilt from "../prebuilt.js";
 import type * as prebuiltActions from "../prebuiltActions.js";
 import type * as prebuiltFields from "../prebuiltFields.js";
@@ -64,6 +66,8 @@ declare const fullApi: ApiFromModules<{
   mail: typeof mail;
   mailActions: typeof mailActions;
   meteredClaude: typeof meteredClaude;
+  portfolioAI: typeof portfolioAI;
+  portfolioSectors: typeof portfolioSectors;
   prebuilt: typeof prebuilt;
   prebuiltActions: typeof prebuiltActions;
   prebuiltFields: typeof prebuiltFields;

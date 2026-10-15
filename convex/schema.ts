@@ -5,6 +5,7 @@ import { thesisFields } from "./thesisFields";
 import {holdingLine,researchEvidenceFields} from './holdingsFields';
 
 export default defineSchema({
+  portfolioSectors:defineTable({symbol:v.string(),sector:v.string(),updatedAt:v.number()}).index('by_symbol',['symbol']),
   holdingSessions:defineTable({tokenHash:v.string(),original:v.string(),lines:v.array(holdingLine),createdAt:v.number(),confirmedAt:v.optional(v.number()),email:v.optional(v.string())}).index('by_token_hash',['tokenHash']),
   stockResearchCache:defineTable({key:v.string(),stockId:v.string(),busySince:v.optional(v.number()),lease:v.optional(v.string()),evidence:v.optional(researchEvidenceFields)}).index('by_key',['key']).index('by_stock_id',['stockId']),
   customTheses: defineTable(thesisFields).index("by_standing_key", ["standingKey"]).index("by_token_hash", ["tokenHash"]).index("by_created_at", ["createdAt"]).index("by_state", ["state"]).index("by_email_state", ["email", "state"]).index('by_standing_active',['standingActive']).index('by_standing_unsubscribe',['standingUnsubscribeToken']),
