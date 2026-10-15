@@ -26,8 +26,8 @@ it.each([0.45,0.49,0.49999,0.5,0.51])('never flags raw weight %s when displayed 
  const p={entries:[{symbol:'FAKE',weight,value:10,invested:10,returnPct:0}],review:[]};
  expect(portfolioFlags(p,5).some(row=>row.flag==='Under 0.5% of portfolio')).toBe(false);
 });
-it('still flags an eligible equity displayed below 0.5%',()=>{
- expect(portfolioFlags({entries:[{symbol:'FAKE',weight:0.449,value:10,invested:10,returnPct:0}],review:[]},5)[0].flag).toBe('Under 0.5% of portfolio');
+it('keeps small equities out of Worth a look',()=>{
+ expect(portfolioFlags({entries:[{symbol:'FAKE',weight:0.449,value:10,invested:10,returnPct:0}],review:[]},5)).toEqual([]);
 });
 it('fails if any Why sentence contains a banned word, made-up figure, duration, or extra sentence',async()=>{
  const facts=whyFacts(await portfolio());const fact=facts[0];
@@ -48,10 +48,10 @@ it('fails if any Why sentence contains a banned word, made-up figure, duration, 
 });
 it('renders one grounded sentence per position and reuses it across multiple flags',async()=>{
  const p=await portfolio(),facts=whyFacts(p);
- const notes=Object.fromEntries(facts.map(row=>[row.id,row.review?`Its statement value is ${row.value.toFixed(2)} rupees, with this row excluded from portfolio totals.`:`At ${row.weight.toFixed(1)}%, its return is ${row.returnPct.toFixed(1)}% versus the portfolio's ${row.portfolioReturnPct.toFixed(1)}%.`]));
+ const notes=Object.fromEntries(facts.map(row=>[row.id,row.review?`Its statement value is ${Math.round(row.value)} rupees, with this row excluded from portfolio totals.`:`At ${row.weight.toFixed(1)}%, its return is ${row.returnPct.toFixed(1)}% versus the portfolio's ${row.portfolioReturnPct.toFixed(1)}%.`]));
  validateWhyNotes(notes,facts);document.body.innerHTML=renderPortfolioReport(p,{whyNotes:notes,whyState:'ready'});
  const why=[...document.querySelectorAll('tbody td:last-child')].map(cell=>cell.textContent!);
- expect(why.length).toBeGreaterThan(facts.length);expect(why[0]).toBe(why[1]);
+ expect(why).toHaveLength(4);expect(document.querySelector('tbody tr td')!.textContent).toBe('Above your 5% limit · Up more than 5x');expect([...document.querySelectorAll('tbody th')].map(cell=>cell.textContent)).toEqual(['FAKEALPHA','FAKEBETA','FAKEEPSILON','FAKEZETA']);
  for(const sentence of why){expect(sentence).not.toMatch(bannedWhy);expect(sentence.split(/\s+/).length).toBeLessThan(30);expect(sentence).toMatch(/\.$/);}
  document.body.innerHTML=renderPortfolioReport(p,{whyNotes:{...notes,p0:'You should sell this.'},whyState:'error'});
  expect(document.querySelector('tbody td:last-child')!.textContent).toBe('Factual note unavailable.');
@@ -60,12 +60,12 @@ it('renders one grounded sentence per position and reuses it across multiple fla
 it('batches notes into one DEV AI call and caches the promise for the lifetime of an upload',async()=>{
  vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');const t=convexTest(schema,modules);agentTest.register(t);
  const facts=whyFacts(await portfolio());
- const notes=Object.fromEntries(facts.map(row=>[row.id,row.review?`Its statement value is ${row.value.toFixed(2)} rupees, with this row excluded from portfolio totals.`:`At ${row.weight.toFixed(1)}%, its return is ${row.returnPct.toFixed(1)}% versus the portfolio's ${row.portfolioReturnPct.toFixed(1)}%.`]));
- const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValue({object:notes} as never);
+ const notes=Object.fromEntries(facts.map(row=>[row.id,row.review?`Its statement value is ${Math.round(row.value)} rupees, with this row excluded from portfolio totals.`:`At ${row.weight.toFixed(1)}%, its return is ${row.returnPct.toFixed(1)}% versus the portfolio's ${row.portfolioReturnPct.toFixed(1)}%.`]));
+ const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValue({object:{notes:Object.entries(notes).map(([id,sentence])=>({id,sentence}))}} as never);
  const load=vi.fn(()=>t.action(api.portfolioAI.whyNotes,{facts}));const batch=uploadNoteBatch(load);
  const [a,b]=await Promise.all([batch(),batch()]);expect(a).toEqual(notes);expect(b).toEqual(notes);await batch();
  expect(load).toHaveBeenCalledTimes(1);expect(model).toHaveBeenCalledTimes(1);
  const prompt=String(model.mock.calls[0][2].prompt);expect(JSON.parse(prompt)).toEqual(facts);expect(prompt).not.toContain('FAKE-CLIENT');expect(prompt).not.toContain('FAKEALPHA');
- model.mockResolvedValue({object:{...notes,p0:'You should buy more.'}} as never);await expect(t.action(api.portfolioAI.whyNotes,{facts})).rejects.toThrow('Factual notes');
+ model.mockResolvedValue({object:{notes:Object.entries({...notes,p0:'You should buy more.'}).map(([id,sentence])=>({id,sentence}))}} as never);await expect(t.action(api.portfolioAI.whyNotes,{facts})).rejects.toThrow('Factual notes');
  vi.stubEnv('CONVEX_CLOUD_URL','https://first-yak-309.convex.cloud');await expect(t.action(api.portfolioAI.whyNotes,{facts})).rejects.toThrow('DEV only');
 });

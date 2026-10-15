@@ -17,7 +17,8 @@ export function whySentenceIssue(sentence,facts){
   const prefix=match[1]?.toLowerCase();
   if(prefix==='next'?(facts.rank!==1||facts.nextWeight===null):facts.rank!==(prefix?ordinals.indexOf(prefix)+1:1))return 'rank wording';
  }
- const permitted=[facts.value,facts.weight,facts.returnPct,facts.portfolioReturnPct,facts.nextWeight,facts.ratio,0.5].filter(value=>value!==null);
+ if(/(?:₹\s*[+-]?\d[\d,]*\.\d|\d[\d,]*\.\d+\s*rupees)/i.test(sentence))return 'whole rupees';
+ const permitted=[facts.value===null?null:Math.round(facts.value),facts.weight,facts.returnPct,facts.portfolioReturnPct,facts.nextWeight,facts.ratio,0.5].filter(value=>value!==null);
  const numbers=[...sentence.matchAll(/[+-]?\d[\d,]*(?:\.\d+)?/g)];
  if(!numbers.length&&!facts.review)return 'missing numbers';
  return numbers.every(match=>{

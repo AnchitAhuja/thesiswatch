@@ -52,7 +52,6 @@ export function portfolioFlags(portfolio,limit,sectors={}){
   if(row.weight>limit)add(`Above your ${limit}% limit`);
   if(row.value/row.invested>5)add('Up more than 5x');
   if(row.returnPct< -40)add('Down more than 40%');
-  if(row.weight<0.5&&Number(row.weight.toFixed(1))<0.5&&!/BEES$/i.test(row.symbol)&&sectors[row.symbol]!=='ETF')add('Under 0.5% of portfolio');
  }
  for(const [index,row] of portfolio.review.entries())flags.push({...row,noteId:`r${index}`,flag:'Check with your broker',why:`ISIN present: ${Number(row.isinPresent)}, value: ${row.value===null?'unavailable':row.value.toFixed(2)}`});
  return flags;

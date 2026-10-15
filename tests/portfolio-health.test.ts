@@ -42,7 +42,7 @@ it('keeps factual flag thresholds strict and updates the position limit',async()
  expect(flags.filter(r=>r.flag==='Above your 5% limit')).toHaveLength(2);
  expect(flags.some(r=>r.symbol==='FAKEALPHA'&&r.flag==='Up more than 5x')).toBe(true);
  expect(flags.some(r=>r.symbol==='FAKEBETA'&&r.flag==='Down more than 40%')).toBe(true);
- expect(flags.some(r=>r.symbol==='FAKEGAMMA'&&r.flag==='Under 0.5% of portfolio')).toBe(true);
+ expect(flags.some(r=>r.flag==='Under 0.5% of portfolio')).toBe(false);
  expect(flags.filter(r=>r.flag==='Check with your broker')).toHaveLength(2);
  expect(portfolioFlags(p,60).some(r=>r.flag.startsWith('Above'))).toBe(false);
  const boundary={entries:[{symbol:'BOUNDARY',weight:0.5,value:500,invested:100,returnPct:-40}],review:[]};
@@ -71,7 +71,7 @@ it('has safe upload and AI error states without sending any file or client data 
 });
 it('classifies symbols in one AI call, caches sectors, and validates the fact-only summary',async()=>{
  vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');const t=convexTest(schema,modules);agentTest.register(t);
- const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValueOnce({object:{FAKEALPHA:'Other',FAKEBETA:'ETF'}} as never);
+ const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValueOnce({object:{sectors:[{symbol:'FAKEALPHA',sector:'Other'},{symbol:'FAKEBETA',sector:'ETF'}]}} as never);
  expect(await t.action(api.portfolioAI.sectors,{symbols:['FAKEALPHA','FAKEBETA']})).toEqual({FAKEALPHA:'Other',FAKEBETA:'ETF'});
  expect(await t.action(api.portfolioAI.sectors,{symbols:['FAKEBETA','FAKEALPHA']})).toEqual({FAKEBETA:'ETF',FAKEALPHA:'Other'});expect(model).toHaveBeenCalledTimes(1);
  expect(model.mock.calls[0][2].prompt).toBe('["FAKEALPHA","FAKEBETA"]');
@@ -79,6 +79,6 @@ it('classifies symbols in one AI call, caches sectors, and validates the fact-on
  const facts=portfolioFacts(parsePortfolioSheets(await sheets()));model.mockResolvedValueOnce({object:{summary:factualSummaries(facts)[0]}} as never);
  expect(await t.action(api.portfolioAI.summary,{facts})).toBe(factualSummaries(facts)[0]);
  model.mockResolvedValueOnce({object:{summary:'Buy now.'}} as never);await expect(t.action(api.portfolioAI.summary,{facts})).rejects.toThrow('Summary could not be verified');
- model.mockResolvedValueOnce({object:{FAKEGAMMA:'Invented sector'}} as never);await expect(t.action(api.portfolioAI.sectors,{symbols:['FAKEGAMMA']})).rejects.toThrow('Sector response');
+ model.mockResolvedValueOnce({object:{sectors:[{symbol:'FAKEGAMMA',sector:'Invented sector'}]}} as never);await expect(t.action(api.portfolioAI.sectors,{symbols:['FAKEGAMMA']})).rejects.toThrow('Sector response');
  vi.stubEnv('CONVEX_CLOUD_URL','https://first-yak-309.convex.cloud');await expect(t.action(api.portfolioAI.sectors,{symbols:['FAKEALPHA']})).rejects.toThrow('DEV only');
 });
