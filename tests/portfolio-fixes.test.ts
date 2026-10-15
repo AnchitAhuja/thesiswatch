@@ -23,8 +23,8 @@ it('keeps the provider response grammar constant for five and eighty symbols and
   model.mockResolvedValueOnce({object:{sectors:symbols.map(symbol=>({symbol,sector:'Other'}))}} as never);
   const map=await t.action(api.portfolioAI.sectors,{symbols});expect(Object.keys(map)).toHaveLength(count);
   grammars.sectors.push(JSON.stringify(model.mock.lastCall![2].schema.jsonSchema));
-  const facts=Array.from({length:count},(_,i)=>({id:`p${i}`,value:1000.25+i,weight:1.3,returnPct:2.1,portfolioReturnPct:71.5,rank:i+1,nextWeight:null,ratio:null,isinPresent:true,review:false}));
-  const notes=facts.map(({id})=>({id,sentence:'At 1.3%, its return is 2.1% versus the portfolio return of 71.5%.'}));
+  const facts=Array.from({length:count},(_,i)=>({id:`p${i}`,value:1000.25+i,weight:1.3,returnPct:2.1,portfolioReturnPct:71.5,invested:800,gained:200+i,gainShare:1,portfolioGain:20000,multiple:1.3,rank:i+1,nextWeight:null,ratio:null,isinPresent:true,review:false}));
+  const notes=facts.map(({id})=>({id,sentence:'Its original 800 rupees is now 1.3 times as large.'}));
   model.mockResolvedValueOnce({object:{notes}} as never);
   expect(Object.keys(await t.action(api.portfolioAI.whyNotes,{facts}))).toHaveLength(count);
   grammars.whyNotes.push(JSON.stringify(model.mock.lastCall![2].schema.jsonSchema));
@@ -73,7 +73,7 @@ it('formats money without paise while leaving source calculations untouched',asy
  expect(moneyTotal(1241000.49)).toBe('₹12.41L');expect(moneyTotal(12410000)).toBe('₹1.24Cr');expect(moneyTotal(-1241000)).toBe('-₹12.41L');
  expect(money(146520.49)).toBe('₹1,46,520');expect(money(146520.99)).toBe('₹1,46,521');expect(money(0)).toBe('₹0');
  renderPortfolioReport(p);expect(JSON.stringify(p)).toBe(before);
- const fact={...whyFacts(p)[0],value:146520.49};
- expect(validWhySentence('Its statement value is 146520 rupees.',fact)).toBe(true);
- expect(validWhySentence('Its statement value is 146520.49 rupees.',fact)).toBe(false);
+ const fact={...whyFacts(p)[0],invested:146520,value:200000.49};
+ expect(validWhySentence('Its original investment is 146520 rupees.',fact)).toBe(true);
+ expect(validWhySentence('Its original investment is 146520.49 rupees.',fact)).toBe(false);
 });
