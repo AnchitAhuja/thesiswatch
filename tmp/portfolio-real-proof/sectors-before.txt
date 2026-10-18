@@ -1,0 +1,7 @@
+{
+  "GOLDBEES": "ETF",
+  "HDFCBANK": "Financial Services",
+  "M&M": "Automobiles",
+  "RELIANCE": "Energy",
+  "TCS": "Information Technology"
+}

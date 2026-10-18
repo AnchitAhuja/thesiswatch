@@ -1,0 +1,6 @@
+﻿import {spawnSync} from 'node:child_process';import {readFileSync,writeFileSync} from 'node:fs';
+const r=JSON.parse(readFileSync('tmp/diagnosis/result.json','utf8'));function cli(args){const p=spawnSync(process.execPath,['node_modules/convex/bin/main.js',...args],{encoding:'utf8',timeout:60000,maxBuffer:30*1024*1024});if(p.status)throw Error('Read failed');return JSON.parse(p.stdout);}
+const cache=r.cacheBefore.find(c=>c.stockId==='IN:DELHIVERY'&&JSON.stringify(JSON.parse(c.key).at(-1))===JSON.stringify(r.reasons));
+const threads=cli(['data','threads','--component','agent','--limit','40','--format','json']).filter(t=>t._creationTime>=cache._creationTime-2000&&t._creationTime<=cache.evidence.researchedAt);
+const messages=cli(['data','messages','--component','agent','--limit','200','--format','json']).filter(m=>threads.some(t=>t._id===m.threadId));writeFileSync('tmp/diagnosis/historical-search.json',JSON.stringify({cache,threads,messages},null,2));
+console.log(JSON.stringify({cacheDate:new Date(cache.evidence.researchedAt).toISOString(),cacheAgeSeconds:(r.start-cache.evidence.researchedAt)/1000,verified:cache.evidence.verified.map(s=>({title:s.title,url:s.url})),threads:threads.map(t=>({id:t._id,title:t.title})),messages:messages.map(m=>({role:m.message?.role,contentTypes:m.message?.content?.map?.(c=>c.type),textPreview:m.text?.slice(0,80)}))},null,2));

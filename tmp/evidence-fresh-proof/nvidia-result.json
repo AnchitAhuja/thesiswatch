@@ -1,0 +1,340 @@
+{
+  "assumptions": [
+    {
+      "assumption": "AI data center demand will keep growing",
+      "reason": "no clear evidence in the last 30 days",
+      "signalStrength": "soft",
+      "sources": [],
+      "status": "No new evidence"
+    }
+  ],
+  "checkedAt": 1791961350887,
+  "modelCalls": 7,
+  "reasonArticleMatches": [
+    {
+      "reason": "AI data center demand will keep growing",
+      "sources": [
+        {
+          "date": "2026-10-13",
+          "dateVerification": "Search result publication date",
+          "publisher": "finance.yahoo.com",
+          "title": "NVIDIA Corporation (NVDA) Stock Price, News, Quote & History - Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/NVDA/"
+        }
+      ]
+    }
+  ],
+  "recentSourcesChecked": 1,
+  "searchAudit": [
+    {
+      "date": "2026-02-25",
+      "decision": "dropped",
+      "publisher": "sec.gov",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26pr.htm"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "investor.nvidia.com",
+      "quality": "primary",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "231 days ago",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx"
+    },
+    {
+      "date": "2025-11-19",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "329 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026"
+    },
+    {
+      "date": "2025-11-19",
+      "decision": "dropped",
+      "publisher": "sec.gov",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000228/q3fy26pr.htm"
+    },
+    {
+      "date": "2025-08-27",
+      "decision": "dropped",
+      "publisher": "sec.gov",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000207/q2fy26pr.htm"
+    },
+    {
+      "date": "2026-02-25",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "231 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026"
+    },
+    {
+      "date": "2026-08-26",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "49 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
+    },
+    {
+      "date": "2025-08-27",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "413 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026"
+    },
+    {
+      "date": "2026-10-07",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "7 days ago",
+      "url": "https://nvidianews.nvidia.com/news"
+    },
+    {
+      "date": "2025-01-27",
+      "decision": "dropped",
+      "publisher": "sec.gov",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "investor.nvidia.com",
+      "quality": "primary",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "226 days ago",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-and-Coherent-Announce-Strategic-Partnership-to-Develop-Optics-Technology-to-Scale-Next-Generation-Data-Center-Architecture/default.aspx"
+    },
+    {
+      "date": "2026-10-09",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "5 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-commits-1-billion-to-advance-us-science-over-the-next-five-years"
+    },
+    {
+      "date": "2025-12-01",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "317 days ago",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-synopsys-announce-strategic-partnership-to-revolutionize-engineering-and-design"
+    },
+    {
+      "date": "2026-03-05",
+      "decision": "dropped",
+      "publisher": "blogs.nvidia.com",
+      "quality": "primary",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "222 days ago",
+      "url": "https://blogs.nvidia.com/recent-news/"
+    },
+    {
+      "date": "2026-10-04",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "primary",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "10 days ago",
+      "url": "https://nvidianews.nvidia.com/news/latest"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "bloomberg.com",
+      "quality": "outlet",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "3 days ago",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-10/nvidia-is-in-talks-to-acquire-reflection-ai-the-ft-reports"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "bloomberg.com",
+      "quality": "outlet",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": "0 days ago",
+      "url": "https://bloomberg.com/news/articles/2026-10-13/nvidia-s-huang-plans-2-billion-in-europe-ai-deals-in-next-week"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "en.wikipedia.org",
+      "quality": "other",
+      "reason": "Skipped non-news encyclopedia, profile, job, app-store or franchise page.",
+      "searchDate": null,
+      "url": "https://en.wikipedia.org/wiki/Nscale"
+    },
+    {
+      "date": "2023-06-26",
+      "decision": "dropped",
+      "publisher": "cnn.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "1 days ago",
+      "url": "https://www.cnn.com/markets/stocks/NVDA"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "tomshardware.com",
+      "quality": "other",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": "5 days ago",
+      "url": "https://tomshardware.com/tech-industry/semiconductors/former-groq-engineers-sue-board-over-usd20-billion-nvidia-deal-saying-it-handed-nvidia-the-lpu-and-the-team-that-built-it-plaintiffs-allege-the-board-kept-billions-from-other-shareholders"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "investing.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "1 days ago",
+      "url": "https://investing.com/news/stock-market-news/navitas-shares-surge-5-on-nvidia-ai-infrastructure-partnership-4945184"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "heygotrade.com",
+      "quality": "other",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": "0 days ago",
+      "url": "https://heygotrade.com/en/news/nvidia-nvda-stock-news-october-14-2026"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "costar.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "1 days ago",
+      "url": "https://www.costar.com/article/155326723/nvidia-joins-tech-firms-push-to-standardize-data-center-development"
+    },
+    {
+      "date": "2026-10-12",
+      "decision": "dropped",
+      "publisher": "blogs.nvidia.com",
+      "quality": "other",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "1 days ago",
+      "url": "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/"
+    },
+    {
+      "date": "2026-10-02",
+      "decision": "dropped",
+      "publisher": "nvidianews.nvidia.com",
+      "quality": "other",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "12 days ago",
+      "url": "https://nvidianews.nvidia.com/"
+    },
+    {
+      "date": "2026-10-13",
+      "decision": "dropped",
+      "publisher": "finance.yahoo.com",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": "1 days ago",
+      "url": "https://finance.yahoo.com/quote/NVDA/"
+    },
+    {
+      "date": "2026-09-05",
+      "decision": "dropped",
+      "publisher": "stockanalysis.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "39 days ago",
+      "url": "https://stockanalysis.com/stocks/nvda/forecast/"
+    },
+    {
+      "date": "2026-10-07",
+      "decision": "dropped",
+      "publisher": "247wallst.com",
+      "quality": "other",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "6 days ago",
+      "url": "https://247wallst.com/investing/2026/10/07/nvidia-just-hit-a-new-buy-point-morgan-stanley-raised-its-target-where-does-it-end/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "tickflow.io",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 429.",
+      "searchDate": "78 days ago",
+      "url": "https://tickflow.io/stock/NVDA/forecast"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "zacks.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "568 days ago",
+      "url": "https://www.zacks.com/stock/research/NVDA/price-target-stock-forecast"
+    },
+    {
+      "date": "2026-10-01",
+      "decision": "dropped",
+      "publisher": "247wallst.com",
+      "quality": "other",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "12 days ago",
+      "url": "https://247wallst.com/investing/2026/10/01/my-nvidia-price-target-looks-beyond-the-next-few-quarters/"
+    },
+    {
+      "date": "2026-10-13",
+      "decision": "dropped",
+      "publisher": "stockanalysis.com",
+      "quality": "other",
+      "reason": "Source is not about the picked company.",
+      "searchDate": "1 days ago",
+      "url": "https://stockanalysis.com/stocks/nvda/"
+    },
+    {
+      "date": "2026-06-03",
+      "decision": "dropped",
+      "publisher": "tickernerd.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "133 days ago",
+      "url": "https://tickernerd.com/stock/nvda-forecast/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "marketbeat.com",
+      "quality": "other",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": null,
+      "url": "https://www.marketbeat.com/instant-alerts/da-davidson-analysts-increase-earnings-estimates-for-nvidia-2025-09-01"
+    }
+  ],
+  "searches": 4,
+  "takeaway": "There is no clear evidence in the last 30 days to judge whether this thesis still holds.",
+  "windowEnd": "2026-10-14",
+  "windowStart": "2026-09-14"
+}

@@ -1,0 +1,352 @@
+{
+  "assumptions": [
+    {
+      "assumption": "Its technology helps reduce delivery costs",
+      "reason": "no clear evidence in the last 30 days",
+      "signalStrength": "soft",
+      "sources": [],
+      "status": "No new evidence"
+    }
+  ],
+  "checkedAt": 1791961408400,
+  "modelCalls": 7,
+  "reasonArticleMatches": [
+    {
+      "reason": "Its technology helps reduce delivery costs",
+      "sources": [
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "whalesbook.com",
+          "title": "Delhivery Target Price Raised to ₹510 by Motilal Oswal",
+          "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+        },
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "whalesbook.com",
+          "title": "Delhivery Share Price: Motilal Oswal ka bullish view, target ₹510!",
+          "url": "https://www.whalesbook.com/news/Hinglish/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+        },
+        {
+          "date": "2026-10-10",
+          "dateVerification": "Search result publication date",
+          "publisher": "topnews.in",
+          "title": "Delhivery Share Price Could Reach Rs 510: Motilal Oswal Financial Services",
+          "url": "https://topnews.in/delhivery-share-price-could-reach-rs-510-motilal-oswal-financial-services-2419317"
+        },
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "businesstoday.in",
+          "title": "Delhivery shares set for a 33% upside, says PL Capital; turns bullish - BusinessToday",
+          "url": "https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09"
+        }
+      ]
+    }
+  ],
+  "recentSourcesChecked": 5,
+  "searchAudit": [
+    {
+      "date": "2025-10-12",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/markets/news/signed-sealed-delivered-delhivery-s-q2-payoff-on-e-commerce-boom-125101200424_1.html"
+    },
+    {
+      "date": "2026-08-13",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/markets/delhivery-ltd-share-price-68151/news"
+    },
+    {
+      "date": "2022-08-08",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/article/companies/delhivery-q1-results-net-loss-widens-to-rs-399-cr-total-income-rises-32-122080801589_1.html"
+    },
+    {
+      "date": "2024-02-02",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/companies/results/delhivery-q3-results-logistics-firm-turns-profitable-revenue-jumps-21-124020201305_1.html"
+    },
+    {
+      "date": "2025-06-26",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/topic/delhivery/page-3"
+    },
+    {
+      "date": "2026-02-26",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "230 days ago",
+      "url": "https://www.business-standard.com/markets/delhivery-ltd-share-price-68151.html"
+    },
+    {
+      "date": "2024-08-07",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/markets/news/operational-performance-in-q1-new-business-growth-to-drive-delhivery-124080700611_1.html"
+    },
+    {
+      "date": "2023-12-25",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/companies/news/analysts-divided-but-delhivery-s-stock-underperformance-may-reverse-123122500598_1.html"
+    },
+    {
+      "date": "2022-05-12",
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/topic/delhivery/page-10"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "business-standard.com",
+      "quality": "outlet",
+      "reason": "Missing or conflicting publication metadata; date unverified.",
+      "searchDate": null,
+      "url": "https://www.business-standard.com/amp/topic/delhivery"
+    },
+    {
+      "date": "2022-08-09",
+      "decision": "dropped",
+      "publisher": "icicidirect.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "1527 days ago",
+      "url": "https://www.icicidirect.com/research/equity/rapid-results/delhivery-ltd"
+    },
+    {
+      "date": "2026-10-14",
+      "decision": "dropped",
+      "publisher": "trendlyne.com",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": null,
+      "url": "https://trendlyne.com/fundamentals/annual-results/888524/DELHIVERY/delhivery-ltd/"
+    },
+    {
+      "date": "2026-02-03",
+      "decision": "dropped",
+      "publisher": "finance.yahoo.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "253 days ago",
+      "url": "https://finance.yahoo.com/news/delhivery-ltd-bom-543529-q3-010616652.html"
+    },
+    {
+      "date": "2026-04-10",
+      "decision": "dropped",
+      "publisher": "kotakneo.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "187 days ago",
+      "url": "https://www.kotakneo.com/stocks/delhivery-share-price/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "youtube.com",
+      "quality": "other",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": "150 days ago",
+      "url": "https://www.youtube.com/watch?v=1SGw1vUYe88"
+    },
+    {
+      "date": "2026-06-24",
+      "decision": "dropped",
+      "publisher": "evreporter.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "111 days ago",
+      "url": "https://evreporter.com/delhivery-to-deploy-200-bajaj-riki-e-carts-for-last-mile-deliveries/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "trustpilot.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "6 days ago",
+      "url": "https://www.trustpilot.com/review/www.delhivery.com"
+    },
+    {
+      "date": "2026-09-02",
+      "decision": "dropped",
+      "publisher": "desidime.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "42 days ago",
+      "url": "https://www.desidime.com/stores/delhivery"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "delhivery.operamediaworks.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "70 days ago",
+      "url": "https://delhivery.operamediaworks.com/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "delhivery.sociablelabs.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "49 days ago",
+      "url": "https://delhivery.sociablelabs.com/coupons"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "stocktitan.net",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "377 days ago",
+      "url": "https://www.stocktitan.net/news/ARTM/american-nortel-communications-inc-highlights-strategic-relationship-1s67ptwv7ipg.html"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "delhivery.valuecom.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 404.",
+      "searchDate": "3 days ago",
+      "url": "https://delhivery.valuecom.com/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "retailintel.in",
+      "quality": "other",
+      "reason": "Publisher fetch failed or timed out; date unverified.",
+      "searchDate": "20 days ago",
+      "url": "https://retailintel.in/signal/delhivery-s-havells-contract-to-build-factory-to-customer-su-5bd997eb"
+    },
+    {
+      "date": "2026-02-03",
+      "decision": "dropped",
+      "publisher": "trendlyne.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "253 days ago",
+      "url": "https://trendlyne.com/latest-news/888524/DELHIVERY/delhivery-ltd/"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "indmoney.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "99 days ago",
+      "url": "https://www.indmoney.com/stocks/delhivery-ltd-share-price"
+    },
+    {
+      "date": "2026-10-09",
+      "decision": "dropped",
+      "publisher": "businesstoday.in",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": "4 days ago",
+      "url": "https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09"
+    },
+    {
+      "date": "2026-10-09",
+      "decision": "dropped",
+      "publisher": "whalesbook.com",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": "5 days ago",
+      "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+    },
+    {
+      "date": "2026-02-16",
+      "decision": "dropped",
+      "publisher": "whalesbook.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "240 days ago",
+      "url": "https://www.whalesbook.com/news/English/brokerage-reports/Logistics-and-FMCG-Delhivery-Britannia-in-Focus/69928a542e6a0b8ae17c8398"
+    },
+    {
+      "date": "2026-10-09",
+      "decision": "dropped",
+      "publisher": "whalesbook.com",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": "5 days ago",
+      "url": "https://www.whalesbook.com/news/Hinglish/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+    },
+    {
+      "date": "2024-08-17",
+      "decision": "dropped",
+      "publisher": "indiapropertydekho.com",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "788 days ago",
+      "url": "https://www.indiapropertydekho.com/article/467/delhivery-share-price-target-2025"
+    },
+    {
+      "date": "2026-06-22",
+      "decision": "dropped",
+      "publisher": "multibagg.ai",
+      "quality": "other",
+      "reason": "Publication date outside 2026-09-14 through 2026-10-14.",
+      "searchDate": "114 days ago",
+      "url": "https://www.multibagg.ai/market-pulse/articles/delhivery-broker-targets-upside-cmqotpsxmbfkdnv0jjxw5y88k"
+    },
+    {
+      "date": null,
+      "decision": "dropped",
+      "publisher": "stockpricearchive.com",
+      "quality": "other",
+      "reason": "Publisher fetch returned HTTP 403.",
+      "searchDate": "661 days ago",
+      "url": "https://stockpricearchive.com/share-price-target/delhivery/"
+    },
+    {
+      "date": "2026-10-10",
+      "decision": "dropped",
+      "publisher": "topnews.in",
+      "quality": "other",
+      "reason": "Verified and allowed, but not selected for an assumption.",
+      "searchDate": "4 days ago",
+      "url": "https://topnews.in/delhivery-share-price-could-reach-rs-510-motilal-oswal-financial-services-2419317"
+    }
+  ],
+  "searches": 4,
+  "takeaway": "There is no clear evidence in the last 30 days to judge whether this thesis still holds.",
+  "windowEnd": "2026-10-14",
+  "windowStart": "2026-09-14"
+}

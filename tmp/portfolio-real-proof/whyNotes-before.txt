@@ -1,0 +1,7 @@
+{
+  "p0": "At 32.0%, its return is 2.1% versus the portfolio return of 71.5%, and its weight is 1.2 times the next largest position at 27.4%.",
+  "p1": "At 27.4%, its return is 86.4% versus the portfolio return of 71.5%, with a value of 125400.00 rupees.",
+  "p2": "At 21.9%, its return is -42.7% versus the portfolio return of 71.5%, with a value of 100500.00 rupees.",
+  "p3": "At 18.6%, its return is 124.8% versus the portfolio return of 71.5%, with a value of 85000.00 rupees.",
+  "p4": "At 0.1%, its return is 3.2% versus the portfolio return of 71.5%, with a value of 500.00 rupees."
+}

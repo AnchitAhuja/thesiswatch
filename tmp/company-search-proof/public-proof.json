@@ -1,0 +1,103 @@
+{
+  "clearedCacheRecords": 6,
+  "queryTrace": [
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery results October 2026",
+      "raw": 9
+    },
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery partnership OR deal OR order October 2026",
+      "raw": 10
+    },
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery news October 2026",
+      "raw": 9
+    },
+    {
+      "afterCompany": 3,
+      "afterDate": 3,
+      "query": "Delhivery brokerage target October 2026",
+      "raw": 10
+    }
+  ],
+  "recentSourcesChecked": 3,
+  "articleMatches": [
+    {
+      "reason": "tech intensive company",
+      "sources": []
+    },
+    {
+      "reason": "cost optimization",
+      "sources": [
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "whalesbook.com",
+          "title": "Delhivery Target Price Raised to ₹510 by Motilal Oswal",
+          "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+        },
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "businesstoday.in",
+          "title": "Delhivery shares set for a 33% upside, says PL Capital; turns bullish - BusinessToday",
+          "url": "https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09"
+        }
+      ]
+    }
+  ],
+  "finalStatuses": [
+    {
+      "assumption": "tech intensive company",
+      "reason": "no clear evidence in the last 30 days",
+      "signalStrength": "soft",
+      "sources": [],
+      "status": "No new evidence"
+    },
+    {
+      "assumption": "cost optimization",
+      "reason": "no clear evidence in the last 30 days",
+      "signalStrength": "soft",
+      "sources": [],
+      "status": "No new evidence"
+    }
+  ],
+  "passages": [
+    {
+      "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7",
+      "title": "Delhivery Target Price Raised to ₹510 by Motilal Oswal",
+      "publisher": "whalesbook.com",
+      "date": "2026-10-09",
+      "dateVerification": "Publisher page datePublished / publication metadata",
+      "reasonIndices": [
+        1
+      ],
+      "excerpt": "Financial projections for the coming years are also ambitious. Analysts estimate that Delhivery could achieve a 15% revenue growth rate and an 82% annual increase in adjusted profit after tax by 2028. These figures assume that the company can successfully manage its infrastructure and keep costs under control. Recent leadership continuity also plays a role in this outlook, as the company’s board has approved the re-appointment of MD and CEO Sahil Barua, effective October 13, 2026, providing stability at the top.\n\nDespite this positive outlook, the road ahead involves clear challenges that investors should monitor. One significant area of risk involves the integration of recent acquisitions, specifically the Ecom Express deal. Costs associated with combining operations and technology can sometimes exceed initial estimates, which may impact short-term financial performance. Furthermore, the company faces external pressures, including volatility in fuel prices, which can quickly erode profit margins.\n\nCompetition also remains a critical factor for the logistics industry. Large e-commerce marketplace platforms are increasingly building their own internal logistics networks to reduce reliance on third-party providers. This trend, known as insourcing, poses a competitive threat that could limit volume growth for companies like Delhivery. The success of the company’s expansion strategy will largely depend on its ability to offer value-added services that these internal networks cannot easily replicate. Investors should keep a close watch on quarterly margins and updates regarding infrastructure scaling, as these will be the primary indicators of whether the company is meeting its long-term growth targets."
+    },
+    {
+      "url": "https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09",
+      "title": "Delhivery shares set for a 33% upside, says PL Capital; turns bullish - BusinessToday",
+      "publisher": "businesstoday.in",
+      "date": "2026-10-09",
+      "dateVerification": "Publisher page datePublished / publication metadata",
+      "reasonIndices": [
+        1
+      ],
+      "excerpt": "Express shipment volumes rose 55% YoY in Q1FY27, led by e-commerce expansion and industry consolidation, MOFSL said adding that diversified customer base reduces concentration risk.\n\nThe brokerage further said the acquisition of Ecom Express strengthens rural reach and network density.\n\nThe company is targeting EBITDA margin expansion to 8.4% by FY28, it added."
+    }
+  ],
+  "spend": {
+    "calls": 56,
+    "capInr": 600,
+    "day": "2026-10-12",
+    "estimatedInr": 189.20280000000008,
+    "inputTokens": 420086,
+    "outputTokens": 20118
+  }
+}

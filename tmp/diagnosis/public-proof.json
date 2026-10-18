@@ -1,0 +1,134 @@
+{
+  "currentRun": {
+    "searchQueriesSent": [],
+    "rawResults": 0,
+    "companyFilterExecuted": false,
+    "verifiedArticlesFromCache": 1,
+    "modelCalls": 2,
+    "sourceArticlesReachingModels": 1,
+    "statuses": [
+      {
+        "reason": "tech first company optimising logistics cost",
+        "status": "No new evidence"
+      },
+      {
+        "reason": "partnerships already with multiple ecommerce players",
+        "status": "No new evidence"
+      }
+    ],
+    "spend": {
+      "calls": 32,
+      "capInr": 600,
+      "day": "2026-10-12",
+      "estimatedInr": 99.29010000000002,
+      "inputTokens": 224497,
+      "outputTokens": 9294
+    }
+  },
+  "cachedResearch": {
+    "researchedAt": "2026-10-12T09:36:35.516Z",
+    "ageSeconds": 245.293,
+    "queries": [
+      {
+        "query": "Delhivery tech first company",
+        "rawResults": 10
+      },
+      {
+        "query": "Delhivery partnerships already multiple",
+        "rawResults": 10
+      },
+      {
+        "query": "Delhivery brokerage report",
+        "rawResults": 9
+      },
+      {
+        "query": "Delhivery quarterly results",
+        "rawResults": 9
+      }
+    ],
+    "uniqueResults": 38,
+    "companyFilterEvaluated": 1,
+    "companyFilterPassed": 1,
+    "companyFilterDropped": 0,
+    "droppedBeforeCompanyFilter": 37,
+    "groups": {
+      "Publication date outside 2026-09-12 through 2026-10-12.": [
+        "https://www.business-standard.com/amp/markets/news/delhivery-slumps-8pc-even-as-analysts-affirm-bright-outlook-after-q2-loss-125110600274_1.html",
+        "https://www.business-standard.com/markets/news/delhivery-slumps-8pc-even-as-analysts-affirm-bright-outlook-after-q2-loss-125110600274_1.html",
+        "https://www.business-standard.com/companies/quarterly-results/delhivery-q4-fy25-result-profit-loss-revenue-shares-125051601253_1.html",
+        "https://www.business-standard.com/amp/companies/start-ups/delhivery-q2-result-net-loss-at-rs-103-cr-revenue-up-8-to-rs-1-942-cr-123110400647_1.html",
+        "https://www.business-standard.com/amp/companies/results/delhivery-posts-q1-net-profit-of-rs-54-cr-revenue-rises-to-rs-2-172-cr-124080201401_1.html",
+        "https://en.wikipedia.org/wiki/Delhivery",
+        "https://startuptalky.com/delhivery-success-story/",
+        "https://orangeowl.marketing/unicorn-chronicles/delhivery-success-story/",
+        "https://business2business.co.in/article/5462/delhivery-success-story-startup-logistics",
+        "https://helloentrepreneurs.com/brand-saga/how-technology-helped-delhivery-crack-the-e-commerce-logistics-market-70022/",
+        "https://x.com/delhivery/status/1813508026323591389",
+        "https://www.multibagg.ai/market-pulse/articles/delhivery-fintech-subsidiary-distribution-cmrkm8rrk5awtph0jbuktjqqj",
+        "https://businessupturn.com/corporates/delhivery-partners-with-ridev-to-deploy-150-evs/",
+        "https://www.whalesbook.com/news/Hinglish/transportation/Delhivery-Sees-Brokerage-Optimism-With-73percent-Express-Volume-Growth/6a38e1faa1c5bf084328905f",
+        "https://www.whalesbook.com/news/English/brokerage-reports/Logistics-and-FMCG-Delhivery-Britannia-in-Focus/69928a542e6a0b8ae17c8398"
+      ],
+      "Missing or conflicting publication metadata; date unverified.": [
+        "https://www.business-standard.com/companies/quarterly-results/delhivery-ltd-quarterly-results-68151",
+        "https://startupintros.com/orgs/delhivery",
+        "https://www.naukri.com/code360/interview-bundle/delhivery",
+        "https://www.delhivery.com/partner/delivery-partner",
+        "https://play.google.com/store/apps/details?id=com.delhivery.delhiverypartner&hl=en_IN",
+        "https://www.franchisebazar.com/blog/invest-in-a-delhivery-franchise-2026-indias-logistics-giant",
+        "https://www.delhivery.com/solutions/d2c-brands",
+        "https://www.partnerbase.com/delhivery",
+        "https://trendlyne.com/research-reports/post/DELHIVERY/888524/delhivery-ltd/",
+        "https://www.tickertape.in/stocks/delhivery-DELH",
+        "https://topnews.in/delhivery-share-price-target-revised-prabhudas-lilladher-research-rs-534-2418979",
+        "https://www.icicidirect.com/research/equity/rapid-results/delhivery-ltd",
+        "https://www.indiainfoline.com/company/delhivery-ltd/results/quarterly-result",
+        "https://quartr.com/companies/delhivery-limited_21080",
+        "https://blinkx.in/insights/results/delhivery-ltd-quarterly-result"
+      ],
+      "Publisher fetch returned HTTP 404.": [
+        "https://www.bitget.com/stock/nse-delhivery/what-is",
+        "https://portersfiveforce.com/blogs/brief-history/delhivery"
+      ],
+      "Publisher fetch failed or timed out; date unverified.": [
+        "https://pestel-analysis.com/blogs/brief-history/delhivery",
+        "https://techcrunch.com/?p=1155063"
+      ],
+      "Publisher fetch returned HTTP 412.": [
+        "https://delhivery-partner.en.softonic.com/android"
+      ],
+      "Publisher fetch returned HTTP 403.": [
+        "https://tracxn.com/d/legal-entities/india/delhivery-limited/__rCt7F9AKlFximkH0QovylicG-b8ZLNssmsOSYAhzuwA",
+        "https://www.indmoney.com/stocks/delhivery-ltd-share-price/results"
+      ]
+    },
+    "verified": [
+      {
+        "date": "2026-10-09",
+        "dateVerification": "Publisher page datePublished / publication metadata",
+        "publisher": "businesstoday.in",
+        "title": "Delhivery shares set for a 33% upside, says PL Capital; turns bullish - BusinessToday",
+        "url": "https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09"
+      }
+    ]
+  },
+  "modelInput": [
+    "[{\"title\":\"Delhivery shares set for a 33% upside, says PL Capital; turns bullish - BusinessToday\",\"date\":\"2026-10-09\",\"publisher\":\"businesstoday.in\",\"url\":\"https://www.businesstoday.in/markets/stocks/story/delhivery-shares-set-for-a-upside-says-pl-capital-turns-bullish-560614-2026-10-09\",\"excerpt\":\"The company is targeting EBITDA margin expansion to 8.4% by FY28, it added.\\n\\nMeanwhile, in the current session, Delhivery stock gained 0.50% to Rs 401 against the previous close of Rs 398. Market cap of the firm rose to Rs 29,900 crore. The logistics solutions provider slipped to a 52 week low of Rs 374.40 on January 21, 2026. Earlier, the stock opened flat at Rs 400.90.\\n\\nIn terms of technicals, the relative strength index (RSI) of Delhivery stands at 32.6, signaling it's trading neither in the oversold nor in the overbought zone.\"}]"
+  ],
+  "review": [
+    {
+      "reviews": [
+        {
+          "match": "indirect",
+          "explanation": "PL Capital's statement about EBITDA margin expansion to 8.4% by FY28 indicates cost optimization targets but does not directly test whether the company is 'tech first' or demonstrate technology-driven logistics cost optimization. The evidence shows financial goals rather than technology capabilities or implementation.",
+          "quotes": []
+        },
+        {
+          "match": "unrelated",
+          "explanation": "No evidence provided relates to partnerships with e-commerce players. The cited source discusses only financial targets and stock performance without mentioning customer partnerships or e-commerce relationships.",
+          "quotes": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "BAJAJ-AUTO": "Automobiles",
+  "DELHIVERY": "Industrials",
+  "INFY": "Information Technology",
+  "NIFTYBEES": "ETF",
+  "NVDA": "Information Technology"
+}

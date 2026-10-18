@@ -1,0 +1,77 @@
+{
+  "cacheBypassed": true,
+  "queries": [
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery tech first company October 2026",
+      "raw": 9
+    },
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery partnerships already multiple October 2026",
+      "raw": 9
+    },
+    {
+      "afterCompany": 2,
+      "afterDate": 2,
+      "query": "Delhivery brokerage report October 2026",
+      "raw": 10
+    },
+    {
+      "afterCompany": 0,
+      "afterDate": 0,
+      "query": "Delhivery quarterly results October 2026",
+      "raw": 10
+    }
+  ],
+  "passages": [
+    {
+      "title": "Delhivery Target Price Raised to ₹510 by Motilal Oswal",
+      "date": "2026-10-09",
+      "publisher": "whalesbook.com",
+      "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7",
+      "excerpt": "Financial projections for the coming years are also ambitious. Analysts estimate that Delhivery could achieve a 15% revenue growth rate and an 82% annual increase in adjusted profit after tax by 2028. These figures assume that the company can successfully manage its infrastructure and keep costs under control. Recent leadership continuity also plays a role in this outlook, as the company’s board has approved the re-appointment of MD and CEO Sahil Barua, effective October 13, 2026, providing stability at the top.\n\nDespite this positive outlook, the road ahead involves clear challenges that investors should monitor. One significant area of risk involves the integration of recent acquisitions, specifically the Ecom Express deal. Costs associated with combining operations and technology can sometimes exceed initial estimates, which may impact short-term financial performance. Furthermore, the company faces external pressures, including volatility in fuel prices, which can quickly erode profit margins.\n\nCompetition also remains a critical factor for the logistics industry. Large e-commerce marketplace platforms are increasingly building their own internal logistics networks to reduce reliance on third-party providers. This trend, known as insourcing, poses a competitive threat that could limit volume growth for companies like Delhivery. The success of the company’s expansion strategy will largely depend on its ability to offer value-added services that these internal networks cannot easily replicate. Investors should keep a close watch on quarterly margins and updates regarding infrastructure scaling, as these will be the primary indicators of whether the company is meeting its long-term growth targets."
+    },
+    {
+      "title": "Delhivery Share Price: Motilal Oswal ka bullish view, target ₹510!",
+      "date": "2026-10-09",
+      "publisher": "whalesbook.com",
+      "url": "https://www.whalesbook.com/news/Hinglish/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7",
+      "excerpt": "Brokerage ka manna hai ki company Indian logistics sector mein consolidation ka fayda utha rahi hai. Kuch khaas points:\n\nBottom line: Delhivery ka expansion plan solid hai, lekin margin pressure aur competition par dhyan rakhna hi smart investing hai."
+    }
+  ],
+  "results": [
+    {
+      "assumption": "tech first company optimising logistics cost",
+      "reason": "no clear evidence in the last 30 days",
+      "signalStrength": "soft",
+      "sources": [],
+      "status": "No new evidence"
+    },
+    {
+      "assumption": "partnerships already with multiple ecommerce players",
+      "reason": "Motilal Oswal (reported 2026-10-09) stated: Large e-commerce marketplace platforms are increasingly building their own internal logistics networks to reduce reliance on third-party providers. Motilal Oswal (reported 2026-10-09) stated: This trend, known as insourcing, poses a competitive threat that could limit volume growth for companies like Delhivery.",
+      "signalStrength": "soft",
+      "sources": [
+        {
+          "date": "2026-10-09",
+          "dateVerification": "Publisher page datePublished / publication metadata",
+          "publisher": "whalesbook.com",
+          "title": "Delhivery Target Price Raised to ₹510 by Motilal Oswal",
+          "url": "https://www.whalesbook.com/news/English/brokerage-reports/Delhivery-Target-Price-Raised-to-indian-rupee510-by-Motilal-Oswal/6ac8735979a16deaeaeb7cd7"
+        }
+      ],
+      "status": "WATCH"
+    }
+  ],
+  "spend": {
+    "calls": 43,
+    "capInr": 600,
+    "day": "2026-10-12",
+    "estimatedInr": 141.42430000000002,
+    "inputTokens": 314651,
+    "outputTokens": 14686
+  }
+}

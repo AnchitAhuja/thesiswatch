@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://fearless-ferret-257.convex.cloud/api/action",
+    "body": "{\"path\":\"portfolioAI:sectors\",\"format\":\"convex_encoded_json\",\"args\":[{\"symbols\":[\"FAKEALPHA\",\"FAKEBETA\",\"FAKEDELTA\",\"FAKEGAMMA\"]}]}"
+  },
+  {
+    "url": "https://fearless-ferret-257.convex.cloud/api/action",
+    "body": "{\"path\":\"portfolioAI:summary\",\"format\":\"convex_encoded_json\",\"args\":[{\"facts\":{\"count\":4,\"largestPct\":54,\"smallCount\":1}}]}"
+  },
+  {
+    "url": "https://fearless-ferret-257.convex.cloud/api/action",
+    "body": "{\"path\":\"portfolioAI:sectors\",\"format\":\"convex_encoded_json\",\"args\":[{\"symbols\":[\"FAKEALPHA\",\"FAKEBETA\",\"FAKEDELTA\",\"FAKEGAMMA\"]}]}"
+  },
+  {
+    "url": "https://fearless-ferret-257.convex.cloud/api/action",
+    "body": "{\"path\":\"portfolioAI:summary\",\"format\":\"convex_encoded_json\",\"args\":[{\"facts\":{\"count\":4,\"largestPct\":54,\"smallCount\":1}}]}"
+  }
+]
