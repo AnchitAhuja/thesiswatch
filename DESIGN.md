@@ -4,9 +4,9 @@ Read this before building or changing any screen. This records the implemented s
 
 ## 1. Scope and screen selection
 
-The current upload-first home and portfolio health card are DEV-only (`fearless-ferret-257`). `src/main.js` sends every route on that deployment, including `?create=holdings` and `?create=portfolio`, to `bindPortfolioHealth`. There is no stock-belief form or link to it in that experience.
+The current upload-first home and portfolio health card run on DEV (`fearless-ferret-257`) and production (`first-yak-309`). `src/main.js` sends every route, including `?create=holdings` and `?create=portfolio`, to `bindPortfolioHealth`. There is no stock-belief form or link to it in that experience.
 
-Other deployments use the older home and holdings screens in `src/production-main.js`. Section 7 records that distinction. Do not apply the older thesis page's cream background, status badges or email layout to the health card.
+The current entry point no longer loads `src/production-main.js`. Section 7 records those retained older modules. Do not apply the older thesis page's cream background, status badges or email layout to the health card. Detailed service errors remain visible only on DEV; production uses the existing generic fallback messages.
 
 Sources: `src/main.js`, `src/production-main.js`, `src/lookout-experience.mjs`.
 
@@ -21,7 +21,7 @@ Top to bottom:
 5. Privacy note: “Your Excel stays in this browser. Only symbols and calculated facts are sent for analysis; your file and Client ID are never sent.”
 6. Upload status, initially empty, followed by the initially empty report area.
 
-The layout is left aligned on a dark background. There is no family photo, thesis composer, How It Works section or email signup in the DEV upload screen. The upload area remains above the report after a file is read.
+The layout is left aligned on a dark background. There is no family photo, thesis composer, How It Works section or email signup in the upload screen. The upload area remains above the report after a file is read.
 
 Source: `bindPortfolioHealth` in `src/portfolio-health.mjs`.
 
@@ -109,9 +109,9 @@ Numbers in metric values, account amounts, table values and bar percentages use 
 
 Sources: `src/portfolio-health.css`, `src/style.css`, `index.html`, `src/portfolio-health.mjs`.
 
-## 7. Older production screens retained
+## 7. Older screen modules retained
 
-These are still implemented, but are not the DEV upload screens:
+These remain in the repository but are no longer loaded by the current entry point on either deployment:
 
 - **Home:** family photo with dark overlay, transparent logo, “How It Works” header link; centred “Invest. Then move on with your life” heading, explanation about watching investment reasons, “Get started” button leading to `?create=holdings`; three How It Works steps and a “My holdings” footer link. Heading 50px desktop / 32px phone, line height 1.03; explanation 16px/24px desktop and 14px/21px phone. Background `#131C17`, primary text `#F0F0E7`, explanation `#E1E8E1`, lime button `#DFFA35` with text `#18251D`.
 - **My holdings entry:** stock suggestions, “What makes you believe in these stocks?” textarea, “Watch this stock” button and status text. Dark background `#131C17`, form `#202D24`, border `#41534A`, 12px corners; secondary text `#A8B7AC`; input border `#63766A`. Heading `clamp(34px, 5vw, 48px)`, lead 18px/1.6; buttons 15px/600, minimum 46px high.

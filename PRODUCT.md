@@ -2,9 +2,9 @@
 
 ## What is current
 
-The upload-first portfolio health card is live on DEV, `fearless-ferret-257`. It is not the production home page. This document describes that v1 and distinguishes the older production flow below.
+The upload-first portfolio health card is the home page for DEV (`fearless-ferret-257`) and production (`first-yak-309`). This document describes that v1; older screen modules retained in the repository are listed separately below.
 
-Source: `src/main.js` selects the health card only when `VITE_CONVEX_URL` is `https://fearless-ferret-257.convex.cloud`. On that deployment, the home page and `?create=holdings` both show the upload screen. Other deployments load `src/production-main.js`.
+Source: `src/main.js` loads the health card for both deployments. The home page and `?create=holdings` both show the upload screen; `VITE_CONVEX_URL` selects the deployment used for server assistance.
 
 ## The job
 
@@ -20,7 +20,7 @@ An investor who already has holdings and a Zerodha equity P&L `.xlsx` statement.
 
 ## The core flow
 
-1. I open the website on DEV.
+1. I open the website.
 2. I see “See your portfolio’s health in one place”, one line explaining what I get, and “Upload your portfolio excel”.
 3. I choose my Zerodha equity P&L `.xlsx` file. The file is read and parsed in the browser; it is never uploaded to the server. Client ID is not used or sent.
 4. I see “Your portfolio health card” below the upload area on the same page. The statement facts appear before the server finishes sector labels and factual wording. (First value)
@@ -79,8 +79,8 @@ First value: the health card on the same page after choosing a statement. No ema
 - Support for arbitrary broker spreadsheets, CSV, PDF or `.xls` imports.
 - A separate complete holdings table: the card currently shows the top 12 chart, flagged stocks and expandable small-position names.
 
-## Older production flow still in the code
+## Older screens retained in the code
 
-Production remains different. `src/production-main.js` and `src/landing.mjs` show “Invest. Then move on with your life”, a “Get started” button, “How It Works”, and a “My holdings” footer link. `?create=holdings` opens `src/holdings.mjs`: choose a supported stock, write business reasons, and check those reasons against evidence. Results include progress, statuses, signal strength and source links, plus an email signup for a weekly check (`src/holdings-results.mjs`, `src/standing.mjs`).
+`src/production-main.js`, `src/landing.mjs`, `src/holdings.mjs`, `src/holdings-results.mjs` and `src/standing.mjs` retain the former home, stock-and-reasons form, evidence results and email signup. The current entry point no longer loads that flow, including at `?create=holdings`.
 
-That form and its navigation are absent from the DEV upload experience. Older AI-thesis and edition modules are not the current DEV core flow; their presence in the repository is not a promise that the health card includes them.
+That form and its navigation are absent from the current upload experience on both deployments. Older AI-thesis and edition modules are not the current core flow; their presence in the repository is not a promise that the health card includes them.

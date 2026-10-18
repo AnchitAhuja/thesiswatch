@@ -57,8 +57,8 @@ it('renders one grounded sentence per position and reuses it across multiple fla
  expect(document.querySelector('tbody td:last-child')!.textContent).toBe('Factual note unavailable.');
  expect(document.querySelector('tbody')!.textContent).not.toMatch(bannedWhy);
 });
-it('batches notes into one DEV AI call and caches the promise for the lifetime of an upload',async()=>{
- vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');const t=convexTest(schema,modules);agentTest.register(t);
+it.each(['https://fearless-ferret-257.convex.cloud','https://first-yak-309.convex.cloud'])('batches and validates notes once per upload on %s',async url=>{
+ vi.stubEnv('CONVEX_CLOUD_URL',url);const t=convexTest(schema,modules);agentTest.register(t);
  const facts=whyFacts(await portfolio());
  const notes=Object.fromEntries(facts.map(row=>[row.id,row.review?'This row is excluded from portfolio totals because its statement details are incomplete.':row.gained===0?'Its investment has generated 0 rupees in gains.':`Its original ${row.invested} rupees is now ${row.multiple} times as large.`]));
  const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValue({object:{notes:Object.entries(notes).map(([id,sentence])=>({id,sentence}))}} as never);
@@ -67,7 +67,6 @@ it('batches notes into one DEV AI call and caches the promise for the lifetime o
  expect(load).toHaveBeenCalledTimes(1);expect(model).toHaveBeenCalledTimes(1);
  const prompt=String(model.mock.calls[0][2].prompt);expect(JSON.parse(prompt).map(({allowedRupees,focus,...row})=>row)).toEqual(facts);expect(JSON.parse(prompt)[1].allowedRupees).toEqual([10000]);expect(JSON.parse(prompt)[1].focus).toContain('multiple');expect(prompt).not.toContain('FAKE-CLIENT');expect(prompt).not.toContain('FAKEALPHA');
  model.mockResolvedValue({object:{notes:Object.entries({...notes,p0:'You should buy more.'}).map(([id,sentence])=>({id,sentence}))}} as never);await expect(t.action(api.portfolioAI.whyNotes,{facts})).rejects.toThrow('Factual notes');
- vi.stubEnv('CONVEX_CLOUD_URL','https://first-yak-309.convex.cloud');await expect(t.action(api.portfolioAI.whyNotes,{facts})).rejects.toThrow('DEV only');
 });
 
 it('rejects a Why sentence that repeats the row Return value or current Value',async()=>{

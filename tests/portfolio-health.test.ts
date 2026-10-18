@@ -69,8 +69,8 @@ it('has safe upload and AI error states without sending any file or client data 
  expect(document.body.textContent).not.toContain('Delayed payment charges mean');
  expect(document.body.textContent).not.toMatch(/\b(buy|sell|trim|exit|hold)\b/i);
 });
-it('classifies symbols in one AI call, caches sectors, and validates the fact-only summary',async()=>{
- vi.stubEnv('CONVEX_CLOUD_URL','https://fearless-ferret-257.convex.cloud');const t=convexTest(schema,modules);agentTest.register(t);
+it.each(['https://fearless-ferret-257.convex.cloud','https://first-yak-309.convex.cloud'])('classifies symbols, caches sectors, and validates the fact-only summary on %s',async url=>{
+ vi.stubEnv('CONVEX_CLOUD_URL',url);const t=convexTest(schema,modules);agentTest.register(t);
  const model=vi.spyOn(Agent.prototype,'generateObject').mockResolvedValueOnce({object:{sectors:[{symbol:'FAKEALPHA',sector:'Other'},{symbol:'FAKEBETA',sector:'ETF'}]}} as never);
  expect(await t.action(api.portfolioAI.sectors,{symbols:['FAKEALPHA','FAKEBETA']})).toEqual({FAKEALPHA:'Other',FAKEBETA:'ETF'});
  expect(await t.action(api.portfolioAI.sectors,{symbols:['FAKEBETA','FAKEALPHA']})).toEqual({FAKEBETA:'ETF',FAKEALPHA:'Other'});expect(model).toHaveBeenCalledTimes(1);
@@ -80,5 +80,4 @@ it('classifies symbols in one AI call, caches sectors, and validates the fact-on
  expect(await t.action(api.portfolioAI.summary,{facts})).toBe(factualSummaries(facts)[0]);
  model.mockResolvedValueOnce({object:{summary:'Buy now.'}} as never);await expect(t.action(api.portfolioAI.summary,{facts})).rejects.toThrow('Summary could not be verified');
  model.mockResolvedValueOnce({object:{sectors:[{symbol:'FAKEGAMMA',sector:'Invented sector'}]}} as never);await expect(t.action(api.portfolioAI.sectors,{symbols:['FAKEGAMMA']})).rejects.toThrow('Sector response');
- vi.stubEnv('CONVEX_CLOUD_URL','https://first-yak-309.convex.cloud');await expect(t.action(api.portfolioAI.sectors,{symbols:['FAKEALPHA']})).rejects.toThrow('DEV only');
 });
