@@ -1,110 +1,86 @@
-\# PRODUCT.md
+﻿# PRODUCT.md
 
+## What is current
 
+The upload-first portfolio health card is live on DEV, `fearless-ferret-257`. It is not the production home page. This document describes that v1 and distinguishes the older production flow below.
 
-\## The core flow
+Source: `src/main.js` selects the health card only when `VITE_CONVEX_URL` is `https://fearless-ferret-257.convex.cloud`. On that deployment, the home page and `?create=holdings` both show the upload screen. Other deployments load `src/production-main.js`.
+
+## The job
 
 The story: I want to make an informed choice with this month's money, without spending my weekend researching.
 
+The built product helps me see the facts about the portfolio I already have: holdings, gains, where the money sits, concentration, small positions and account charges. The card states facts only, never buy/sell calls.
 
+I decide, and I buy or sell through my own broker. (Outside the product.)
 
-1\. First week of the month. Salary in, rent and bills paid. I want to invest, but I don't have time to research, so I default to a SIP or ask a friend.
+## The user
 
-2\. I open the website.
+An investor who already has holdings and a Zerodha equity P&L `.xlsx` statement. The current input is that statement, not a connection to the investor's broker account.
 
-3\. I see the AI thesis (v1: one thesis).
+## The core flow
 
-4\. The product shows the stocks and ETFs this thesis depends on, by chain stage (Energy → Chips → AI Platforms → AI Adopters), each with a status (STRENGTHENING, INTACT, WATCH, WEAKENING), a reason and a source link. Price direction only, no numbers. (Aha 1)
+1. I open the website on DEV.
+2. I see “See your portfolio’s health in one place”, one line explaining what I get, and “Upload your portfolio excel”.
+3. I choose my Zerodha equity P&L `.xlsx` file. The file is read and parsed in the browser; it is never uploaded to the server. Client ID is not used or sent.
+4. I see “Your portfolio health card” below the upload area on the same page. The statement facts appear before the server finishes sector labels and factual wording. (First value)
+5. I see portfolio value, invested amount, unrealised gain and percentage, holdings count and largest position.
+6. I review “Worth a look”, “Where the money sits”, “Small positions” and “Account this year”. I can change the position limit, expand the small-position names, or retry a failed sector lookup.
+7. I can choose another statement using the same upload button. It replaces the report; it does not compare statements. Refreshing the page returns to the upload screen.
 
-5\. I tap "Subscribe to this thesis" and enter my email.
+Source: `src/portfolio-health.mjs`, `shared/portfolio-health.mjs`.
 
-6\. The latest saved edition, with its date, lands in my inbox. (Aha 2)
+## v1
 
-7\. Every Saturday 10 AM IST, a new edition on the thesis.
+- Accepts `.xlsx` files up to `10 * 1024 * 1024` bytes and at most 1,000 usable current positions. No login, no paywall in this flow.
+- Reads the first sheet's equity P&L table and the second sheet's account ledger. Headers can begin below the top row and in any column.
+- Includes positive open quantities; combines repeated security identifiers (ISINs), and sorts usable positions by value. Current value is invested amount plus unrealised P&L from the statement, not a live price feed.
+- Excludes rows with missing identifiers or unusable values from portfolio totals and flags them “Check with your broker”.
+- Shows a fact-only summary and the five headline figures. “Worth a look” groups flags once per stock: above the chosen position limit (default 5%), value more than 5 times invested amount, return below -40%, or broker review. These flags are observations, not instructions to trade.
+- Shows the top 12 holdings by weight and the sector breakdown. Sector labels are AI classified from symbols; unknown symbols are “Other”.
+- Shows the count, combined value and combined portfolio weight of positions under 0.5% each; names start collapsed.
+- Shows realised P&L, trading charges, other debits and delayed payment charges from the statement. Missing account amounts say “Not in statement”. Positive delayed payment charges show the explanation about the trading balance going below zero.
+- Formats displayed rupees without paise and large headline amounts in lakh/crore form. Calculations retain their underlying precision.
+- Ends with “Facts from your broker statement. Not investment advice.”
 
-8\. Next salary day, I decide, and I buy or sell through my own broker. (Outside the product.)
+Source: `src/portfolio-health.mjs`, `shared/portfolio-health.mjs`.
 
+## Privacy and factual wording
 
+The Excel file stays in this browser tab. This is browser parsing with limited server assistance, not a wholly offline tool:
 
-\## Things they do today
+- Only stock symbols go to sector lookup. The server caches sector labels by symbol.
+- Only the largest-position percentage and position counts go to the summary service. The displayed summary must match one of the verified factual phrasings; a local factual summary is available immediately.
+- Anonymous row identifiers and calculated numeric facts go to the factual-note service for the “Why” column. These include weights, gains, invested amounts and ranks, without stock names, the spreadsheet or Client ID. Those notes explain the figures; they do not ask why the investor believes in a stock.
+- Factual notes are checked against the supplied numbers and reject trading instructions, targets and invented time history. Changing the position limit does not request another batch of notes.
 
-1\. First week of the month. Salary in, rent and bills paid. I want to invest, but I don't have time to research, so I default to a SIP or ask a friend.
+Source: `src/portfolio-health.mjs`, `shared/portfolio-why.mjs`, `convex/portfolioAI.ts`, `convex/portfolioSectors.ts`.
 
-2\. I open Google search, Tickertape or a similar platform.
+## What can go wrong
 
-3\. I figure out with AI tools what stocks I must pick based on my thesis.
+- The file is the wrong format, too large, missing required columns, has an invalid delayed-payment entry, or has too many current positions: show a readable error and allow another file selection.
+- No usable current positions: render the card's zero/empty values and any broker-review flags; the upload status explains that no usable current positions were found.
+- Sector lookup fails: keep the local statement facts visible and offer “Retry sector lookup”.
+- Summary or factual notes fail validation or the service is unavailable: retain the local facts and fallback summary. DEV displays escaped service error text; missing factual notes show a dash when the DEV error is available.
 
-4\. After multiple prompts and attempts, I find the set of stocks and try to research them, whether the sentiment is positive or negative.
+Source: `src/portfolio-health.mjs` and the shared parser and wording checks above.
 
-5\. I put a reminder to track the stocks over the next few days and weeks.
+## Onboarding
 
-6\. Over time, whenever I remember to check, I research the stocks.
+First value: the health card on the same page after choosing a statement. No email or account is required before seeing it. There is no subscription step in the upload flow.
 
-7\. I never feel confident evaluating whether my thesis is holding or not.
+## Not in v1
 
-8\. I keep worrying the stock might be overvalued by the time I find it.
+- Broker connect or automatic account syncing.
+- Monthly comparison, saved portfolio history or automatic refresh from a broker.
+- Analyst price targets or future-return predictions in the health card.
+- Buy/sell actions, order placement, or buy, sell or hold advice.
+- An investment-thesis editor, stock-belief questionnaire, watchlist or weekly-email signup inside the upload flow.
+- Support for arbitrary broker spreadsheets, CSV, PDF or `.xls` imports.
+- A separate complete holdings table: the card currently shows the top 12 chart, flagged stocks and expandable small-position names.
 
-9\. I abandon without a decision, or go back to step 2 and start all over again.
+## Older production flow still in the code
 
+Production remains different. `src/production-main.js` and `src/landing.mjs` show “Invest. Then move on with your life”, a “Get started” button, “How It Works”, and a “My holdings” footer link. `?create=holdings` opens `src/holdings.mjs`: choose a supported stock, write business reasons, and check those reasons against evidence. Results include progress, statuses, signal strength and source links, plus an email signup for a weekly check (`src/holdings-results.mjs`, `src/standing.mjs`).
 
-
-Things they do with my product: 7
-
-
-
-\## What can go wrong
-
-Step 4:
-
-\- Not all important stocks are mentioned.
-
-&#x20; Fix (v1): stock list reviewed manually; trust built through copy.
-
-&#x20; Fix (v2): a confidence cutoff on what's shown, prompt review by a finance person, and a feedback channel so a user can suggest stocks they researched themselves.
-
-\- Some stocks mentioned are not very relevant.
-
-\- Information presented is not enough to convince the user.
-
-&#x20; Fix: every row has a reason of up to 75 words and a "Go deeper" link.
-
-
-
-Step 6:
-
-\- Email send fails.
-
-\- Email goes into spam.
-
-\- Email sent but not read, buried in too many emails.
-
-\- Email sent but content not useful; user still feels they need to research.
-
-&#x20; Fix: article links to deep-dive into each idea in the edition.
-
-
-
-\## Onboarding
-
-First value: step 4, the stocks this thesis depends on.
-
-The worry it removes: which stocks carry my thesis?
-
-1\. First customers come from my CA network. Removes the intent gap and knowledge gap.
-
-2\. Open the site, see the thesis. Removes the worry about which stocks.
-
-3\. The stocks it rests on. (First value)
-
-
-
-\## v1
-
-Does: one thesis (AI), 11 positions, weekly status per position with reason and link, email signup.
-
-Doesn't: login, paywall, users writing their own thesis, watchlist, prices in numbers, buy, sell or hold advice, broker connection.
-
-Metric: saved subscriptions, one per email per thesis.
-
-Unsubscribe: a private link in each email.
-
+That form and its navigation are absent from the DEV upload experience. Older AI-thesis and edition modules are not the current DEV core flow; their presence in the repository is not a promise that the health card includes them.
